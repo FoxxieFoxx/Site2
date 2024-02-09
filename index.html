@@ -8,11 +8,11 @@
 <head>
   <title>Foxxie's Lofi Site</title>
   <meta name="description" content="Lofi music streams for studying, working, and relaxing with rain.">
-  <meta property="og:title" content="Foxxie's Site">
+  <meta property="og:title" content="Foxxie's Cafe">
   <meta property="og:description" content="Lofi music streams for studying, working, and relaxing with rain.">
   <meta property="og:type" content="website">
   <meta property="og:image" itemprop="image"
-    content="https://cdn.discordapp.com/avatars/962958589780193320/023825229ce0f94bb65d9b52049fdae3.png?size=1024">
+    content="https://cdn.discordapp.com/emojis/1202292344276402250.gif?size=240">
   <link rel="stylesheet" href="style.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,37 +27,37 @@
 
 <body>
   <script>
-      function playAudio() {
-          var audio = document.getElementById("myAudio");
-          if (audio.paused) {
-              audio.play();
-          } else {
-              audio.pause();
-          }
+    function playAudio() {
+      var audio = document.getElementById("myAudio");
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
       }
+    }
 
-      function toggleRain() {
-          var audio = document.getElementById("myAudio");
-          if (audio.paused) {
-              audio.play();
-          } else {
-              audio.pause();
-          }
+    function toggleRain() {
+      var audio = document.getElementById("myAudio");
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
       }
+    }
 
-      // Event listener for 'r' key press only after the page has loaded
-      window.addEventListener("load", function() {
-          document.addEventListener("keydown", function(event) {
-              if (event.key === "r") {
-                  toggleRain();
-              }
-          });
+    // Event listener for 'r' key press only after the page has loaded
+    window.addEventListener("load", function () {
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "r") {
+          toggleRain();
+        }
       });
+    });
 
-      // Auto-play rain audio on page load
-      window.addEventListener("load", function() {
-          playAudio();
-      });
+    // Auto-play rain audio on page load
+    window.addEventListener("load", function () {
+      playAudio();
+    });
   </script>
 
   <div id="root">
