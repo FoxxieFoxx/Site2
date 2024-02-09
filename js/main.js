@@ -246,7 +246,7 @@
           , K = n(88)
           , q = n(87);
         function _(e) {
-            return "https://mir-s3-cdn-cf.behance.net/project_modules/hd/9c702d95319225.5e94d16d1296c.gif"
+            return "../default.gif" 
         }
         var $ = "ontouchend"in document;
         var ee = function(e) {
@@ -1018,7 +1018,7 @@
                 pressToStart: "Press any key to start",
                 changeStation: "Change station",
                 playPause: "Play/Pause",
-                changeGif: "Change gif",
+                changeGif: "Toggle Rain",
                 showVideo: "Show original video",
                 lowPowerMode: "Low power mode",
                 closeThis: "Close",
@@ -1065,7 +1065,7 @@
                 children: [Object(i.jsx)(Ue, {
 name: "962958589780193320",
 username: "foxxie",
-image: "./images/foxxie.png"
+image: "./images/frumpy.gif"
                 })
             ]
             })
@@ -1167,6 +1167,14 @@ image: "./images/foxxie.png"
                     style: {
                         marginBottom: "0px"
                     },
+                      children: [Object(i.jsx)("span", {
+                        className: "red",
+                        children: "R"
+                      }), " ", Ve.changeGif]
+                      }), Object(i.jsxs)("span", {
+                      style: {
+                        marginBottom: "0px"
+                      },
                     children: [Object(i.jsx)("span", {
                         className: "red",
                         children: "ESC"
