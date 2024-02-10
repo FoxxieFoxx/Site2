@@ -32,8 +32,7 @@
       var audio = document.getElementById("myAudio");
       if (audio.paused) {
         audio.play();
-      } else {
-        audio.pause();
+        audio.volume = 0.5; // Set initial rain volume to 50%
       }
     }
 
@@ -46,18 +45,28 @@
       }
     }
 
-    // Event listener for 'r' key press only after the page has loaded
+    function changeRainVolume(direction) {
+      var audio = document.getElementById("myAudio");
+      var currentVolume = audio.volume;
+
+      // Adjust the volume based on the direction
+      var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1)); // Volume between 0.1 and 1
+
+      audio.volume = newVolume;
+    }
+
     window.addEventListener("load", function () {
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {
           toggleRain();
+        } else if (event.key === "q") {
+          // Decrease rain volume
+          changeRainVolume(-1);
+        } else if (event.key === "e") {
+          // Increase rain volume
+          changeRainVolume(1);
         }
       });
-    });
-
-    // Auto-play rain audio on page load
-    window.addEventListener("load", function () {
-      playAudio();
     });
   </script>
 

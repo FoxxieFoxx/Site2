@@ -1024,6 +1024,8 @@
           closeThis: "Close",
           arrows: "Arrows",
           spacebar: "Spacebar",
+          rainDown: "Turn down the rain",
+          rainUp: "Turn up the rain",
         }
       });
     var Xe = n(17);
@@ -1171,6 +1173,22 @@
                 className: "red",
                 children: "R"
               }), " ", Ve.changeGif]
+            }), Object(i.jsxs)("span", {
+              style: {
+                marginBottom: "0px"
+              },
+              children: [Object(i.jsx)("span", {
+                className: "red",
+                children: "Q"
+              }), " ", Ve.rainDown]
+            }), Object(i.jsxs)("span", {
+              style: {
+                marginBottom: "0px"
+              },
+              children: [Object(i.jsx)("span", {
+                className: "red",
+                children: "E"
+              }), " ", Ve.rainUp]
             }), Object(i.jsxs)("span", {
               style: {
                 marginBottom: "0px"
