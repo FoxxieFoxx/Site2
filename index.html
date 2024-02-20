@@ -46,17 +46,19 @@
       font-weight: bold;
     }
     #mobileVolumeButtons {
-        display: block;
-        position: fixed;
-        top: 20px; /* Adjust the top position as needed */
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        z-index: 1000;
+      display: inline-blockee;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1000;
     }
     /* Add these styles to ensure the buttons are visible */
     
@@ -153,8 +155,10 @@
         if (event.key === "r") {
           toggleRain();
         } else if (event.key === "q") {
+          playAudio();
           changeRainVolume(-1);
         } else if (event.key === "e") {
+          playAudio();
           changeRainVolume(1);
         }
       });
@@ -164,21 +168,20 @@
 
       if (volumeUpButtonMobile && volumeDownButtonMobile) {
         volumeUpButtonMobile.addEventListener("click", function () {
-          playAudio()
+          playAudio();
           changeRainVolume(1);
         });
 
         volumeDownButtonMobile.addEventListener("click", function () {
-          playAudio()
+          playAudio();
           changeRainVolume(-1);
         });
       }
 
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
-        if (mobileVolumeButtons) {
-          mobileVolumeButtons.style.display = "flex";
-        }
+      // Remove the mobile-specific check
+      var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
+      if (mobileVolumeButtons) {
+        mobileVolumeButtons.style.display = "flex";
       }
     });
   </script>
