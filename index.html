@@ -24,57 +24,70 @@
   <script async="" defer="defer" data-domain="" src="https://sats.mailbrew.com/js/index.js"></script>
   <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
   <style>
-    /* Style for the mobile volume control buttons */
-    #mobileVolumeButtons {
-      display: none;
+    /* New style for the volume dialog */
+    .volume-dialog {
       position: fixed;
-      bottom: 20px;
+      top: 50%;
       left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Style for the close button inside the dialog */
+    .close-button {
+      cursor: pointer;
+      color: #333;
+      font-weight: bold;
+    }
+    #mobileVolumeButtons {
+      display: block;
+      position: fixed;
+      top: 20px; /* Adjust the top position as needed */
+      right: 37%;
       transform: translateX(-50%);
       background-color: #fff;
       padding: 10px;
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
       z-index: 1000;
     }
 
-    #volumeDownButtonMobile,
-    #volumeUpButtonMobile {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      line-height: 0;
-    }
+    /* Add these styles to ensure the buttons are visible */
+    
 
-    #volumeDownButtonMobile img,
-    #volumeUpButtonMobile img {
-      width: 20px;
-      height: 20px;
+    #mobileVolumeButtons img {
+      width: 25px;
+      height: 25px;
       flex: 0 0 20px;
       margin-right: 0px;
     }
 
     #volumeDownButtonMobile {
-      margin-right: 10px;
+      margin-right: 5px;
     }
 
     #volumeUpButtonMobile {
-      margin-right: 10px;
+      margin-right: 5px;
     }
   </style>
 </head>
 
 <body onload="playAudio()">
   <script>
-    var currentDialog = null; // Variable to keep track of the current dialog
+    var currentDialog = null;
 
     function playAudio() {
       var audio = document.getElementById("myAudio");
       if (audio.paused) {
         audio.play();
-        audio.volume = 0.5; // Set initial rain volume to 50%
+        audio.volume = 0.5;
       }
     }
 
@@ -90,57 +103,36 @@
     function changeRainVolume(direction) {
       var audio = document.getElementById("myAudio");
       var currentVolume = audio.volume;
-
-      // Adjust the volume based on the direction
-      var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1)); // Volume between 0.1 and 1
+      var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1));
 
       audio.volume = newVolume;
-
-      // Display volume change dialog
       showVolumeDialog(newVolume);
     }
 
     function showVolumeDialog(volume) {
-      // If a dialog is already present, update its content
       if (currentDialog) {
         updateDialogContent(currentDialog, volume);
       } else {
-        // Create a new dialog
         var dialog = document.createElement("div");
         dialog.className = "volume-dialog";
 
-        // Add an image before the text (adjust the image URL accordingly)
-        var img = document.createElement("img");
-        img.src = "your_image_url.png";
-        img.alt = "Volume Icon";
-        img.style.width = "30px"; // Adjust the width as needed
-        dialog.appendChild(img);
-
-        // Add text with the volume percentage
         var text = document.createElement("div");
-        text.className = "volume-text"; // Add a class for easy identification
+        text.className = "volume-text";
         text.innerHTML = "Rain Volume: " + Math.round(volume * 100) + "%";
         dialog.appendChild(text);
 
-        // Add a close button inside the dialog
         var closeButton = document.createElement("div");
         closeButton.className = "close-button";
         closeButton.innerHTML = "Close";
         closeButton.addEventListener("click", function () {
-          // Clear the timeout and remove the dialog when the close button is clicked
           clearTimeout(dialogTimeout);
           document.body.removeChild(dialog);
-          currentDialog = null; // Reset the currentDialog variable
+          currentDialog = null;
         });
         dialog.appendChild(closeButton);
-
-        // Append the dialog to the body
         document.body.appendChild(dialog);
-
-        // Set the currentDialog variable
         currentDialog = dialog;
 
-        // Set timeout to remove the dialog after 2 seconds
         var dialogTimeout = setTimeout(function () {
           if (currentDialog === dialog) {
             document.body.removeChild(dialog);
@@ -150,7 +142,6 @@
       }
     }
 
-    // Function to update the content of an existing dialog
     function updateDialogContent(dialog, volume) {
       var text = dialog.querySelector(".volume-text");
       if (text) {
@@ -159,48 +150,31 @@
     }
 
     window.addEventListener("load", function () {
-      // Event listener for key presses
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {
           toggleRain();
         } else if (event.key === "q") {
-          // Decrease rain volume
           changeRainVolume(-1);
         } else if (event.key === "e") {
-          // Increase rain volume
           changeRainVolume(1);
         }
       });
 
-      // Event listener for mobile devices (button to change volume)
-      var volumeUpButton = document.getElementById("volumeUpButton");
-      var volumeDownButton = document.getElementById("volumeDownButton");
-
-      if (volumeUpButton && volumeDownButton) {
-        volumeUpButton.addEventListener("click", function () {
-          changeRainVolume(1);
-        });
-
-        volumeDownButton.addEventListener("click", function () {
-          changeRainVolume(-1);
-        });
-      }
-    });
-
-    var volumeUpButtonMobile = document.getElementById("volumeUpButtonMobile");
+      var volumeUpButtonMobile = document.getElementById("volumeUpButtonMobile");
       var volumeDownButtonMobile = document.getElementById("volumeDownButtonMobile");
 
       if (volumeUpButtonMobile && volumeDownButtonMobile) {
         volumeUpButtonMobile.addEventListener("click", function () {
+          playAudio()
           changeRainVolume(1);
         });
 
         volumeDownButtonMobile.addEventListener("click", function () {
+          playAudio()
           changeRainVolume(-1);
         });
       }
 
-      // Check for mobile and show mobile volume buttons
       if (/Mobi|Android/i.test(navigator.userAgent)) {
         var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
         if (mobileVolumeButtons) {
@@ -412,10 +386,10 @@
   <script src="./js/main.js"></script>
   <div id="mobileVolumeButtons">
     <button id="volumeDownButtonMobile">
-      <img src="your_image_url_down.png" alt="Decrease Volume">
+      <img src="volumedown.png" alt="Decrease Volume">
     </button>
     <button id="volumeUpButtonMobile">
-      <img src="your_image_url_up.png" alt="Increase Volume">
+      <img src="volumeup.png" alt="Increase Volume">
     </button>
   </div>
 </body>
