@@ -12,9 +12,8 @@
   <meta property="og:title" content="Foxxie's Cafe">
   <meta property="og:description" content="Lofi music streams for studying, working, and relaxing with rain.">
   <meta property="og:type" content="website">
-  <meta property="og:image" itemprop="image"
-    content="https://i.ibb.co/j42Nsdx/frumpy.gif"">
-  <link rel="stylesheet" href="style.css">
+  <meta property="og:image" itemprop="image" content="https://i.ibb.co/j42Nsdx/frumpy.gif"">
+  <link rel=" stylesheet" href="style.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#09153f">
@@ -24,10 +23,53 @@
     src="https://www.youtube.com/s/player/bc6d77fc/www-widgetapi.vflset/www-widgetapi.js" async=""></script>
   <script async="" defer="defer" data-domain="" src="https://sats.mailbrew.com/js/index.js"></script>
   <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
+  <style>
+    /* Style for the mobile volume control buttons */
+    #mobileVolumeButtons {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    #volumeDownButtonMobile,
+    #volumeUpButtonMobile {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      line-height: 0;
+    }
+
+    #volumeDownButtonMobile img,
+    #volumeUpButtonMobile img {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      margin-right: 0px;
+    }
+
+    #volumeDownButtonMobile {
+      margin-right: 10px;
+    }
+
+    #volumeUpButtonMobile {
+      margin-right: 10px;
+    }
+  </style>
 </head>
 
 <body onload="playAudio()">
   <script>
+    var currentDialog = null; // Variable to keep track of the current dialog
+
     function playAudio() {
       var audio = document.getElementById("myAudio");
       if (audio.paused) {
@@ -53,9 +95,71 @@
       var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1)); // Volume between 0.1 and 1
 
       audio.volume = newVolume;
+
+      // Display volume change dialog
+      showVolumeDialog(newVolume);
+    }
+
+    function showVolumeDialog(volume) {
+      // If a dialog is already present, update its content
+      if (currentDialog) {
+        updateDialogContent(currentDialog, volume);
+      } else {
+        // Create a new dialog
+        var dialog = document.createElement("div");
+        dialog.className = "volume-dialog";
+
+        // Add an image before the text (adjust the image URL accordingly)
+        var img = document.createElement("img");
+        img.src = "your_image_url.png";
+        img.alt = "Volume Icon";
+        img.style.width = "30px"; // Adjust the width as needed
+        dialog.appendChild(img);
+
+        // Add text with the volume percentage
+        var text = document.createElement("div");
+        text.className = "volume-text"; // Add a class for easy identification
+        text.innerHTML = "Rain Volume: " + Math.round(volume * 100) + "%";
+        dialog.appendChild(text);
+
+        // Add a close button inside the dialog
+        var closeButton = document.createElement("div");
+        closeButton.className = "close-button";
+        closeButton.innerHTML = "Close";
+        closeButton.addEventListener("click", function () {
+          // Clear the timeout and remove the dialog when the close button is clicked
+          clearTimeout(dialogTimeout);
+          document.body.removeChild(dialog);
+          currentDialog = null; // Reset the currentDialog variable
+        });
+        dialog.appendChild(closeButton);
+
+        // Append the dialog to the body
+        document.body.appendChild(dialog);
+
+        // Set the currentDialog variable
+        currentDialog = dialog;
+
+        // Set timeout to remove the dialog after 2 seconds
+        var dialogTimeout = setTimeout(function () {
+          if (currentDialog === dialog) {
+            document.body.removeChild(dialog);
+            currentDialog = null;
+          }
+        }, 2000);
+      }
+    }
+
+    // Function to update the content of an existing dialog
+    function updateDialogContent(dialog, volume) {
+      var text = dialog.querySelector(".volume-text");
+      if (text) {
+        text.innerHTML = "Rain Volume: " + Math.round(volume * 100) + "%";
+      }
     }
 
     window.addEventListener("load", function () {
+      // Event listener for key presses
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {
           toggleRain();
@@ -67,6 +171,42 @@
           changeRainVolume(1);
         }
       });
+
+      // Event listener for mobile devices (button to change volume)
+      var volumeUpButton = document.getElementById("volumeUpButton");
+      var volumeDownButton = document.getElementById("volumeDownButton");
+
+      if (volumeUpButton && volumeDownButton) {
+        volumeUpButton.addEventListener("click", function () {
+          changeRainVolume(1);
+        });
+
+        volumeDownButton.addEventListener("click", function () {
+          changeRainVolume(-1);
+        });
+      }
+    });
+
+    var volumeUpButtonMobile = document.getElementById("volumeUpButtonMobile");
+      var volumeDownButtonMobile = document.getElementById("volumeDownButtonMobile");
+
+      if (volumeUpButtonMobile && volumeDownButtonMobile) {
+        volumeUpButtonMobile.addEventListener("click", function () {
+          changeRainVolume(1);
+        });
+
+        volumeDownButtonMobile.addEventListener("click", function () {
+          changeRainVolume(-1);
+        });
+      }
+
+      // Check for mobile and show mobile volume buttons
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
+        if (mobileVolumeButtons) {
+          mobileVolumeButtons.style.display = "flex";
+        }
+      }
     });
   </script>
 
@@ -97,6 +237,11 @@
                 <img class="shadow" src="./media/fullscreen-enter.47fab6db.svg" alt=""
                   style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
               </button>
+              <button type="button" class="hide-small-screen" title="Fullscreen"
+                style="display: flex; align-items: center; margin-right: 14px; line-height: 0;">
+                <img class="shadow" src="./media/fullscreen-enter.47fab6db.svg" alt=""
+                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
+              </button>
               <button type="button" title="Pomodoro Timer"
                 style="display: flex; align-items: center; margin-right: 14px; line-height: 0;">
                 <img class="shadow" src="./media/timer.1427f4b2.svg" alt=""
@@ -109,13 +254,13 @@
             </div>
           </div>
         </div>
-        <div style="width: 100%; z-index: 6; display: block;">
-          <div style="width: 14px; height: 14px;"></div>
-          <div id="buttons-ui">
-            <div style="display: flex; justify-content: flex-start; align-items: center;"><button type="button"
-                style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
-                  src="./media/play.1055bee6.svg" alt=""
-                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
+        <div style="width: 100%; z-index: 6; display: block; position: relative;">
+        <div style="width: 14px; height: 14px;"></div>
+        <div id="buttons-ui" style="user-select: auto; display: flex; justify-content: flex-start; align-items: center; position: relative;">  
+          <button type="button" style="display: flex; align-items: center; line-height: 0;">
+            <img class="shadow" src="./media/play.1055bee6.svg" alt=""
+              style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
+          </button><button type="button"
                 style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
                   src="./media/shuffle.53b14e6b.svg" alt=""
                   style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
@@ -265,6 +410,14 @@
   </script>
   <script src="./js/core.js"></script>
   <script src="./js/main.js"></script>
+  <div id="mobileVolumeButtons">
+    <button id="volumeDownButtonMobile">
+      <img src="your_image_url_down.png" alt="Decrease Volume">
+    </button>
+    <button id="volumeUpButtonMobile">
+      <img src="your_image_url_up.png" alt="Increase Volume">
+    </button>
+  </div>
 </body>
 
 </html>
