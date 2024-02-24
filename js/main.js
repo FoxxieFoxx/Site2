@@ -1065,9 +1065,9 @@
           marginBottom: "10px"
         },
         children: [Object(i.jsx)(Ue, {
-          name: "962958589780193320",
+          name: "1037862493550280704",
           username: "foxxie",
-          image: "./images/frumpy.gif"
+          image: "./foxxo.png"
         })
         ]
       })
@@ -1077,7 +1077,7 @@
           , n = e.username
           , c = e.image;
         return Object(i.jsxs)("a", {
-          href: "https://discordapp.com/users/" + n,
+          href: "https://lookup.guru/" + t,
           target: "_blank",
           rel: "noopener noreferrer",
           style: {
