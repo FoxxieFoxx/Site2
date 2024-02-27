@@ -45,8 +45,9 @@
       color: #333;
       font-weight: bold;
     }
+
     #mobileVolumeButtons {
-      display: inline-blockee;
+      display: inline-block;
       justify-content: center;
       align-items: center;
       position: fixed;
@@ -60,8 +61,9 @@
       text-align: center;
       z-index: 1000;
     }
+
     /* Add these styles to ensure the buttons are visible */
-    
+
 
     #mobileVolumeButtons img {
       width: 25px;
@@ -82,6 +84,7 @@
 
 <body onload="playAudio()">
   <script>
+    
     var currentDialog = null;
 
     function playAudio() {
@@ -139,7 +142,7 @@
             document.body.removeChild(dialog);
             currentDialog = null;
           }
-        }, 2000);
+        }, 2500);
       }
     }
 
@@ -150,6 +153,46 @@
       }
     }
 
+    var customVideoButton = document.getElementById("customVideoButton");
+
+    function handleCustomVideo() {
+      var customVideoLink = prompt("Enter custom video link: (YOU WILL NEED TO REFRESH TO PLAY THE OTHER STATIONS)");
+
+      if (customVideoLink) {
+        var videoId = extractVideoId(customVideoLink);
+
+        if (videoId) {
+          // Construct the YouTube embed link with the extracted video ID
+          var embedLink = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&origin=https%3A%2F%2Fwww.lofi.cafe&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1`;
+
+          // Set the custom video link
+          setCustomVideo(embedLink);
+        } else {
+          alert("Invalid YouTube link. Please provide a valid link.");
+        }
+      }
+    }
+
+    function extractVideoId(link) {
+      var regex = /[?&]v=([^?&]+)/;
+      var match = link.match(regex);
+
+      return match ? match[1] : null;
+    }
+
+    function setCustomVideo(link) {
+      var iframe = document.getElementById("widget2");
+      iframe.src = link;
+
+      // Wait for the iframe to load, then play the video
+      iframe.onload = function () {
+        // Send a playVideo command after a short delay
+        setTimeout(function () {
+          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        }, 1500); // Adjust the delay as needed
+      };
+    }
+    
     window.addEventListener("load", function () {
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {
@@ -231,81 +274,80 @@
           </div>
         </div>
         <div style="width: 100%; z-index: 6; display: block; position: relative;">
-        <div style="width: 14px; height: 14px;"></div>
-        <div id="buttons-ui" style="user-select: auto; display: flex; justify-content: flex-start; align-items: center; position: relative;">  
-          <button type="button" style="display: flex; align-items: center; line-height: 0;">
-            <img class="shadow" src="./media/play.1055bee6.svg" alt=""
-              style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
-          </button><button type="button"
-                style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
-                  src="./media/shuffle.53b14e6b.svg" alt=""
-                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
-                style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
-                  src="./media/previous.17bb0c57.svg" alt=""
-                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
-                style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
-                  src="./media/forward.64c7a860.svg" alt=""
-                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button>
-              <div style="user-select: none; margin-left: 4px;">
-                <div class="pointer" style="width: auto; display: inline-block;">
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
-                  </div>
-                  <div class="green-box"
-                    style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
-                  </div>
+          <div style="width: 14px; height: 14px;"></div>
+          <div id="buttons-ui"
+            style="user-select: auto; display: flex; justify-content: flex-start; align-items: center; position: relative;">
+            <button type="button" style="display: flex; align-items: center; line-height: 0;">
+              <img class="shadow" src="./media/play.1055bee6.svg" alt=""
+                style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
+            </button><button type="button" style="display: flex; align-items: center; line-height: 0;"><img
+                class="shadow" src="./media/shuffle.53b14e6b.svg" alt=""
+                style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
+              style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
+                src="./media/previous.17bb0c57.svg" alt=""
+                style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button><button type="button"
+              style="display: flex; align-items: center; line-height: 0;"><img class="shadow"
+                src="./media/forward.64c7a860.svg" alt=""
+                style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;"></button>
+            <div style="user-select: none; margin-left: 4px;">
+              <div class="pointer" style="width: auto; display: inline-block;">
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 1;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
+                </div>
+                <div class="green-box"
+                  style="width: 6px; height: 14px; margin-right: 5px; background: white; display: inline-block; pointer-events: none; opacity: 0.5;">
                 </div>
               </div>
             </div>
           </div>
-          <div style="width: 12px; height: 12px;"></div>
-          <div value="Qt0-9mO-ZXY" name="stations" id="stations-selector">
-            <div id="stations-button" class="pointer" style="display: flex; align-items: center; flex-wrap: nowrap;">
-              <img class="shadow" src="./media/beatsMute.70cdfd3c.svg" alt=""
-                style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 8px;"> <span></span>
-            </div>
+        </div>
+        <div style="width: 12px; height: 12px;"></div>
+        <div value="Qt0-9mO-ZXY" name="stations" id="stations-selector">
+          <div id="stations-button" class="pointer" style="display: flex; align-items: center; flex-wrap: nowrap;">
+            <img class="shadow" src="./media/beatsMute.70cdfd3c.svg" alt=""
+              style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 8px;"> <span></span>
           </div>
         </div>
-        <div class="yt-wrapper"
-          style="pointer-events: none; user-select: none; position: fixed; top: 100%; left: 100%;">
+      </div>
+      <div class="yt-wrapper" style="pointer-events: none; user-select: none; position: fixed; top: 100%; left: 100%;">
+        <div
+          style="width: 100%; height: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
           <div
-            style="width: 100%; height: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-            <div
-              style="pointer-events: none; user-select: none; z-index: -1; border-radius: 8px; width: 100vw; height: 200vw;">
-              <div style="width: 100%; height: 100%;"><iframe frameborder="0" allowfullscreen="1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  title="YouTube video player" width="100%" height="100%"
-                  src="https://www.youtube.com/embed/Qt0-9mO-ZXY?autoplay=0&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.lofi.cafe&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1"
-                  id="widget2"></iframe></div>
-            </div>
+            style="pointer-events: none; user-select: none; z-index: -1; border-radius: 8px; width: 100vw; height: 200vw;">
+            <div style="width: 100%; height: 100%;"><iframe frameborder="0" allowfullscreen="1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                title="YouTube video player" width="100%" height="100%"
+                src="https://www.youtube.com/embed/Qt0-9mO-ZXY?autoplay=0&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.lofi.cafe&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1"
+                id="widget2"></iframe></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <script>
     ! function (e) {
@@ -392,6 +434,9 @@
     </button>
     <button id="volumeUpButtonMobile">
       <img src="volumeup.png" alt="Increase Volume">
+    </button>
+    <button id="customVideoButton" onclick="handleCustomVideo()">
+      <img src="plus.png" alt="Add Custom Video">
     </button>
   </div>
 </body>
