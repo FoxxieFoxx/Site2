@@ -79,6 +79,56 @@
     #volumeUpButtonMobile {
       margin-right: 5px;
     }
+
+    #sliderContainer {
+      display: none;
+        position: absolute;
+        top: 70px; /* Adjust the top position */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        padding: 10px;
+        background-color: #444;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 1000;
+    }
+
+    #sliderContainer img {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: -20px;
+        filter: grayscale(25%);
+    }
+
+    #volumeSlider {
+        width: calc(100% - 20px); /* Adjust width considering the width of the thumbs */
+        margin: 0 auto; /* Center the slider */
+        margin-top: 10px;
+        appearance: none;
+        height: 5px;
+        background: #555;
+        border-radius: 10px;
+        outline: none;
+        position: relative;
+    }
+
+    #volumeSlider::-webkit-slider-thumb,
+    #volumeSlider::-moz-range-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #3498db;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        z-index: 1;
+        top: -8px; /* Adjust the vertical position */
+        transform: translateX(-50%);
+    }
   </style>
 </head>
 
@@ -220,6 +270,46 @@
       var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
       if (mobileVolumeButtons) {
         mobileVolumeButtons.style.display = "flex";
+      }
+    });
+
+    function toggleSlider() {
+        var sliderContainer = document.getElementById("sliderContainer");
+        var toggleButton = document.getElementById("toggleSliderButton");
+
+        if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
+            sliderContainer.style.display = 'block';
+            toggleButton.innerHTML = '<img src="x.webp" alt="Hide Slider">';
+        } else {
+            sliderContainer.style.display = 'none';
+            toggleButton.innerHTML = '<img src="./rain-icon.png" alt="Show Slider">';
+        }
+    }
+
+    function changeRainAudio(value) {
+      var audio = document.getElementById("myAudio");
+
+      // Map the slider values to corresponding audio sources
+      var audioSources = [
+        "./audio_drizzle.mp3",
+        "./audio_hail.mp3",
+        "./audio.mp3",
+        "./audio_heavy_rain.mp3"
+      ];
+
+      // Set the audio source based on the slider value
+      audio.src = audioSources[value];
+      audio.play();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var volumeSlider = document.getElementById("volumeSlider");
+
+      // Check if the element is present
+      if (volumeSlider) {
+        volumeSlider.addEventListener("input", function () {
+          changeRainAudio(parseInt(volumeSlider.value, 10));
+        });
       }
     });
   </script>
@@ -433,7 +523,16 @@
     <button id="customVideoButton" onclick="handleCustomVideo()">
       <img src="plus.png" alt="Add Custom Video">
     </button>
+    <div id="sliderContainer" class="slider-container">
+        <img src="drizzle.png" alt="Image 1" style="left: 5%;">
+        <img src="hail.png" alt="Image 2" style="left: 30%;">
+        <img src="rain.png" alt="Image 3" style="left: 55%;">
+        <img src="heavy rain.png" alt="Image 4" style="left: 80%;">
+       <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
+    </div>
+    <button id="toggleSliderButton" onclick="toggleSlider()">
+      <img src="./rain-icon.png" alt="Toggle Slider">
+    </button>
   </div>
 </body>
-
 </html>
