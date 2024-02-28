@@ -156,17 +156,25 @@
     var customVideoButton = document.getElementById("customVideoButton");
 
     function handleCustomVideo() {
-      var customVideoLink = prompt("Enter custom video link: (YOU WILL NEED TO REFRESH TO PLAY THE OTHER STATIONS)");
+      // Prompt the user for the video link and name
+      var customVideoLink = prompt("Enter custom video link:");
+      var customVideoName = prompt("Enter custom video name:");
 
-      if (customVideoLink) {
+      if (customVideoLink && customVideoName) {
         var videoId = extractVideoId(customVideoLink);
 
         if (videoId) {
-          // Construct the YouTube embed link with the extracted video ID
-          var embedLink = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&origin=https%3A%2F%2Fwww.lofi.cafe&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=true&color=black&enablejsapi=1&widgetid=1`;
+          // Dispatch a custom event with video data, including the name
+          var event = new CustomEvent("customVideoAdded", {
+            detail: {
+              id: videoId,
+              name: customVideoName, // Use the provided custom video name
+              embedLink: `https://www.youtube.com/embed/${videoId}?autoplay=1&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.lofi.cafe&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1`,
+            },
+          });
 
-          // Set the custom video link
-          setCustomVideo(embedLink);
+          // Dispatch the event
+          document.dispatchEvent(event);
         } else {
           alert("Invalid YouTube link. Please provide a valid link.");
         }
@@ -178,19 +186,6 @@
       var match = link.match(regex);
 
       return match ? match[1] : null;
-    }
-
-    function setCustomVideo(link) {
-      var iframe = document.getElementById("widget2");
-      iframe.src = link;
-
-      // Wait for the iframe to load, then play the video
-      iframe.onload = function () {
-        // Send a playVideo command after a short delay
-        setTimeout(function () {
-          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        }, 1500); // Adjust the delay as needed
-      };
     }
     
     window.addEventListener("load", function () {

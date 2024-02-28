@@ -1,6 +1,82 @@
 (this["webpackJsonplofi-app"] = this["webpackJsonplofi-app"] || []).push([[0], {
   46: function(e, t, n) { },
   82: function(e, t, n) {
+    var g = [{
+        id: "jfKfPfyJRdk",
+        name: "lofi hip hop radio - beats to relax/study to"
+      }, {
+        id: "rUxyKA_-grg",
+        name: "lofi hip hop radio - beats to sleep/chill to"
+      }, {
+        id: "5yx6BWlEVcY",
+        name: "Chillhop Radio - jazzy & lofi hip hop beats"
+      }, {
+        id: "qH3fETPsqXU",
+        name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to"
+      }, {
+        id: "CLeZyIID9Bo",
+        name: "Chill Lofi Mix [chill lo-fi hip hop beats]"
+      }, {
+        id: "YOJsKatW-Ts",
+        name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming"
+      }, {
+        id: "4xDzrJKXOOY",
+        name: "synthwave radio 🌌 - beats to chill/game to"
+      }, {
+        id: "M8yB4NqlnqQ",
+        name: "lofi songs for cold days"
+      }, {
+        id: "q55qNEKQLG0",
+        name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
+      }, {
+        id: "c-M58jTmR6E",
+        name: "Saturday vibes 🍀 Calm Your Mind"
+      }, {
+        id: "VKum4lF8a10",
+        name: "3 hours of relaxing and beautiful animal crossing music"
+      }, {
+        id: "hHxfGGJ_kDU",
+        name: "Video Game Study Lounge 🎮"
+      }, {
+        id: "-z3RRwk2rdU",
+        name: "Zelda & Chill + Zelda & Chill 2"
+      }, {
+        id: "NJuSStkIZBg",
+        name: "Rainy Jazz Cafe ☕️"
+      }, {
+        id: "8TbLuBOClSg",
+        name: "Cozy animal crossing music that cures my headaches🌿"
+      }, {
+        id: "IumNzh6yvfM",
+        name: "pov: it finally feels like summer (an animal crossing playlist)"
+      }, {
+        id: "azV9PMW5-Ro",
+        name: "[24/7 study with me] chill study live stream"
+      }]
+    var storedG = localStorage.getItem('g');
+    if (storedG) {
+      // If there is a stored g array, use it
+      g = JSON.parse(storedG);
+    }
+    document.addEventListener("customVideoAdded", function (event) {
+      // Access the video data from the event detail
+      var videoData = event.detail;
+
+      // Add the custom video to the g array
+      g.push({
+        id: videoData.id,
+        name: videoData.name,
+        embedLink: videoData.embedLink,
+        isCustom: true,
+      });
+
+      // Save the updated g array to localStorage
+      localStorage.setItem('g', JSON.stringify(g));
+
+      // Optionally, you can trigger the playback of the custom video here
+      // Example: setCustomVideo(videoData.embedLink);
+      alert("Station Added!")
+    });
     "use strict";
     n.r(t);
     var i = n(1)
@@ -68,58 +144,7 @@
       ), []),
         n
     }
-      , g = [{
-        id: "jfKfPfyJRdk",
-        name: "lofi hip hop radio - beats to relax/study to"
-      }, {
-        id: "rUxyKA_-grg",
-        name: "lofi hip hop radio - beats to sleep/chill to"
-      }, {
-        id: "5yx6BWlEVcY",
-        name: "Chillhop Radio - jazzy & lofi hip hop beats"
-      }, {
-        id: "qH3fETPsqXU",
-        name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to"
-      }, {
-        id: "CLeZyIID9Bo",
-        name: "Chill Lofi Mix [chill lo-fi hip hop beats]"
-      }, {
-        id: "YOJsKatW-Ts",
-        name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming"
-      }, {
-        id: "4xDzrJKXOOY",
-        name: "synthwave radio 🌌 - beats to chill/game to"
-      }, {
-        id: "M8yB4NqlnqQ",
-        name: "lofi songs for cold days"
-      }, {
-        id: "q55qNEKQLG0",
-        name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
-      }, {
-        id: "c-M58jTmR6E",
-        name: "Saturday vibes 🍀 Calm Your Mind"
-      }, {
-        id: "VKum4lF8a10",
-        name: "3 hours of relaxing and beautiful animal crossing music"
-      }, {
-        id: "hHxfGGJ_kDU",
-        name: "Video Game Study Lounge 🎮"
-      }, {
-        id: "-z3RRwk2rdU",
-        name: "Zelda & Chill + Zelda & Chill 2"
-      }, {
-        id: "NJuSStkIZBg",
-        name: "Rainy Jazz Cafe ☕️"
-      }, {
-        id: "8TbLuBOClSg",
-        name: "Cozy animal crossing music that cures my headaches🌿"
-      }, {
-        id: "IumNzh6yvfM",
-        name: "pov: it finally feels like summer (an animal crossing playlist)"
-      }, {
-        id: "azV9PMW5-Ro",
-        name: "[24/7 study with me] chill study live stream"
-      }]
+      , g = g
       , y = {
         track: function(e, t) { }
       }
