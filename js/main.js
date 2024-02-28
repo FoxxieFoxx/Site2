@@ -53,11 +53,13 @@
         id: "azV9PMW5-Ro",
         name: "[24/7 study with me] chill study live stream"
       }]
+    
     var storedG = localStorage.getItem('g');
     if (storedG) {
       // If there is a stored g array, use it
       g = JSON.parse(storedG);
     }
+    
     document.addEventListener("customVideoAdded", function (event) {
       // Access the video data from the event detail
       var videoData = event.detail;
@@ -70,11 +72,9 @@
         isCustom: true,
       });
 
-      // Save the updated g array to localStorage
       localStorage.setItem('g', JSON.stringify(g));
 
-      // Optionally, you can trigger the playback of the custom video here
-      // Example: setCustomVideo(videoData.embedLink);
+
       alert("Station Added!")
     });
     "use strict";
@@ -1025,12 +1025,34 @@
         )
       }
     }
-    var Ye = n.p + "./media/boot.47b60944.mp3"
-      , ke = n.p + "./media/1static.mp3"
+
+    function playRandomAudio() {
+        var randomAudioNumber = Math.floor(Math.random() * 9); // Generates a random number between 0 and 8
+        var audioFileName = "./media/audio" + randomAudioNumber + ".mp3";
+        var audio = new Audio(audioFileName);
+
+        // Ensure loop is disabled
+        audio.loop = false;
+
+        
+
+        // Play for 1 second
+        audio.play();
+
+
+        // Stop playback after 1 second
+        setTimeout(function() {
+            audio.pause();
+            audio.currentTime = 0;
+        }, 1000);
+    }
+    
+    var Ye = n.p + "./media/boot.mp3"
+      , ke = n.p + "./radio.mp3"
       , We = n.p + "./media/endWork.05b9f5ea.mp3"
       , Re = n.p + "./media/endPause.d5eb5059.mp3"
       , Be = {
-        static: new Audio(ke),
+        static: (ke),
         boot: new Audio(Ye),
         endWork: new Audio(We),
         endPause: new Audio(Re)
@@ -1764,7 +1786,7 @@
                 var e = !(arguments.length > 0 && void 0 !== arguments[0]) || arguments[0];
                 y.track("Thay đổi kênh"),
                   x(300),
-                  e && Be.static.play(),
+                  e && playRandomAudio(),
                   g()
               }
             })]
