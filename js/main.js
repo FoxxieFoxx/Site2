@@ -1027,20 +1027,11 @@
     }
 
     function playRandomAudio() {
-        var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 8
+        var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 14
         var audioFileName = "./media/audio" + randomAudioNumber + ".mp3";
         var audio = new Audio(audioFileName);
-
-        // Ensure loop is disabled
         audio.loop = false;
-
-        
-
-        // Play for 1 second
         audio.play();
-
-
-        // Stop playback after 1 second
         setTimeout(function() {
             audio.pause();
             audio.currentTime = 0;
@@ -1048,11 +1039,9 @@
     }
     
     var Ye = n.p + "./media/boot.mp3"
-      , ke = n.p + "./radio.mp3"
       , We = n.p + "./media/endWork.05b9f5ea.mp3"
       , Re = n.p + "./media/endPause.d5eb5059.mp3"
       , Be = {
-        static: (ke),
         boot: new Audio(Ye),
         endWork: new Audio(We),
         endPause: new Audio(Re)

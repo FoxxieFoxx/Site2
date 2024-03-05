@@ -83,51 +83,80 @@
     #sliderContainer {
       display: none;
         position: absolute;
-        top: 70px; /* Adjust the top position */
+        top: 100px; /* Adjust the top position */
         left: 50%;
         transform: translateX(-50%);
-        width: 300px;
-        padding: 10px;
+        width: 400px;
+        padding: 1px;
         background-color: #444;
-        border-radius: 15px;
+        border-radius: 50px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         text-align: center;
         z-index: 1000;
+      opacity: 0; /* Set initial opacity to 0 */
+      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
+    }
+    #sliderContainer.fade-in {
+      opacity: 1; /* Set opacity to 1 when the fade-in class is added to the container */
+      transition-delay: 0.2s; /* Add a small delay for the fade-in effect */
     }
 
     #sliderContainer img {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         position: absolute;
-        top: -20px;
+        top: 50px;
+        right: 100%;
         filter: grayscale(25%);
+      opacity: 0; /* Set initial opacity to 0 */
+      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
+    }
+
+    #sliderContainer.fade-in img {
+      opacity: 1; /* Set opacity to 1 when the fade-in class is added to the container */
+      transition-delay: 0.2s; /* Add a small delay for the fade-in effect */
+    }
+
+    #sliderContainer.fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #sliderContainer.fade-out img {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
     #volumeSlider {
-        width: calc(100% - 20px); /* Adjust width considering the width of the thumbs */
-        margin: 0 auto; /* Center the slider */
-        margin-top: 10px;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+        margin-top: 0px;
         appearance: none;
-        height: 5px;
+        height: 20px;
         background: #555;
         border-radius: 10px;
         outline: none;
         position: relative;
+        transition: all 0.5s ease-in-out;
+    }
+    #volumeSlider.transitioning {
+      transition: margin-left 0.5s ease-in-out;
     }
 
     #volumeSlider::-webkit-slider-thumb,
     #volumeSlider::-moz-range-thumb {
         appearance: none;
-        width: 20px;
-        height: 20px;
+        width: 30px; /* Adjust the width of the thumb */
+        height: 30px; /* Adjust the height of the thumb */
         background: #3498db;
-        border-radius: 50%;
+        border-radius: 15px; /* Set border-radius to half of the height for a rounded rectangle effect */
         cursor: pointer;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         position: absolute;
         z-index: 1;
         top: -8px; /* Adjust the vertical position */
         transform: translateX(-50%);
+        transition: left 0.5s ease-in-out, right 0.5s ease-in-out; /* Add smooth transition to both left and right properties */
     }
   </style>
 </head>
@@ -274,16 +303,30 @@
     });
 
     function toggleSlider() {
-        var sliderContainer = document.getElementById("sliderContainer");
-        var toggleButton = document.getElementById("toggleSliderButton");
+      var sliderContainer = document.getElementById("sliderContainer");
+      var toggleButton = document.getElementById("toggleSliderButton");
 
-        if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
-            sliderContainer.style.display = 'block';
-            toggleButton.innerHTML = '<img src="x.webp" alt="Hide Slider">';
-        } else {
-            sliderContainer.style.display = 'none';
-            toggleButton.innerHTML = '<img src="./rain-icon.png" alt="Show Slider">';
-        }
+      if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
+        sliderContainer.style.display = 'block';
+        toggleButton.innerHTML = '<img src="x.webp" alt="Hide Slider">';
+
+        // Use setTimeout to add the fade-in class after a small delay
+        setTimeout(function () {
+          sliderContainer.classList.add("fade-in");
+        }, 50); // Adjust the delay as needed
+      } else {
+        // Add fade-out class before changing display to 'none'
+        sliderContainer.classList.add("fade-out");
+
+        // Set a timeout to change display to 'none' after the fade-out animation duration
+        setTimeout(function () {
+          sliderContainer.style.display = 'none';
+
+          // Remove both fade-in and fade-out classes when closing the slider
+          sliderContainer.classList.remove("fade-in", "fade-out");
+        }, 500); // Adjust the duration to match the CSS transition time
+        toggleButton.innerHTML = '<img src="./rain-icon.png" alt="Show Slider">';
+      }
     }
 
     function changeRainAudio(value) {
@@ -312,6 +355,9 @@
         });
       }
     });
+    
+  
+    
   </script>
 
   <div id="root">
@@ -524,10 +570,10 @@
       <img src="plus.png" alt="Add Custom Video">
     </button>
     <div id="sliderContainer" class="slider-container">
-        <img src="drizzle.png" alt="Image 1" style="left: 5%;">
-        <img src="hail.png" alt="Image 2" style="left: 30%;">
-        <img src="rain.png" alt="Image 3" style="left: 55%;">
-        <img src="heavy rain.png" alt="Image 4" style="left: 80%;">
+        <img src="drizzle.png" alt="Image 1" style="left: 0%;">
+        <img src="hail.png" alt="Image 2" style="left: 29%;">
+        <img src="rain.png" alt="Image 3" style="left: 58%;">
+        <img src="heavy rain.png" alt="Image 4" style="left: 88%;">
        <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
     </div>
     <button id="toggleSliderButton" onclick="toggleSlider()">
