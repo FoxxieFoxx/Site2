@@ -98,7 +98,7 @@
     }
     #sliderContainer.fade-in {
       opacity: 1; /* Set opacity to 1 when the fade-in class is added to the container */
-      transition-delay: 0.2s; /* Add a small delay for the fade-in effect */
+      transition-delay: 0.1s; /* Add a small delay for the fade-in effect */
     }
 
     #sliderContainer img {
@@ -117,6 +117,22 @@
       transition-delay: 0.2s; /* Add a small delay for the fade-in effect */
     }
 
+    #volumeSlider {
+        width: calc(100%);
+        margin: 0 auto;
+        margin-top: 0px;
+        appearance: none;
+        height: 20px;
+        background: #555;
+        border-radius: 10px;
+        outline: none;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+    }
+    #volumeSlider.transitioning {
+      transition: margin-left 0.5s ease-in-out;
+    }
+
     #sliderContainer.fade-out {
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
@@ -127,28 +143,15 @@
       transition: opacity 0.5s ease-in-out;
     }
 
-    #volumeSlider {
-        width: calc(100%);
-        margin: 0 auto;
-        margin-top: 0px;
-        appearance: none;
-        height: 20px;
-        border-radius: 10px;
-        outline: none;
-        position: relative;
-        transition: all 0.5s ease-in-out;
-    }
-    #volumeSlider.transitioning {
-      transition: margin-left 0.5s ease-in-out;
-    }
-
     #volumeSlider::-webkit-slider-thumb,
     #volumeSlider::-moz-range-thumb {
         appearance: none;
         width: 30px; /* Adjust the width of the thumb */
         height: 30px; /* Adjust the height of the thumb */
+        background: #3498db;
         border-radius: 15px; /* Set border-radius to half of the height for a rounded rectangle effect */
         cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         position: absolute;
         z-index: 1;
         top: -8px; /* Adjust the vertical position */
@@ -160,7 +163,7 @@
 
 <body onload="playAudio()">
   <script>
-    
+
     var currentDialog = null;
 
     function playAudio() {
@@ -263,7 +266,7 @@
 
       return match ? match[1] : null;
     }
-    
+
     window.addEventListener("load", function () {
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {
@@ -326,103 +329,22 @@
       }
     }
 
-    var audioContext; // Declare audioContext as a global variable
-    var gainNode;
-
-    function initAudio() {
-        var audio = document.getElementById("myAudio");
-        console.log("initAudio() called");
-
-        // Check if audio context is already created
-        if (!audioContext) {
-            // Check if audio context is supported
-            var AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) {
-                console.error("AudioContext is not supported in this browser");
-                return;
-            }
-
-            audioContext = new AudioContext();
-            gainNode = audioContext.createGain();
-            var sourceNode = audioContext.createMediaElementSource(audio);
-
-            sourceNode.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Set initial gain to 1
-
-            audio.gainNode = gainNode;
-            audioContext.resume(); // Needed to autoplay audio on some browsers
-        }
-    }
 
     function changeRainAudio(value) {
-        var audio = document.getElementById("myAudio");
-        var audioSources = [
-            "./audio_drizzle.mp3",
-            "./audio_hail.mp3",
-            "./audio.mp3",
-            "./audio_heavy_rain.mp3"
-        ];
+      var audio = document.getElementById("myAudio");
 
-        // Log when the function is called
-        console.log("changeRainAudio called with value:", value);
+      // Map the slider values to corresponding audio sources
+      var audioSources = [
+        "./audio_drizzle.mp3",
+        "./audio_hail.mp3",
+        "./audio.mp3",
+        "./audio_heavy_rain.mp3"
+      ];
 
-        // Cancel the previous fade if it's still in progress
-        if (audio.playing) {
-            audio.playing.cancelScheduledValues(audioContext.currentTime);
-            audio.playing = null;
-        }
-
-        // Fade out the current audio
-        var fadeOut = gainNode.gain.setValueAtTime(1, audioContext.currentTime);
-        fadeOut.linearRampToValueAtTime(0, audioContext.currentTime + 1); // Adjust the duration as needed
-
-        setTimeout(function() {
-            // Set the new audio source
-          audio.playing.cancelScheduledValues(audioContext.currentTime);
-          audio.playing = null;
-            audio.src = audioSources[value];
-
-            // Fade in the new audio
-            var fadeIn = gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            fadeIn.linearRampToValueAtTime(1, audioContext.currentTime + 1); // Adjust the duration as needed
-
-            // Start playing the new audio
-            audio.play();
-        });
-
-        // Store the fade-out schedule
-        audio.playing = fadeOut;
+      // Set the audio source based on the slider value
+      audio.src = audioSources[value];
+      audio.play();
     }
-
-        function fadeIn() {
-            // Fade in the new audio
-            var fadeIn = gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            fadeIn.linearRampToValueAtTime(1, audioContext.currentTime + 1); // Adjust the duration as needed
-
-            // Schedule the fade-in and start playing the new audio
-            audio.playing = fadeIn;
-            audio.play();
-
-            // Remove the reference to the scheduled event
-            audio.playing.onended = null;
-            audio.playing = null;
-
-            // Schedule a stop event to prevent the audio from playing indefinitely
-            var stopTime = audioContext.currentTime + 2; // Adjust the duration as needed
-            audio.stopEvent = gainNode.gain.setValueAtTime(1, stopTime);
-            audio.stopEvent.linearRampToValueAtTime(0, stopTime + 1); // Adjust the duration as needed
-            audio.stopEvent.onended = function () {
-                audio.pause();
-                audio.currentTime = 0;
-            };
-        }
-    
-    
-
-    document.getElementById("myAudio").addEventListener("loadedmetadata", function () {
-        initAudio();
-    });
 
     document.addEventListener("DOMContentLoaded", function () {
       var volumeSlider = document.getElementById("volumeSlider");
@@ -434,7 +356,9 @@
         });
       }
     });
-        
+
+
+
   </script>
 
   <div id="root">
