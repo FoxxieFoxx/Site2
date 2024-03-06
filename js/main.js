@@ -29,7 +29,7 @@
         id: "q55qNEKQLG0",
         name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
       }, {
-        id: "qyuDWa9pn2s",
+        id: "Dlxc5g6hMg8",
         name: "Saturday vibes 🍀 Calm Your Mind"
       }, {
         id: "VKum4lF8a10",
@@ -56,26 +56,34 @@
     
     var storedG = localStorage.getItem('g');
     if (storedG) {
-      // If there is a stored g array, use it
-      g = JSON.parse(storedG);
+      // If there is a stored g array, merge it with the current g array
+      g = g.concat(JSON.parse(storedG));
     }
-    
+
     document.addEventListener("customVideoAdded", function (event) {
       // Access the video data from the event detail
       var videoData = event.detail;
 
-      // Add the custom video to the g array
-      g.push({
-        id: videoData.id,
-        name: videoData.name,
-        embedLink: videoData.embedLink,
-        isCustom: true,
+      // Check if the video is already in the g array
+      var isVideoInArray = g.some(function (video) {
+        return video.id === videoData.id;
       });
 
-      localStorage.setItem('g', JSON.stringify(g));
+      if (!isVideoInArray) {
+        // Add the custom video to the g array
+        g.push({
+          id: videoData.id,
+          name: videoData.name,
+          embedLink: videoData.embedLink,
+          isCustom: true,
+        });
 
+        localStorage.setItem('g', JSON.stringify(g));
 
-      alert("Station Added!")
+        alert("Station Added!");
+      } else {
+        alert("Station already exists!");
+      }
     });
     "use strict";
     n.r(t);
@@ -1027,7 +1035,7 @@
     }
 
     function playRandomAudio() {
-        var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 14
+        var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 8
         var audioFileName = "./media/audio" + randomAudioNumber + ".mp3";
         var audio = new Audio(audioFileName);
         audio.loop = false;
