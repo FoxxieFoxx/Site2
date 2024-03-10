@@ -54,10 +54,12 @@
         name: "[24/7 study with me] chill study live stream"
       }]
     
+    // Initialize g array
+
+    // Load stored array from localStorage
     var storedG = localStorage.getItem('g');
     if (storedG) {
-      // If there is a stored g array, merge it with the current g array
-      g = g.concat(JSON.parse(storedG));
+      g = JSON.parse(storedG);
     }
 
     document.addEventListener("customVideoAdded", function (event) {
@@ -85,6 +87,11 @@
         alert("Station already exists!");
       }
     });
+
+    // If you want to manually clear the localStorage, you can do it elsewhere in your code
+    // localStorage.removeItem('g');
+
+
     "use strict";
     n.r(t);
     var i = n(1)
