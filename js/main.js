@@ -88,7 +88,6 @@
       }
     });
 
-    // If you want to manually clear the localStorage, you can do it elsewhere in your code
     // localStorage.removeItem('g');
 
 
