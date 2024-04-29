@@ -2,58 +2,58 @@
   46: function(e, t, n) { },
   82: function(e, t, n) {
     var g = [{
-        id: "jfKfPfyJRdk",
-        name: "lofi hip hop radio - beats to relax/study to"
-      }, {
-        id: "rUxyKA_-grg",
-        name: "lofi hip hop radio - beats to sleep/chill to"
-      }, {
-        id: "5yx6BWlEVcY",
-        name: "Chillhop Radio - jazzy & lofi hip hop beats"
-      }, {
-        id: "qH3fETPsqXU",
-        name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to"
-      }, {
-        id: "CLeZyIID9Bo",
-        name: "Chill Lofi Mix [chill lo-fi hip hop beats]"
-      }, {
-        id: "YOJsKatW-Ts",
-        name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming"
-      }, {
-        id: "4xDzrJKXOOY",
-        name: "synthwave radio 🌌 - beats to chill/game to"
-      }, {
-        id: "M8yB4NqlnqQ",
-        name: "lofi songs for cold days"
-      }, {
-        id: "q55qNEKQLG0",
-        name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
-      }, {
-        id: "Dlxc5g6hMg8",
-        name: "Saturday vibes 🍀 Calm Your Mind"
-      }, {
-        id: "VKum4lF8a10",
-        name: "3 hours of relaxing and beautiful animal crossing music"
-      }, {
-        id: "hHxfGGJ_kDU",
-        name: "Video Game Study Lounge 🎮"
-      }, {
-        id: "-z3RRwk2rdU",
-        name: "Zelda & Chill + Zelda & Chill 2"
-      }, {
-        id: "NJuSStkIZBg",
-        name: "Rainy Jazz Cafe ☕️"
-      }, {
-        id: "8TbLuBOClSg",
-        name: "Cozy animal crossing music that cures my headaches🌿"
-      }, {
-        id: "IumNzh6yvfM",
-        name: "pov: it finally feels like summer (an animal crossing playlist)"
-      }, {
-        id: "azV9PMW5-Ro",
-        name: "[24/7 study with me] chill study live stream"
-      }]
-    
+      id: "jfKfPfyJRdk",
+      name: "lofi hip hop radio - beats to relax/study to"
+    }, {
+      id: "rUxyKA_-grg",
+      name: "lofi hip hop radio - beats to sleep/chill to"
+    }, {
+      id: "5yx6BWlEVcY",
+      name: "Chillhop Radio - jazzy & lofi hip hop beats"
+    }, {
+      id: "qH3fETPsqXU",
+      name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to"
+    }, {
+      id: "CLeZyIID9Bo",
+      name: "Chill Lofi Mix [chill lo-fi hip hop beats]"
+    }, {
+      id: "YOJsKatW-Ts",
+      name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming"
+    }, {
+      id: "4xDzrJKXOOY",
+      name: "synthwave radio 🌌 - beats to chill/game to"
+    }, {
+      id: "M8yB4NqlnqQ",
+      name: "lofi songs for cold days"
+    }, {
+      id: "q55qNEKQLG0",
+      name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
+    }, {
+      id: "Dlxc5g6hMg8",
+      name: "Saturday vibes 🍀 Calm Your Mind"
+    }, {
+      id: "VKum4lF8a10",
+      name: "3 hours of relaxing and beautiful animal crossing music"
+    }, {
+      id: "hHxfGGJ_kDU",
+      name: "Video Game Study Lounge 🎮"
+    }, {
+      id: "-z3RRwk2rdU",
+      name: "Zelda & Chill + Zelda & Chill 2"
+    }, {
+      id: "NJuSStkIZBg",
+      name: "Rainy Jazz Cafe ☕️"
+    }, {
+      id: "8TbLuBOClSg",
+      name: "Cozy animal crossing music that cures my headaches🌿"
+    }, {
+      id: "IumNzh6yvfM",
+      name: "pov: it finally feels like summer (an animal crossing playlist)"
+    }, {
+      id: "azV9PMW5-Ro",
+      name: "[24/7 study with me] chill study live stream"
+    }]
+
     // Initialize g array
 
     // Load stored array from localStorage
@@ -62,12 +62,12 @@
       g = JSON.parse(storedG);
     }
 
-    document.addEventListener("customVideoAdded", function (event) {
+    document.addEventListener("customVideoAdded", function(event) {
       // Access the video data from the event detail
       var videoData = event.detail;
 
       // Check if the video is already in the g array
-      var isVideoInArray = g.some(function (video) {
+      var isVideoInArray = g.some(function(video) {
         return video.id === videoData.id;
       });
 
@@ -1041,17 +1041,17 @@
     }
 
     function playRandomAudio() {
-        var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 8
-        var audioFileName = "./media/audio" + randomAudioNumber + ".mp3";
-        var audio = new Audio(audioFileName);
-        audio.loop = false;
-        audio.play();
-        setTimeout(function() {
-            audio.pause();
-            audio.currentTime = 0;
-        }, 1000);
+      var randomAudioNumber = Math.floor(Math.random() * 14); // Generates a random number between 0 and 8
+      var audioFileName = "./media/audio" + randomAudioNumber + ".mp3";
+      var audio = new Audio(audioFileName);
+      audio.loop = false;
+      audio.play();
+      setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
+      }, 1000);
     }
-    
+
     var Ye = n.p + "./media/boot.mp3"
       , We = n.p + "./media/endWork.05b9f5ea.mp3"
       , Re = n.p + "./media/endPause.d5eb5059.mp3"
@@ -1119,12 +1119,12 @@
           username: "foxxie",
           image: "./foxxo.png"
         })
-        , Object(i.jsx)(Ue, {
-           name: "923370607557640312",
-           username: "kit",
-           image: "./kit.png"
-        })
-                                 
+          , Object(i.jsx)(Ue, {
+            name: "0",
+            username: "kit",
+            image: "./kit.png"
+          })
+
         ]
       })
     }
