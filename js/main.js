@@ -87,7 +87,7 @@
         alert("Station already exists!");
       }
     });
-
+    // this was supposed to take 5 minutes i've been here for 3 hours help
     // localStorage.removeItem('g');
 
 

@@ -1,13 +1,13 @@
 <html lang="en">
-<audio loop src="./audio.mp3" id="myAudio"></audio>
+<audio loop src="./media/audio.mp3" id="myAudio"></audio>
 <script> function playAudio() {
     document.getElementById("myAudio").play();
   }
+  // foxxie.space/smile.mp4
 </script>
-
 <head>
   <title>Foxxie's Lofi Site</title>
-  <link rel="icon" type="image/x-icon" href="./blep.ico">
+  <link rel="icon" type="image/x-icon" href="blep.ico">
   <meta name="description" content="Lofi music streams for studying, working, and relaxing with rain.">
   <meta property="og:title" content="Foxxie's Cafe">
   <meta property="og:description" content="Lofi music streams for studying, working, and relaxing with rain.">
@@ -24,7 +24,6 @@
   <script async="" defer="defer" data-domain="" src="https://sats.mailbrew.com/js/index.js"></script>
   <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
   <style>
-    
     /* New style for the volume dialog */
     .volume-dialog {
       position: fixed;
@@ -83,53 +82,64 @@
 
     #sliderContainer {
       display: none;
-        position: absolute;
-        top: 100px; /* Adjust the top position */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 400px;
-        padding: 1px;
-        background-color: #444;
-        border-radius: 50px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        z-index: 1000;
-      opacity: 0; /* Set initial opacity to 0 */
-      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
+      position: absolute;
+      top: 100px;
+      /* Adjust the top position */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      padding: 1px;
+      background-color: #444;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1000;
+      opacity: 0;
+      /* Set initial opacity to 0 */
+      transition: opacity 0.5s ease-in-out;
+      /* Add transition for opacity */
     }
+
     #sliderContainer.fade-in {
-      opacity: 1; /* Set opacity to 1 when the fade-in class is added to the container */
-      transition-delay: 0.1s; /* Add a small delay for the fade-in effect */
+      opacity: 1;
+      /* Set opacity to 1 when the fade-in class is added to the container */
+      transition-delay: 0.1s;
+      /* Add a small delay for the fade-in effect */
     }
 
     #sliderContainer img {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        top: 50px;
-        right: 100%;
-        filter: grayscale(25%);
-      opacity: 0; /* Set initial opacity to 0 */
-      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: 50px;
+      right: 100%;
+      filter: grayscale(25%);
+      opacity: 0;
+      /* Set initial opacity to 0 */
+      transition: opacity 0.5s ease-in-out;
+      /* Add transition for opacity */
     }
 
     #sliderContainer.fade-in img {
-      opacity: 1; /* Set opacity to 1 when the fade-in class is added to the container */
-      transition-delay: 0.2s; /* Add a small delay for the fade-in effect */
+      opacity: 1;
+      /* Set opacity to 1 when the fade-in class is added to the container */
+      transition-delay: 0.2s;
+      /* Add a small delay for the fade-in effect */
     }
 
     #volumeSlider {
-        width: calc(100%);
-        margin: 0 auto;
-        margin-top: 0px;
-        appearance: none;
-        height: 20px;
-        background: #555;
-        border-radius: 10px;
-        outline: none;
-        position: relative;
-        transition: all 0.5s ease-in-out;
+      width: calc(100%);
+      margin: 0 auto;
+      margin-top: 0px;
+      appearance: none;
+      height: 20px;
+      background: #555;
+      border-radius: 10px;
+      outline: none;
+      position: relative;
+      transition: all 0.5s ease-in-out;
     }
+
     #volumeSlider.transitioning {
       transition: margin-left 0.5s ease-in-out;
     }
@@ -146,18 +156,23 @@
 
     #volumeSlider::-webkit-slider-thumb,
     #volumeSlider::-moz-range-thumb {
-        appearance: none;
-        width: 30px; /* Adjust the width of the thumb */
-        height: 30px; /* Adjust the height of the thumb */
-        background: #3498db;
-        border-radius: 15px; /* Set border-radius to half of the height for a rounded rectangle effect */
-        cursor: pointer;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        position: absolute;
-        z-index: 1;
-        top: -8px; /* Adjust the vertical position */
-        transform: translateX(-50%);
-        transition: left 0.5s ease-in-out, right 0.5s ease-in-out; /* Add smooth transition to both left and right properties */
+      appearance: none;
+      width: 30px;
+      /* Adjust the width of the thumb */
+      height: 30px;
+      /* Adjust the height of the thumb */
+      background: #3498db;
+      border-radius: 15px;
+      /* Set border-radius to half of the height for a rounded rectangle effect */
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      position: absolute;
+      z-index: 1;
+      top: -8px;
+      /* Adjust the vertical position */
+      transform: translateX(-50%);
+      transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
+      /* Add smooth transition to both left and right properties */
     }
   </style>
 </head>
@@ -176,6 +191,7 @@
     }
 
     function toggleRain() {
+      // i mean it works
       var audio = document.getElementById("myAudio");
       if (audio.paused) {
         audio.play();
@@ -194,6 +210,7 @@
     }
 
     function showVolumeDialog(volume) {
+      // this function is a bitch, it also breaks on mobile for some reason.
       if (currentDialog) {
         updateDialogContent(currentDialog, volume);
       } else {
@@ -264,6 +281,7 @@
     function extractVideoId(link) {
       var regex = /[?&]v=([^?&]+)/;
       var match = link.match(regex);
+      // we use regex to get the youtube video id from the link, if the link doesnt contain a youtube video id, no custom station for you.
 
       return match ? match[1] : null;
     }
@@ -336,10 +354,10 @@
 
       // Map the slider values to corresponding audio sources
       var audioSources = [
-        "./audio_drizzle.mp3",
-        "./audio_hail.mp3",
-        "./audio.mp3",
-        "./audio_heavy_rain.mp3"
+        "./media/audio_drizzle.mp3",
+        "./media/audio_hail.mp3",
+        "./media/audio.mp3",
+        "./media/audio_heavy_rain.mp3"
       ];
 
       // Set the audio source based on the slider value
@@ -561,24 +579,25 @@
   <script src="./js/main.js"></script>
   <div id="mobileVolumeButtons">
     <button id="volumeDownButtonMobile">
-      <img src="volumedown.png" alt="Decrease Volume">
+      <img src="./media/volumedown.png" alt="Decrease Volume">
     </button>
     <button id="volumeUpButtonMobile">
-      <img src="volumeup.png" alt="Increase Volume">
+      <img src="./media/volumeup.png" alt="Increase Volume">
     </button>
     <button id="customVideoButton" onclick="handleCustomVideo()">
-      <img src="plus.png" alt="Add Custom Video">
+      <img src="./media/plus.png" alt="Add Custom Video">
     </button>
     <div id="sliderContainer" class="slider-container">
-        <img src="drizzle.png" alt="Image 1" style="left: 0%;">
-        <img src="hail.png" alt="Image 2" style="left: 29%;">
-        <img src="rain.png" alt="Image 3" style="left: 58%;">
-        <img src="heavy rain.png" alt="Image 4" style="left: 88%;">
-       <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
+      <img src="./media/drizzle.png" alt="Image 1" style="left: 0%;">
+      <img src="./media/hail.png" alt="Image 2" style="left: 29%;">
+      <img src="./media/rain.png" alt="Image 3" style="left: 58%;">
+      <img src="./media/heavy rain.png" alt="Image 4" style="left: 88%;">
+      <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
     </div>
     <button id="toggleSliderButton" onclick="toggleSlider()">
-      <img src="./rain-icon.png" alt="Toggle Slider">
+      <img src="./media/rain-icon.png" alt="Toggle Slider">
     </button>
   </div>
 </body>
+
 </html>
