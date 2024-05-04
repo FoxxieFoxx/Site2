@@ -87,6 +87,25 @@
         alert("Station already exists!");
       }
     });
+
+    // Function to add custom video without duplication
+    function addCustomVideo(videoData) {
+      var isVideoInArray = g.some(function(video) {
+        return video.id === videoData.id;
+      });
+
+      if (!isVideoInArray) {
+        // Add the custom video to the g array
+        g.push({
+          id: videoData.id,
+          name: videoData.name,
+          embedLink: videoData.embedLink,
+          isCustom: true,
+        });
+
+        localStorage.setItem('g', JSON.stringify(g));
+      }
+    }
     // this was supposed to take 5 minutes i've been here for 3 hours help
     // localStorage.removeItem('g');
 
