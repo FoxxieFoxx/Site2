@@ -328,7 +328,7 @@
 
       if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
         sliderContainer.style.display = 'block';
-        toggleButton.innerHTML = '<img src="x.webp" alt="Hide Slider">';
+        toggleButton.innerHTML = '<img src="./media/x.webp" alt="Hide Slider">';
 
         // Use setTimeout to add the fade-in class after a small delay
         setTimeout(function () {
@@ -345,7 +345,7 @@
           // Remove both fade-in and fade-out classes when closing the slider
           sliderContainer.classList.remove("fade-in", "fade-out");
         }, 500); // Adjust the duration to match the CSS transition time
-        toggleButton.innerHTML = '<img src="./rain-icon.png" alt="Show Slider">';
+        toggleButton.innerHTML = '<img src="./media/rain-icon.png" alt="Show Slider">';
       }
     }
 
