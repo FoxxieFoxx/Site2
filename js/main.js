@@ -1269,14 +1269,19 @@
                 marginBottom: "0px"
               },
               children: [Object(i.jsx)("span", {
-                className: "red",
-                children: "ESC"
-              }), " ", Ve.closeThis]
-            }), Object(i.jsx)(Je, {}), Object(i.jsx)("a", {
-
-            })]
-        })
-      };
+                          className: "red",
+                          children: "ESC"
+                        }), " ", Ve.closeThis]
+                      }), Object(i.jsx)(Je, {}),
+                      Object(i.jsx)("a", {
+                        href: "../sources.html",
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        children: "Sources of Assets"
+                      })
+                    ]
+                })
+              };
     var qe = function(e) {
       var t = e.src
         , n = e.zIndex
