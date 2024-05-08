@@ -109,6 +109,37 @@
     // localStorage.removeItem('g');
 
 
+    // Function to get the visit count from localStorage
+    function getVisitCount() {
+      var visitCount = localStorage.getItem('visitCount');
+      console.log('Retrieved visit count:', visitCount);
+      if (visitCount === null) {
+        visitCount = 1;
+        localStorage.setItem('visitCount', visitCount);
+        console.log('Set initial visit count:', visitCount);
+      }
+      return parseInt(visitCount);
+    }
+
+    // Function to format the welcome message based on visit count
+    function getWelcomeMessage(visitCount) {
+      if (visitCount === 1) {
+        return "Welcome! It's your first visit.";
+      } else {
+        return "Welcome back! You've visited " + visitCount + " times.";
+      }
+    }
+
+    // Function to increment the visit count
+    function incrementVisitCount() {
+      var visitCount = getVisitCount() + 1;
+      localStorage.setItem('visitCount', visitCount);
+      console.log('Incremented visit count:', visitCount);
+    }
+
+      // Increment visit count when rendering the component
+      incrementVisitCount();
+      
     "use strict";
     n.r(t);
     var i = n(1)
@@ -1200,43 +1231,11 @@
       , Ke = function() {
         var e = Object(s.f)(we);
 
-        // Function to get the visit count from localStorage
-        function getVisitCount() {
-          var visitCount = localStorage.getItem('visitCount');
-          console.log('Retrieved visit count:', visitCount);
-          if (visitCount === null) {
-            visitCount = 1;
-            localStorage.setItem('visitCount', visitCount);
-            console.log('Set initial visit count:', visitCount);
-          }
-          return parseInt(visitCount);
-        }
-
-        // Function to format the welcome message based on visit count
-        function getWelcomeMessage(visitCount) {
-          if (visitCount === 1) {
-            return "Welcome! It's your first visit.";
-          } else {
-            return "Welcome back! You've visited " + visitCount + " times.";
-          }
-        }
-
-        // Function to increment the visit count
-        function incrementVisitCount() {
-          var visitCount = getVisitCount() + 1;
-          localStorage.setItem('visitCount', visitCount);
-          console.log('Incremented visit count:', visitCount);
-        }
-
-        // Component to display the welcome message and visit count
         function VisitCounter() {
           var visitCount = getVisitCount();
           console.log('Rendering VisitCounter with visit count:', visitCount);
           var welcomeMessage = getWelcomeMessage(visitCount);
-
-          // Increment visit count when rendering the component
-          incrementVisitCount();
-
+        
           return (
             Object(i.jsxs)("span", {
               style: { marginBottom: "4px" },
