@@ -1221,11 +1221,21 @@
           }
         }
 
+        // Function to increment the visit count
+        function incrementVisitCount() {
+          var visitCount = getVisitCount() + 1;
+          localStorage.setItem('visitCount', visitCount);
+          console.log('Incremented visit count:', visitCount);
+        }
+
         // Component to display the welcome message and visit count
         function VisitCounter() {
           var visitCount = getVisitCount();
           console.log('Rendering VisitCounter with visit count:', visitCount);
           var welcomeMessage = getWelcomeMessage(visitCount);
+
+          // Increment visit count when rendering the component
+          incrementVisitCount();
 
           return (
             Object(i.jsxs)("span", {
@@ -1235,12 +1245,8 @@
           );
         }
 
-        // Increment visit count when the component mounts
-        if (!localStorage.getItem('visitCount')) {
-          localStorage.setItem('visitCount', '1');
-          console.log('Initialized visit count.');
-        }
         return (
+    
           Object(i.jsxs)(Qe, {
             show: e,
             className: "about-container",
