@@ -54,7 +54,6 @@
       name: "[24/7 study with me] chill study live stream"
     }]
 
-    // Initialize g array
 
     // Load stored array from localStorage
     var storedG = localStorage.getItem('g');
@@ -1200,88 +1199,101 @@
       }
       , Ke = function() {
         var e = Object(s.f)(we);
-        return Object(i.jsxs)(Qe, {
-          show: e,
-          className: "about-container",
-          children: [
+
+        // Function to get the visit count from localStorage
+        function getVisitCount() {
+          var visitCount = localStorage.getItem('visitCount');
+          console.log('Retrieved visit count:', visitCount);
+          if (visitCount === null) {
+            visitCount = 1;
+            localStorage.setItem('visitCount', visitCount);
+            console.log('Set initial visit count:', visitCount);
+          }
+          return parseInt(visitCount);
+        }
+
+        // Function to format the welcome message based on visit count
+        function getWelcomeMessage(visitCount) {
+          if (visitCount === 1) {
+            return "Welcome! It's your first visit.";
+          } else {
+            return "Welcome back! You've visited " + visitCount + " times.";
+          }
+        }
+
+        // Component to display the welcome message and visit count
+        function VisitCounter() {
+          var visitCount = getVisitCount();
+          console.log('Rendering VisitCounter with visit count:', visitCount);
+          var welcomeMessage = getWelcomeMessage(visitCount);
+
+          return (
             Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "4px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: ""
-              })]
-            }), Object(i.jsx)(Ce, {}), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: Ve.arrows
-              }), " ", Ve.changeStation]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: Ve.spacebar
-              }), " ", Ve.playPause]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              }
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: "V"
-              }), " ", Ve.showVideo]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: "R"
-              }), " ", Ve.changeGif]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: "Q"
-              }), " ", Ve.rainDown]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                className: "red",
-                children: "E"
-              }), " ", Ve.rainUp]
-            }), Object(i.jsxs)("span", {
-              style: {
-                marginBottom: "0px"
-              },
-              children: [Object(i.jsx)("span", {
-                          className: "red",
-                          children: "ESC"
-                        }), " ", Ve.closeThis]
-                      }), Object(i.jsx)(Je, {}),
-                      Object(i.jsx)("a", {
-                        href: "../sources.html",
-                        target: "_blank",
-                        rel: "noopener noreferrer",
-                        children: "Sources of Assets"
-                      })
-                    ]
-                })
-              };
+              style: { marginBottom: "4px" },
+              children: [Object(i.jsx)("span", { className: "red", children: welcomeMessage })]
+            })
+          );
+        }
+
+        // Increment visit count when the component mounts
+        if (!localStorage.getItem('visitCount')) {
+          localStorage.setItem('visitCount', '1');
+          console.log('Initialized visit count.');
+        }
+        return (
+          Object(i.jsxs)(Qe, {
+            show: e,
+            className: "about-container",
+            children: [
+              ,
+              Object(i.jsx)(VisitCounter, {}),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "4px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "" })]
+              }),
+              Object(i.jsx)(Ce, {}),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: Ve.arrows }), " ", Ve.changeStation]
+              }),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: Ve.spacebar }), " ", Ve.playPause]
+              }),
+              // Add more spans for other components
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "V" }), " ", Ve.showVideo]
+              }),
+              // Add more spans for other components
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "R" }), " ", Ve.changeGif]
+              }),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "Q" }), " ", Ve.rainDown]
+              }),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "E" }), " ", Ve.rainUp]
+              }),
+              Object(i.jsxs)("span", {
+                style: { marginBottom: "0px" },
+                children: [Object(i.jsx)("span", { className: "red", children: "ESC" }), " ", Ve.closeThis]
+              }),
+              Object(i.jsx)(Je, {}),
+              Object(i.jsx)("a", {
+                href: "../sources.html",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                children: "Sources of Assets"
+              })
+            ]
+          })
+        );
+      };
+
     var qe = function(e) {
       var t = e.src
         , n = e.zIndex
