@@ -114,11 +114,19 @@
       var visitCount = localStorage.getItem('visitCount');
       console.log('Retrieved visit count:', visitCount);
       if (visitCount === null) {
-        visitCount = 1;
+        visitCount = 0;
         localStorage.setItem('visitCount', visitCount);
         console.log('Set initial visit count:', visitCount);
       }
       return parseInt(visitCount);
+    }
+
+    // Function to increment the visit count
+    function incrementVisitCount() {
+      var visitCount = getVisitCount();
+      visitCount++; // Increment the visit count by 1
+      localStorage.setItem('visitCount', visitCount);
+      console.log('Incremented visit count:', visitCount);
     }
 
     // Function to format the welcome message based on visit count
@@ -126,19 +134,12 @@
       if (visitCount === 1) {
         return "Welcome! It's your first visit.";
       } else {
-        return "Welcome back! You've visited " + visitCount + " times.";
+        return "Welcome back! You've visited " + visitCount + " times.";  
       }
     }
 
-    // Function to increment the visit count
-    function incrementVisitCount() {
-      var visitCount = getVisitCount() + 1;
-      localStorage.setItem('visitCount', visitCount);
-      console.log('Incremented visit count:', visitCount);
-    }
-
-      // Increment visit count when rendering the component
-      incrementVisitCount();
+    incrementVisitCount();
+ 
       
     "use strict";
     n.r(t);
