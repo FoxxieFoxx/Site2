@@ -1,4 +1,4 @@
-(this["webpackJsonplofi-app"] = this["webpackJsonplofi-app"] || []).push([[0], {
+(this["foxxielofi-app"] = this["foxxielofi-app"] || []).push([[0], {
   46: function(e, t, n) { },
   82: function(e, t, n) {
     var g = [{
@@ -244,6 +244,8 @@
       , L = n.p + "./media/Media_Viewer_Icon_-_Fullscreen.svg.png"
       , E = n.p + "./media/Media_Viewer_Icon_-_Close_Fullscreen.svg.png"
       , Y = n.p + "./media/png-transparent-white-heart-illustration-white-heart-black-pattern-white-heart-love-white-heart-removebg-preview.png"
+      , AA = n.p + "./media/whiteplus.png"
+      , AB = n.p + "./media/4837776.png"
       , k = n.p + "./media/mail.7a7748f6.svg"
       , W = n.p + "./media/mailbrew.3d6186a7.svg"
       , R = n.p + "./media/open.b33a26e7.svg"
@@ -274,6 +276,8 @@
       timer: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
       mail: k,
       heart: Y,
+      plus: AA,
+      rain: AB,
       twitter: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
       facebook: S,
       checkmark: P,
@@ -1600,7 +1604,28 @@
         , m = Ee();
       return Object(i.jsxs)("div", {
         id: "horizontal",
-        children: [n && Object(i.jsx)(J, {
+        children: [n && 
+                   Object(i.jsx)(J, {
+                     tooltip: "Add Custom Station",
+                     icon: "plus",
+                     onClick: function() {
+                       handleCustomVideo();
+                     },
+                     style: {
+                       marginRight: "14px"
+                     }
+                   }),
+                   Object(i.jsx)(J, {
+                      tooltip: "Rain Intensity Slider",
+                      icon: "rain",
+                      onClick: function() {
+                        toggleSlider();
+                      },
+                      style: {
+                        marginRight: "14px"
+                      }
+                    }),
+          Object(i.jsx)(J, {
           className: "hide-small-screen",
           tooltip: "Fullscreen",
           icon: t.active ? "fullscreenExit" : "fullscreenEnter",

@@ -267,7 +267,7 @@
             detail: {
               id: videoId,
               name: customVideoName, // Use the provided custom video name
-              embedLink: `https://www.youtube.com/embed/${videoId}?autoplay=1&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.lofi.cafe&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1`,
+              embedLink: `https://www.youtube.com/embed/${videoId}?autoplay=1&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.foxxie&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1`,
             },
           });
 
@@ -324,11 +324,11 @@
 
     function toggleSlider() {
       var sliderContainer = document.getElementById("sliderContainer");
-      var toggleButton = document.getElementById("toggleSliderButton");
+      var toggleButton = document.getElementById("volumeUpButtonMobile");
 
       if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
         sliderContainer.style.display = 'block';
-        toggleButton.innerHTML = '<img src="./media/x.webp" alt="Hide Slider">';
+        
 
         // Use setTimeout to add the fade-in class after a small delay
         setTimeout(function () {
@@ -345,7 +345,7 @@
           // Remove both fade-in and fade-out classes when closing the slider
           sliderContainer.classList.remove("fade-in", "fade-out");
         }, 500); // Adjust the duration to match the CSS transition time
-        toggleButton.innerHTML = '<img src="./media/rain-icon.png" alt="Show Slider">';
+        
       }
     }
 
@@ -400,12 +400,7 @@
               </span></span>
           </div>
           <div class="vertical">
-            <div id="horizontal">
-              <button type="button" class="hide-small-screen" title="Fullscreen"
-                style="display: flex; align-items: center; margin-right: 14px; line-height: 0;">
-                <img class="shadow" src="./media/fullscreen-enter.47fab6db.svg" alt=""
-                  style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
-              </button>
+            <div id="horizontal">          
               <button type="button" class="hide-small-screen" title="Fullscreen"
                 style="display: flex; align-items: center; margin-right: 14px; line-height: 0;">
                 <img class="shadow" src="./media/fullscreen-enter.47fab6db.svg" alt=""
@@ -491,7 +486,7 @@
             <div style="width: 100%; height: 100%;"><iframe frameborder="0" allowfullscreen="1"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 title="YouTube video player" width="100%" height="100%"
-                src="https://www.youtube.com/embed/Qt0-9mO-ZXY?autoplay=0&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.lofi.cafe&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1"
+                src="https://www.youtube.com/embed/Qt0-9mO-ZXY?autoplay=0&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.foxxie.space&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1"
                 id="widget2"></iframe></div>
           </div>
         </div>
@@ -568,7 +563,7 @@
       }, i.p = "/", i.oe = function (e) {
         throw console.error(e), e
       };
-      var a = this["webpackJsonplofi-app"] = this["webpackJsonplofi-app"] || [],
+      var a = this["foxxielofi-app"] = this["foxxielofi-app"] || [],
         c = a.push.bind(a);
       a.push = r, a = a.slice();
       for (var l = 0; l < a.length; l++) r(a[l]);
@@ -585,9 +580,6 @@
     <button id="volumeUpButtonMobile">
       <img src="./media/volumeup.png" alt="Increase Volume">
     </button>
-    <button id="customVideoButton" onclick="handleCustomVideo()">
-      <img src="./media/plus.png" alt="Add Custom Video">
-    </button>
     <div id="sliderContainer" class="slider-container">
       <img src="./media/drizzle.png" alt="Image 1" style="left: 0%;">
       <img src="./media/hail.png" alt="Image 2" style="left: 29%;">
@@ -595,9 +587,6 @@
       <img src="./media/heavy rain.png" alt="Image 4" style="left: 88%;">
       <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
     </div>
-    <button id="toggleSliderButton" onclick="toggleSlider()">
-      <img src="./media/rain-icon.png" alt="Toggle Slider">
-    </button>
   </div>
 </body>
 

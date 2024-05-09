@@ -1,5 +1,4 @@
-/*! For license information please see 2.8ace6be4.chunk.js.LICENSE.txt */
-(this["webpackJsonplofi-app"] = this["webpackJsonplofi-app"] || []).push([[2], [function(e, t, n) {
+(this["foxxielofi-app"] = this["foxxielofi-app"] || []).push([[2], [function(e, t, n) {
     "use strict";
     e.exports = n(41)
 }
