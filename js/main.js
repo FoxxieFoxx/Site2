@@ -240,18 +240,18 @@
       , D = n.p + "./media/buffering4.e55cf19d.svg"
       , P = n.p + "./media/checkmark.27630148.svg"
       , S = n.p + "./media/facebook.3fe0a515.svg"
-      , H = n.p + "./media/Unknown-removebg-preview.png"
+      , H = n.p + "./media/forward.64c7a860.svg"
       , L = n.p + "./media/Media_Viewer_Icon_-_Fullscreen.svg.png"
       , E = n.p + "./media/Media_Viewer_Icon_-_Close_Fullscreen.svg.png"
-      , Y = n.p + "./media/png-transparent-white-heart-illustration-white-heart-black-pattern-white-heart-love-white-heart-removebg-preview.png"
+      , Y = n.p + "./media/heart.0513072e.svg"
       , AA = n.p + "./media/whiteplus.png"
       , AB = n.p + "./media/4837776.png"
       , k = n.p + "./media/mail.7a7748f6.svg"
       , W = n.p + "./media/mailbrew.3d6186a7.svg"
       , R = n.p + "./media/open.b33a26e7.svg"
-      , B = n.p + "./media/pause-icon-18-256.png"
-      , F = n.p + "./media/639-6391407_transparent-play-icon-white-png-png-download-removebg-preview.png"
-      , V = n.p + "./media/Unknown-2-removebg-preview.png";
+      , B = n.p + "./media/pause.69ddfc29.svg"
+      , F = n.p + "./media/play.1055bee6.svg"
+      , V = n.p + "./media/previous.17bb0c57.svg";
     function X(e) {
       var t = e.name
         , n = e.style;
@@ -267,13 +267,13 @@
       })
     }
     var Q = {
-      shuffle: n.p + "./media/Unknown-4-removebg-preview.png",
+      shuffle: n.p + "./media/shuffle.53b14e6b.svg",
       play: F,
       pause: B,
       forward: H,
       previous: V,
       open: R,
-      timer: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
+      timer: n.p + "./media/timer.1427f4b2.svg",
       mail: k,
       heart: Y,
       plus: AA,
