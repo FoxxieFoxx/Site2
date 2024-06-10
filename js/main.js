@@ -1173,12 +1173,7 @@
           username: "foxxie",
           image: "./foxxo.png"
         })
-          , Object(i.jsx)(Ue, {
-            name: "0",
-            username: "kit",
-            image: "./kit.png"
-          })
-
+          
         ]
       })
     }
