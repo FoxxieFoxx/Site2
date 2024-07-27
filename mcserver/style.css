@@ -1,0 +1,176 @@
+/**========================  Page Setup  ========================**/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #000000;
+    cursor: url(images/cursor.png), auto;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+/**========================  Header  ========================**/
+.header {
+    background-image: url(images/LogoLongPixelPerfectScaled.png);
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px 0 10px;
+    position: fixed;
+    z-index: 1;
+}
+.header img {
+    height: 60px;
+    padding: 5px 0px 0px 5px;
+    transition: transform .2s;
+}
+.header ul {
+    list-style: none;
+    display: flex;
+}
+.header li {
+    display: inline;
+    margin-right: 15px;
+}
+.header a {
+    text-decoration: none;
+    color: white;
+}
+.header a img:hover {
+    transform: scale(1.3);
+}
+
+/**========================  Body  ========================**/
+.spacer {
+    padding: 20px 100px;
+    padding-top: 120px;
+}
+.content {
+    border: 10px solid transparent;
+    border-style: inset;
+    border-image: url(images/screen_border.png) 20 stretch;
+    padding: 10px 20px;
+    background-color: #0e6b61;
+    color: #9cfc68;
+}
+.invert {
+    background-color: #9cfc68;
+    color: #0e6b61;
+}
+.s {
+    font-size: 15px;
+}
+.m {
+    font-size: 25px;
+}
+.l {
+    font-size: 50px;
+}
+.table {
+    display: flex;
+    margin-bottom: 20px;
+}
+.table-left, .table-right {
+    flex: 1;
+    padding: 20px;
+}
+.table-left img, .table-right img {
+    max-width: 100%;
+    height: auto;
+    border: 10px solid transparent;
+    border-style: inset;
+    border-image: url(images/screen_border.png) 20 stretch;
+}
+.table img:hover {
+    filter: drop-shadow(0px 0px 150px black);
+    transform: scale(1.08);
+    transition: transform .2s;
+}
+
+/**========================  Dynmap Section  ========================**/
+.dynmap-section {
+    margin-top: 20px;
+    text-align: center;
+}
+.dynmap-section h2 {
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.dynmap-section iframe {
+    width: 100%;
+    height: 800px; /* Increased height for better visibility */
+    border: none;
+}
+
+/**========================  Footer  ========================**/
+.footer img {
+    width: 100%;
+    image-rendering: crisp-edges;
+}
+
+.end {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 250px;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+.sitemap {
+    margin-bottom: 10px;
+    background-color: black;
+    padding: 5px 25px;
+    border: 10px solid transparent;
+}
+.sitemap a {
+    padding: 0 25px;
+    color: #0e6b61;
+    text-decoration: none;
+}
+.sitemap a:hover {
+    color: #9cfc68;
+    transition: color 0.5s;
+}
+
+/**========================  Commands Section  ========================**/
+.commands {
+    background-color: #0e6b61;
+    color: #9cfc68;
+    border: 10px solid transparent;
+    border-style: inset;
+    border-image: url(images/screen_border.png) 20 stretch;
+    margin-top: 20px;
+    padding: 20px;
+}
+.commands h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.commands ul {
+    list-style-type: none;
+    padding: 0;
+}
+.commands li {
+    margin-bottom: 10px;
+}
+.commands code {
+    background-color: #9cfc68;
+    color: #0e6b61;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+.commands a {
+    color: #9cfc68;
+}
+.commands a:hover {
+    text-decoration: underline;
+}

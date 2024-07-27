@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://play.foxxie.space/images/logo.png">
+    <meta property="og:title" content="FoxMP SMP">
+    <meta property="og:description" content="Join the FoxMP SMP Minecraft server at play.foxxie.space for an epic adventure!">
+    <meta property="og:image" content="https://play.foxxie.space/images/logo.png">
+    <meta property="og:url" content="https://play.foxxie.space">
+    <meta property="og:type" content="website">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Silkscreen&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.png" alt="Server Logo">
+        <ul>
+            <li><a href="#"><img src="images/home.png" alt="Home"></a></li>
+            <li><a href="https://discord.gg/zaWfUC6hhv" target="_blank"><img src="images/discord.png" alt="Discord"></a></li>
+            <li><a href="#"><img src="images/join.png" alt="Join" onclick="copyIP()"></a></li>
+        </ul>
+    </div>
+
+    <div class="spacer">
+        <div class="content">
+            <!-- About Section -->
+            <div class="table">
+                <div class="table-left">
+                    <p class="l">Welcome to FoxMP 1.21!</p>
+                    <p class="m">An epic Minecraft adventure awaits!</p>
+                    <p class="l invert">
+                        play.foxxie.space
+                        <button id="copyButton" onclick="copyToClipboard()">Copy</button>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Additional Sections -->
+            <div class="table">
+                <div class="table-left">
+                    <p class="m">Explore our world and discover amazing terrain and structures!</p>
+                </div>
+                <div class="table-right">
+                    <img src="https://media.discordapp.net/attachments/1265788430323814533/1266623033628426240/2024-07-27_00.07.21.png?ex=66a5d21f&is=66a4809f&hm=1023b4219f3af807324725f4d4fff2dafae94f85a46cd4f173518baeb38ea5cd&=&format=webp&quality=lossless&width=1246&height=701" alt="World Exploration">
+                </div>
+            </div>
+
+            <div class="table">
+                <div class="table-left">
+                    <img src="https://cdn.discordapp.com/attachments/1261451120513908747/1266277817910427828/image.png?ex=66a5395e&is=66a3e7de&hm=878bcf0aa505ad9b4306f2499bf4f6fd963ff2f6aa08b578e2d38347c02665ee&" alt="Building">
+                </div>
+                <div class="table-right">
+                    <p class="l invert">Build your dream house</p>
+                    <p class="m">Craft with custom materials and decorate to your heart's content!</p>
+                </div>
+            </div>
+
+            <div class="table">
+                <div class="table-left">
+                    <img src="https://media.discordapp.net/attachments/1265788430323814533/1266624581712613396/2024-07-27_00.13.10.png?ex=66a5d391&is=66a48211&hm=257874630092cdd44a2a886b922bf97cc0f1fe966d52bb24f0efa961a52d7575&=&format=webp&quality=lossless&width=1246&height=701" alt="Experience">
+                </div>
+                <div class="table-right">
+                    <p class="m">Experience the best Minecraft has to offer!</p>
+                </div>
+            </div>
+
+            <div class="table">
+                <div class="table-left">
+                    <img src="https://cdn.discordapp.com/attachments/1265788430323814533/1266626520840011816/2024-07-27_00.21.15.png?ex=66a5d55f&is=66a483df&hm=74ef0b87242bf0bf334f26cc3c206b5d02b0a90d4d6eea91c194814f4f604a1a&" alt="Adventure">
+                </div>
+                <div class="table-right">
+                    <p class="m">Join us and enjoy countless adventures and custom features!</p>
+                </div>
+            </div>
+
+            <!-- Dynmap Section -->
+            <div class="dynmap-section">
+                <h2>Live Dynmap</h2>
+                <iframe src="http://play.foxxie.space:8123" title="Dynmap"></iframe>
+            </div>
+
+            <!-- New Commands Section -->
+            <div class="commands">
+                <h2>Commands and Instructions</h2>
+                <ul>
+                    <li><strong>Image Creation Command:</strong> <code>/image create (link) (scale number)</code></li>
+                    <li><strong>Custom Discs Setup:</strong>
+                        <ul>
+                            <li>Install and set up the Simple VC Mod.</li>
+                            <li>Upload an MP3 file to Discord.</li>
+                            <li>Right-click the file, click "Copy Link."</li>
+                            <li>Use the command: <code>/cd download &lt;discord link&gt; &lt;filename.extension&gt;</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Create Disc for Downloaded File:</strong> 
+                        <ul>
+                            <li>Hold a disc in your hand.</li>
+                            <li>Use the command: <code>/cd create &lt;filename.extension&gt; "song title"</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Convert YouTube to MP3:</strong> Use <a href="https://cobalt.tools/">https://cobalt.tools/</a> to get the MP3.</li>
+                    <li><strong>Voice Chat Mod Download:</strong>
+                        <ul>
+                            <li>For Fabric: <a href="https://cdn.discordapp.com/attachments/1264008220222165094/1264455022138097724/voicechat-fabric-1.21-2.5.19.jar?ex=66a52f41&is=66a3ddc1&hm=4d9560456789fa9b98123261430105674ef0970740f26a2c0c7268ace2d7ffed&" target="_blank">Download Fabric Mod</a></li>
+                            <li>For Forge: <a href="https://cdn.discordapp.com/attachments/1264008220222165094/1264455147539529830/voicechat-forge-1.21-2.5.19_1.jar?ex=66a52f5f&is=66a3dddf&hm=490be51f70a358f703b95b397caf8f3f0bde3a8b578b297e5c80fad613fd47c3&" target="_blank">Download Forge Mod</a></li>
+                        </ul>
+                    </li>
+                    <li><strong>Testing Designs in Creative Mode:</strong> <code>/mv tp creative</code>
+                        <br> To return: <code>/mv tp world</code>
+                    </li>
+                    <li><strong>Inspect Containers:</strong> <code>/co inspect</code>
+                        <br> Click on the container to see who has taken items.
+                    </li>
+                    <li><strong>Set Custom Nickname:</strong> <code>/nick</code>
+                        <br> To set a custom color, use: <code>/nickcolor &lt;hexvalue&gt;</code>
+                        <br> Find your preferred color at <a href="https://rgbcolorpicker.com/" target="_blank">RGB Color Picker</a>.
+                    </li>
+                    <li><strong>Register as Premium Player:</strong> <code>/premium</code>
+                        <br> Use this command if you own Minecraft to avoid having to log in with AuthMe every time.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="images/footer.png" alt="Footer">
+    </div>
+
+    <div class="end">
+        <div class="sitemap">
+            <a href="https://discord.gg/zaWfUC6hhv">Discord</a>
+            <a href="#">Home</a>
+        </div>
+        <p>&copy; 2024 FoxMP Minecraft Server. All rights reserved.</p>
+        <p>FoxMP is not affiliated with Mojang, AB</p>
+    </div>
+
+    <div id="custom-cursor"></div>
+
+    <script>
+        function copyIP() {
+            const ip = 'play.foxxie.space';
+            navigator.clipboard.writeText(ip).then(() => {
+                alert('Server IP copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy IP:', err);
+            });
+        }
+
+        function copyToClipboard() {
+            const copyText = document.querySelector('.l.invert').textContent;
+            navigator.clipboard.writeText(copyText).then(() => {
+                alert('Server address copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy address:', err);
+            });
+        }
+    </script>
+</body>
+</html>
