@@ -21,45 +21,51 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #000000;
-            cursor: url(images/cursor.png), auto;
-            font-family: 'Silkscreen', sans-serif;
-        }
+    background: linear-gradient(to bottom, #ADD8E6, #106c64);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: url(images/cursor.png), auto;
+    font-family: 'Silkscreen', sans-serif;
+ }
+
 
         /**========================  Header  ========================**/
-        .header {
-            background-image: url(images/LogoLongPixelPerfectScaled.png);
-            background-size: cover;
-            background-position: center;
-            height: 100px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 50px 0 10px;
-            position: fixed;
-            z-index: 1;
-        }
-        .header img {
-            height: 60px;
-            padding: 5px 0px 0px 5px;
-            transition: transform .2s;
-        }
-        .header ul {
-            list-style: none;
-            display: flex;
-        }
-        .header li {
-            display: inline;
-            margin-right: 15px;
-        }
-        .header a {
-            text-decoration: none;
-            color: white;
-        }
-        .header a img:hover {
-            transform: scale(1.3);
-        }
+        /**========================  Header  ========================**/
+.header {
+    background-image: url(https://pbs.twimg.com/media/COkK2lmUcAAfuNY?format=jpg&name=large); /* Optional: Keep this if you still want a background image */
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px 0 10px;
+    position: fixed;
+    z-index: 1;
+}
+.header img {
+    height: 60px;
+    padding: 5px 0px 0px 5px;
+    transition: transform .2s;
+}
+.header ul {
+    list-style: none;
+    display: flex;
+}
+.header li {
+    display: inline;
+    margin-right: 15px;
+}
+.header a {
+    text-decoration: none;
+    color: black; /* Adjust color as needed */
+}
+.header a img:hover {
+    transform: scale(1.3);
+}
+
 
         /**========================  Body  ========================**/
         .spacer {
