@@ -39,7 +39,6 @@
       }
     }
 
-
     function saveJSON(key, data) {
       console.log(`Attempting to save JSON data for key: "${key}"`);
       try {
@@ -66,13 +65,22 @@
       }
     }
 
+    // Load stored data
     var storedG = loadJSON('g');
     var customVideos = loadJSON('customVideos');
+
+    // Combine lists
     var combinedList = [...g, ...storedG, ...customVideos];
+
+    // Remove duplicates based on id
     combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
+
     console.log('Initialized combinedList:', combinedList);
 
+    // Save combined list as the new 'g'
     saveJSON('g', combinedList);
+
+    // Update the g variable
     var g = combinedList;
 
     document.addEventListener("customVideoAdded", function(event) {
@@ -87,6 +95,7 @@
 
       var storedG = loadJSON('g');
       var customVideos = loadJSON('customVideos');
+
       var isVideoInArray = storedG.some(function(video) {
         return video.id === videoData.id;
       });
@@ -103,6 +112,7 @@
         combinedList.push(newVideo);
         customVideos.push(newVideo);
 
+        // Remove duplicates based on id
         combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
 
         saveJSON('g', combinedList);
@@ -155,6 +165,7 @@
       var welcomeMessage = getWelcomeMessage(visitCount);
       console.log('Final welcome message:', welcomeMessage);
     });
+
 
 
     "use strict";
