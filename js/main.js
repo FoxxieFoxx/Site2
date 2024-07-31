@@ -72,8 +72,14 @@
     // Combine lists
     var combinedList = [...g, ...storedG, ...customVideos];
 
-    // Deduplicate based on name
-    var uniqueList = Array.from(new Map(combinedList.map(video => [video.name, video])).values());
+    // Deduplicate based on name, keeping the last occurrence
+    function deduplicateByName(list) {
+      const map = new Map();
+      list.forEach(video => map.set(video.name, video));  // Set will keep the last occurrence
+      return Array.from(map.values());
+    }
+
+    var uniqueList = deduplicateByName(combinedList);
 
     // Log if any duplicates were removed
     if (uniqueList.length < combinedList.length) {
@@ -115,9 +121,9 @@
         combinedList.push(newVideo);
         customVideos.push(newVideo);
 
-        // Deduplicate based on name
+        // Deduplicate based on name, keeping the last occurrence
         var previousLength = combinedList.length;
-        combinedList = Array.from(new Map(combinedList.map(video => [video.name, video])).values());
+        combinedList = deduplicateByName(combinedList);
         var currentLength = combinedList.length;
 
         // Log if any duplicates were removed during addition
