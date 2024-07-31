@@ -88,6 +88,40 @@
       console.log('No duplicates found.');
     }
 
+    // Initialize lists
+    var storedG = loadJSON('g');
+    var customVideos = loadJSON('customVideos');
+
+    // Combine lists
+    var combinedList = [...g, ...storedG, ...customVideos];
+
+    // Deduplicate based on name, keeping the first occurrence
+    function deduplicateByName(list) {
+      const seen = new Set();
+      const result = [];
+
+      list.forEach(video => {
+        if (!seen.has(video.name)) {
+          seen.add(video.name);
+          result.push(video);
+        } else {
+          // Log duplicate removal
+          console.log(`Duplicate found: ${video.name}. Removing this entry.`);
+        }
+      });
+
+      return result;
+    }
+
+    var uniqueList = deduplicateByName(combinedList);
+
+    // Log if any duplicates were removed
+    if (uniqueList.length < combinedList.length) {
+      console.log('Duplicates found and removed based on name.');
+    } else {
+      console.log('No duplicates found.');
+    }
+
     // Save updated list
     saveJSON('g', uniqueList);
     var g = uniqueList;
@@ -121,7 +155,7 @@
         combinedList.push(newVideo);
         customVideos.push(newVideo);
 
-        // Deduplicate based on name, keeping the last occurrence
+        // Deduplicate based on name, keeping the first occurrence
         var previousLength = combinedList.length;
         combinedList = deduplicateByName(combinedList);
         var currentLength = combinedList.length;
@@ -141,6 +175,7 @@
         alert("Station already exists!");
       }
     });
+
 
 
     function getVisitCount() {
