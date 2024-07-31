@@ -21,7 +21,8 @@
       { id: "IumNzh6yvfM", name: "pov: it finally feels like summer (an animal crossing playlist)" },
       { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" }
     ];
-
+    
+    // Function to load JSON data from localStorage
     function loadJSON(key) {
       console.log(`Attempting to load JSON data for key: "${key}"`);
       try {
@@ -39,6 +40,7 @@
       }
     }
 
+    // Function to save JSON data to localStorage
     function saveJSON(key, data) {
       console.log(`Attempting to save JSON data for key: "${key}"`);
       try {
@@ -53,6 +55,7 @@
       }
     }
 
+    // Function to reset localStorage
     function resetLocalStorage() {
       console.log('Attempting to reset localStorage.');
       try {
@@ -65,68 +68,53 @@
       }
     }
 
-    // Initialize lists
-    var storedG = loadJSON('g');
-    var customVideos = loadJSON('customVideos');
-
-    // Combine lists
-    var combinedList = [...g, ...storedG, ...customVideos];
-
-    // Deduplicate based on name, keeping the last occurrence
-    function deduplicateByName(list) {
-      const map = new Map();
-      list.forEach(video => map.set(video.name, video));  // Set will keep the last occurrence
-      return Array.from(map.values());
+    // Function to get the combined list of videos
+    function getCombinedList() {
+      var storedG = loadJSON('g');
+      var customVideos = loadJSON('customVideos');
+      console.log('Loaded storedG:', storedG);
+      console.log('Loaded customVideos:', customVideos);
+      return {
+        defaultVideos: storedG,
+        customVideos: customVideos
+      };
     }
 
-    var uniqueList = deduplicateByName(combinedList);
-
-    // Log if any duplicates were removed
-    if (uniqueList.length < combinedList.length) {
-      console.log('Duplicates found and removed based on name.');
-    } else {
-      console.log('No duplicates found.');
-    }
-
-    // Initialize lists
-    var storedG = loadJSON('g');
-    var customVideos = loadJSON('customVideos');
-
-    // Combine lists
-    var combinedList = [...g, ...storedG, ...customVideos];
-
-    // Deduplicate based on name, keeping the first occurrence
+    // Function to deduplicate a list based on video name
     function deduplicateByName(list) {
       const seen = new Set();
       const result = [];
-
       list.forEach(video => {
         if (!seen.has(video.name)) {
           seen.add(video.name);
           result.push(video);
         } else {
-          // Log duplicate removal
-          console.log(`Duplicate found: ${video.name}. Removing this entry.`);
+          console.log(`Duplicate found and removed: ${video.name}`);
         }
       });
-
       return result;
     }
 
-    var uniqueList = deduplicateByName(combinedList);
+    // Initialize the list and perform deduplication
+    var { defaultVideos, customVideos } = getCombinedList();
+    var uniqueDefaultVideos = deduplicateByName(defaultVideos);
 
-    // Log if any duplicates were removed
-    if (uniqueList.length < combinedList.length) {
+    console.log('Default Videos:', defaultVideos);
+    console.log('Unique Default Videos:', uniqueDefaultVideos);
+    console.log('Custom Videos:', customVideos);
+
+    if (uniqueDefaultVideos.length < defaultVideos.length) {
       console.log('Duplicates found and removed based on name.');
     } else {
       console.log('No duplicates found.');
     }
 
-    // Save updated list
-    saveJSON('g', uniqueList);
-    var g = uniqueList;
+    // Combine the unique default videos with custom videos
+    var finalList = [...uniqueDefaultVideos, ...customVideos];
+    saveJSON('g', finalList); // Save the final combined list as 'g'
+    var g = finalList
 
-    // Custom video addition event
+    // Event listener for custom video addition
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -137,9 +125,9 @@
         return;
       }
 
-      var storedG = loadJSON('g');
-      var customVideos = loadJSON('customVideos');
-      var isVideoInArray = storedG.some(function(video) {
+      // Update the combined list with the latest data
+      var { defaultVideos, customVideos } = getCombinedList();
+      var isVideoInArray = customVideos.some(function(video) {
         return video.name === videoData.name;
       });
 
@@ -152,29 +140,25 @@
           isCustom: true,
         };
 
-        combinedList.push(newVideo);
         customVideos.push(newVideo);
 
-        // Deduplicate based on name, keeping the first occurrence
-        var previousLength = combinedList.length;
-        combinedList = deduplicateByName(combinedList);
-        var currentLength = combinedList.length;
+        // Combine the unique default videos with updated custom videos
+        var uniqueDefaultVideos = deduplicateByName(defaultVideos);
+        var finalList = [...uniqueDefaultVideos, ...customVideos];
+        console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
+        console.log('Updated Final List:', finalList);
 
-        // Log if any duplicates were removed during addition
-        if (currentLength < previousLength) {
-          console.log('Duplicate video found and removed during custom video addition.');
-        } else {
-          console.log('No duplicate video found during custom video addition.');
-        }
-
-        saveJSON('g', combinedList);
-        saveJSON('customVideos', customVideos);
+        // Save updated lists
+        saveJSON('g', finalList); // Save the updated list as 'g'
+        saveJSON('customVideos', customVideos); // Save only updated custom videos
 
         alert("Station Added!");
       } else {
         alert("Station already exists!");
       }
     });
+
+
 
 
 
