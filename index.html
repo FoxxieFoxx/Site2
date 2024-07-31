@@ -4,6 +4,17 @@
       document.getElementById("myAudio").play();
     }
 
+    function resetLocalStorage() {
+      try {
+        localStorage.removeItem('g');
+        localStorage.removeItem('customVideos');
+        localStorage.removeItem('visitCount');
+        console.log('LocalStorage reset successfully.');
+      } catch (e) {
+        console.error('Error resetting localStorage:', e);
+      }
+    }
+    
   </script>
 <head>
   <link rel="icon" type="image/x-icon" href="./favicon.ico">

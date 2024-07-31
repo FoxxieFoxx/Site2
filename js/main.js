@@ -1,85 +1,112 @@
 (this["foxxielofi-app"] = this["foxxielofi-app"] || []).push([[0], {
   46: function(e, t, n) { },
   82: function(e, t, n) {
-    var g = [{
-      id: "jfKfPfyJRdk",
-      name: "lofi hip hop radio - beats to relax/study to"
-    }, {
-      id: "rUxyKA_-grg",
-      name: "lofi hip hop radio - beats to sleep/chill to"
-    }, {
-      id: "5yx6BWlEVcY",
-      name: "Chillhop Radio - jazzy & lofi hip hop beats"
-    }, {
-      id: "qH3fETPsqXU",
-      name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to"
-    }, {
-      id: "CLeZyIID9Bo",
-      name: "Chill Lofi Mix [chill lo-fi hip hop beats]"
-    }, {
-      id: "YOJsKatW-Ts",
-      name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming"
-    }, {
-      id: "4xDzrJKXOOY",
-      name: "synthwave radio 🌌 - beats to chill/game to"
-    }, {
-      id: "M8yB4NqlnqQ",
-      name: "lofi songs for cold days"
-    }, {
-      id: "q55qNEKQLG0",
-      name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended"
-    }, {
-      id: "og0F2Dpcs1I",
-      name: "Study Lofi 📚 Lofi Deep Focus Study Work Concentration 🌿 Study beats ~ lofi / relax / stress relief"
-    }, {
-      id: "VKum4lF8a10",
-      name: "3 hours of relaxing and beautiful animal crossing music"
-    }, {
-      id: "jgvWFbgJ5fY",
-      name: "Video Game Study Lounge 🎮"
-    }, {
-      id: "-z3RRwk2rdU",
-      name: "Zelda & Chill + Zelda & Chill 2"
-    }, {
-      id: "NJuSStkIZBg",
-      name: "Rainy Jazz Cafe ☕️"
-    }, {
-      id: "8TbLuBOClSg",
-      name: "Cozy animal crossing music that cures my headaches🌿"
-    }, {
-      id: "IumNzh6yvfM",
-      name: "pov: it finally feels like summer (an animal crossing playlist)"
-    }, {
-      id: "azV9PMW5-Ro",
-      name: "[24/7 study with me] chill study live stream"
-    }]
+    // Initial video list
+    g = [
+      { id: "jfKfPfyJRdk", name: "lofi hip hop radio - beats to relax/study to" },
+      { id: "rUxyKA_-grg", name: "lofi hip hop radio - beats to sleep/chill to" },
+      { id: "5yx6BWlEVcY", name: "Chillhop Radio - jazzy & lofi hip hop beats" },
+      { id: "qH3fETPsqXU", name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to" },
+      { id: "CLeZyIID9Bo", name: "Chill Lofi Mix [chill lo-fi hip hop beats]" },
+      { id: "YOJsKatW-Ts", name: "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming" },
+      { id: "4xDzrJKXOOY", name: "synthwave radio 🌌 - beats to chill/game to" },
+      { id: "M8yB4NqlnqQ", name: "lofi songs for cold days" },
+      { id: "q55qNEKQLG0", name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended" },
+      { id: "og0F2Dpcs1I", name: "Study Lofi 📚 Lofi Deep Focus Study Work Concentration 🌿 Study beats ~ lofi / relax / stress relief" },
+      { id: "VKum4lF8a10", name: "3 hours of relaxing and beautiful animal crossing music" },
+      { id: "jgvWFbgJ5fY", name: "Video Game Study Lounge 🎮" },
+      { id: "-z3RRwk2rdU", name: "Zelda & Chill + Zelda & Chill 2" },
+      { id: "NJuSStkIZBg", name: "Rainy Jazz Cafe ☕️" },
+      { id: "8TbLuBOClSg", name: "Cozy animal crossing music that cures my headaches🌿" },
+      { id: "IumNzh6yvfM", name: "pov: it finally feels like summer (an animal crossing playlist)" },
+      { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" }
+    ];
 
-
-    // Load stored array from localStorage
-    var storedG = localStorage.getItem('g');
-    if (storedG) {
-      g = JSON.parse(storedG);
+    function loadJSON(key) {
+      console.log(`Attempting to load JSON data for key: "${key}"`);
+      try {
+        var data = localStorage.getItem(key);
+        if (!data) {
+          console.warn(`No data found for key "${key}" or data is empty. Returning empty array.`);
+          return [];
+        }
+        var parsedData = JSON.parse(data);
+        console.log(`Data successfully retrieved for key "${key}":`, parsedData);
+        return parsedData;
+      } catch (e) {
+        console.error(`Error parsing JSON from localStorage for key "${key}":`, e);
+        return [];
+      }
     }
 
-    document.addEventListener("customVideoAdded", function(event) {
-      // Access the video data from the event detail
-      var videoData = event.detail;
 
-      // Check if the video is already in the g array
-      var isVideoInArray = g.some(function(video) {
+    function saveJSON(key, data) {
+      console.log(`Attempting to save JSON data for key: "${key}"`);
+      try {
+        if (data === undefined || data === null) {
+          throw new Error('Cannot save undefined or null data');
+        }
+        var jsonData = JSON.stringify(data);
+        localStorage.setItem(key, jsonData);
+        console.log(`Data successfully saved for key "${key}":`, jsonData);
+      } catch (e) {
+        console.error(`Error saving JSON to localStorage for key "${key}":`, e);
+      }
+    }
+
+    function resetLocalStorage() {
+      console.log('Attempting to reset localStorage.');
+      try {
+        localStorage.removeItem('g');
+        localStorage.removeItem('customVideos');
+        localStorage.removeItem('visitCount');
+        console.log('LocalStorage reset successfully.');
+      } catch (e) {
+        console.error('Error resetting localStorage:', e);
+      }
+    }
+
+    var storedG = loadJSON('g');
+    var customVideos = loadJSON('customVideos');
+    var combinedList = [...g, ...storedG, ...customVideos];
+    combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
+    console.log('Initialized combinedList:', combinedList);
+
+    saveJSON('g', combinedList);
+    var g = combinedList;
+
+    document.addEventListener("customVideoAdded", function(event) {
+      console.log('Custom video addition event detected.');
+      var videoData = event.detail;
+      console.log('Received customVideoAdded event:', videoData);
+
+      if (!videoData || !videoData.id || !videoData.name) {
+        console.error('Invalid videoData received:', videoData);
+        return;
+      }
+
+      var storedG = loadJSON('g');
+      var customVideos = loadJSON('customVideos');
+      var isVideoInArray = storedG.some(function(video) {
         return video.id === videoData.id;
       });
 
       if (!isVideoInArray) {
-        // Add the custom video to the g array
-        g.push({
+        console.log('Adding new custom video:', videoData);
+        var newVideo = {
           id: videoData.id,
           name: videoData.name,
-          embedLink: videoData.embedLink,
+          embedLink: videoData.embedLink || '',
           isCustom: true,
-        });
+        };
 
-        localStorage.setItem('g', JSON.stringify(g));
+        combinedList.push(newVideo);
+        customVideos.push(newVideo);
+
+        combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
+
+        saveJSON('g', combinedList);
+        saveJSON('customVideos', customVideos);
 
         alert("Station Added!");
       } else {
@@ -87,50 +114,33 @@
       }
     });
 
-    // Function to add custom video without duplication
-    function addCustomVideo(videoData) {
-      var isVideoInArray = g.some(function(video) {
-        return video.id === videoData.id;
-      });
-
-      if (!isVideoInArray) {
-        // Add the custom video to the g array
-        g.push({
-          id: videoData.id,
-          name: videoData.name,
-          embedLink: videoData.embedLink,
-          isCustom: true,
-        });
-
-        localStorage.setItem('g', JSON.stringify(g));
-      }
-    }
-    // this was supposed to take 5 minutes i've been here for 3 hours help
-    // localStorage.removeItem('g');
-
-
-    // Function to get the visit count from localStorage
     function getVisitCount() {
-      var visitCount = localStorage.getItem('visitCount');
-      console.log('Retrieved visit count:', visitCount);
-      if (visitCount === null) {
-        visitCount = 0;
-        localStorage.setItem('visitCount', visitCount);
-        console.log('Set initial visit count:', visitCount);
+      console.log('Attempting to get visit count from localStorage.');
+      try {
+        var visitCount = localStorage.getItem('visitCount');
+        console.log('Retrieved visit count:', visitCount);
+        if (visitCount === null) {
+          console.log('No visit count found. Initializing to 0.');
+          visitCount = 0;
+          localStorage.setItem('visitCount', visitCount);
+        }
+        return parseInt(visitCount, 10);
+      } catch (e) {
+        console.error('Error getting visit count from localStorage:', e);
+        return 0;
       }
-      return parseInt(visitCount);
     }
 
-    // Function to increment the visit count
     function incrementVisitCount() {
+      console.log('Incrementing visit count.');
       var visitCount = getVisitCount();
-      visitCount++; // Increment the visit count by 1
+      visitCount++;
       localStorage.setItem('visitCount', visitCount);
       console.log('Incremented visit count:', visitCount);
     }
 
-    // Function to format the welcome message based on visit count
     function getWelcomeMessage(visitCount) {
+      console.log('Formatting welcome message for visit count:', visitCount);
       if (visitCount === 1) {
         return "Welcome! It's your first visit.";
       } else {
@@ -138,7 +148,13 @@
       }
     }
 
-    incrementVisitCount();
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log('DOM fully loaded. Starting initialization.');
+      incrementVisitCount();
+      var visitCount = getVisitCount();
+      var welcomeMessage = getWelcomeMessage(visitCount);
+      console.log('Final welcome message:', welcomeMessage);
+    });
 
 
     "use strict";
@@ -240,18 +256,18 @@
       , D = n.p + "./media/buffering4.e55cf19d.svg"
       , P = n.p + "./media/checkmark.27630148.svg"
       , S = n.p + "./media/facebook.3fe0a515.svg"
-      , H = n.p + "./media/forward.64c7a860.svg"
+      , H = n.p + "./media/Unknown-removebg-preview.png"
       , L = n.p + "./media/Media_Viewer_Icon_-_Fullscreen.svg.png"
       , E = n.p + "./media/Media_Viewer_Icon_-_Close_Fullscreen.svg.png"
-      , Y = n.p + "./media/heart.0513072e.svg"
+      , Y = n.p + "./media/icon.png"
       , AA = n.p + "./media/whiteplus.png"
       , AB = n.p + "./media/4837776.png"
       , k = n.p + "./media/mail.7a7748f6.svg"
       , W = n.p + "./media/mailbrew.3d6186a7.svg"
       , R = n.p + "./media/open.b33a26e7.svg"
-      , B = n.p + "./media/pause.69ddfc29.svg"
+      , B = n.p + "./media/pause-icon-18-256.png"
       , F = n.p + "./media/play.1055bee6.svg"
-      , V = n.p + "./media/previous.17bb0c57.svg";
+      , V = n.p + "./media/Unknown-2-removebg-preview.png";
     function X(e) {
       var t = e.name
         , n = e.style;
@@ -267,13 +283,13 @@
       })
     }
     var Q = {
-      shuffle: n.p + "./media/shuffle.53b14e6b.svg",
+      shuffle: n.p + "./media/Unknown-4-removebg-preview.png",
       play: F,
       pause: B,
       forward: H,
       previous: V,
       open: R,
-      timer: n.p + "./media/timer.1427f4b2.svg",
+      timer: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
       mail: k,
       heart: Y,
       plus: AA,
@@ -913,15 +929,24 @@
       , fe = ["static1", "static2", "static3", "static4", "static5", "static6", "static7", "static8"]
       , Oe = function(e) {
         return function(t) {
-          var n = t.setSelf
-            , i = t.onSet
-            , c = localStorage.getItem(e);
-          null != c && n(JSON.parse(c)),
-            i((function(t) {
-              t instanceof s.a ? localStorage.removeItem(e) : localStorage.setItem(e, JSON.stringify(t))
+          var n = t.setSelf,
+            i = t.onSet,
+            c = localStorage.getItem(e);
+
+          try {
+            if (c !== null) {
+              // Ensure that c is a valid JSON string
+              var parsedData = JSON.parse(c);
+              n(parsedData);
+            } else {
+              n(null); // Handle case where localStorage item is null
             }
-            ))
+          } catch (error) {
+            console.error(`Error parsing JSON from localStorage for key "${e}":`, error);
+            n(null); // Set default value in case of parsing error
+          }
         }
+
       }
       , he = Object(s.c)({
         key: "playerShown",
@@ -1182,7 +1207,7 @@
           , n = e.username
           , c = e.image;
         return Object(i.jsxs)("a", {
-          href: "https://lookup.guru/" + t,
+          href: "https://discordlookup.com/user/" + t,
           target: "_blank",
           rel: "noopener noreferrer",
           style: {
