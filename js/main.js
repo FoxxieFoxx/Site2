@@ -1193,15 +1193,21 @@
           display: "flex",
           marginBottom: "10px"
         },
-        children: [Object(i.jsx)(Ue, {
-          name: "1037862493550280704",
-          username: "foxxie",
-          image: "./foxxo.png"
-        })
-
+        children: [
+          Object(i.jsx)(Ue, {
+            name: "1037862493550280704",
+            username: "foxxie",
+            image: "./media/foxxie.webp"
+          }),
+          Object(i.jsx)(Ue, {
+            name: "1177062577281441872",
+            username: "angel",
+            image: "./media/angel.webp"
+          })
         ]
-      })
+      });
     }
+
       , Ue = function(e) {
         var t = e.name
           , n = e.username
