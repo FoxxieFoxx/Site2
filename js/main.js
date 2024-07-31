@@ -111,8 +111,9 @@
 
     // Combine the unique default videos with custom videos
     var finalList = [...uniqueDefaultVideos, ...customVideos];
+    var uniqueFinalList = deduplicateByName(finalList);
     saveJSON('g', finalList); // Save the final combined list as 'g'
-    var g = finalList
+    var g = uniqueFinalList; // Assign the final list to the global variable 'g'
 
     // Event listener for custom video addition
     document.addEventListener("customVideoAdded", function(event) {
