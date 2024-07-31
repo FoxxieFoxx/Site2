@@ -35,7 +35,7 @@
       id: "VKum4lF8a10",
       name: "3 hours of relaxing and beautiful animal crossing music"
     }, {
-      id: "hHxfGGJ_kDU",
+      id: "jgvWFbgJ5fY",
       name: "Video Game Study Lounge 🎮"
     }, {
       id: "-z3RRwk2rdU",
@@ -134,13 +134,13 @@
       if (visitCount === 1) {
         return "Welcome! It's your first visit.";
       } else {
-        return "Welcome back! You've visited " + visitCount + " times.";  
+        return "Welcome back! You've visited " + visitCount + " times.";
       }
     }
 
     incrementVisitCount();
- 
-      
+
+
     "use strict";
     n.r(t);
     var i = n(1)
@@ -1173,7 +1173,7 @@
           username: "foxxie",
           image: "./foxxo.png"
         })
-          
+
         ]
       })
     }
@@ -1235,7 +1235,7 @@
           var visitCount = getVisitCount();
           console.log('Rendering VisitCounter with visit count:', visitCount);
           var welcomeMessage = getWelcomeMessage(visitCount);
-        
+
           return (
             Object(i.jsxs)("span", {
               style: { marginBottom: "4px" },
@@ -1245,7 +1245,7 @@
         }
 
         return (
-    
+
           Object(i.jsxs)(Qe, {
             show: e,
             className: "about-container",
@@ -1599,28 +1599,28 @@
         , m = Ee();
       return Object(i.jsxs)("div", {
         id: "horizontal",
-        children: [n && 
-                   Object(i.jsx)(J, {
-                     tooltip: "Add Custom Station",
-                     icon: "plus",
-                     onClick: function() {
-                       handleCustomVideo();
-                     },
-                     style: {
-                       marginRight: "14px"
-                     }
-                   }),
-                   Object(i.jsx)(J, {
-                      tooltip: "Rain Intensity Slider",
-                      icon: "rain",
-                      onClick: function() {
-                        toggleSlider();
-                      },
-                      style: {
-                        marginRight: "14px"
-                      }
-                    }),
+        children: [n &&
           Object(i.jsx)(J, {
+            tooltip: "Add Custom Station",
+            icon: "plus",
+            onClick: function() {
+              handleCustomVideo();
+            },
+            style: {
+              marginRight: "14px"
+            }
+          }),
+        Object(i.jsx)(J, {
+          tooltip: "Rain Intensity Slider",
+          icon: "rain",
+          onClick: function() {
+            toggleSlider();
+          },
+          style: {
+            marginRight: "14px"
+          }
+        }),
+        Object(i.jsx)(J, {
           className: "hide-small-screen",
           tooltip: "Fullscreen",
           icon: t.active ? "fullscreenExit" : "fullscreenEnter",
