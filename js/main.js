@@ -65,24 +65,28 @@
       }
     }
 
-    // Load stored data
+    // Initialize lists
     var storedG = loadJSON('g');
     var customVideos = loadJSON('customVideos');
 
     // Combine lists
     var combinedList = [...g, ...storedG, ...customVideos];
 
-    // Remove duplicates based on id
-    combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
+    // Deduplicate based on name
+    var uniqueList = Array.from(new Map(combinedList.map(video => [video.name, video])).values());
 
-    console.log('Initialized combinedList:', combinedList);
+    // Log if any duplicates were removed
+    if (uniqueList.length < combinedList.length) {
+      console.log('Duplicates found and removed based on name.');
+    } else {
+      console.log('No duplicates found.');
+    }
 
-    // Save combined list as the new 'g'
-    saveJSON('g', combinedList);
+    // Save updated list
+    saveJSON('g', uniqueList);
+    var g = uniqueList;
 
-    // Update the g variable
-    var g = combinedList;
-
+    // Custom video addition event
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -95,9 +99,8 @@
 
       var storedG = loadJSON('g');
       var customVideos = loadJSON('customVideos');
-
       var isVideoInArray = storedG.some(function(video) {
-        return video.id === videoData.id;
+        return video.name === videoData.name;
       });
 
       if (!isVideoInArray) {
@@ -112,8 +115,17 @@
         combinedList.push(newVideo);
         customVideos.push(newVideo);
 
-        // Remove duplicates based on id
-        combinedList = Array.from(new Map(combinedList.map(video => [video.id, video])).values());
+        // Deduplicate based on name
+        var previousLength = combinedList.length;
+        combinedList = Array.from(new Map(combinedList.map(video => [video.name, video])).values());
+        var currentLength = combinedList.length;
+
+        // Log if any duplicates were removed during addition
+        if (currentLength < previousLength) {
+          console.log('Duplicate video found and removed during custom video addition.');
+        } else {
+          console.log('No duplicate video found during custom video addition.');
+        }
 
         saveJSON('g', combinedList);
         saveJSON('customVideos', customVideos);
@@ -123,6 +135,7 @@
         alert("Station already exists!");
       }
     });
+
 
     function getVisitCount() {
       console.log('Attempting to get visit count from localStorage.');
