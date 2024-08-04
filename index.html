@@ -3,8 +3,8 @@
   <script> function playAudio() {
       document.getElementById("myAudio").play();
     }
-
     function resetLocalStorage() {
+      console.log('Attempting to reset localStorage.');
       try {
         localStorage.removeItem('g');
         localStorage.removeItem('customVideos');
@@ -13,9 +13,8 @@
       } catch (e) {
         console.error('Error resetting localStorage:', e);
       }
-    }
-    
-  </script>
+    }    
+    </script>
 <head>
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title>Foxxie's Lo-Fi Site</title>

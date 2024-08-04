@@ -21,8 +21,7 @@
       { id: "IumNzh6yvfM", name: "pov: it finally feels like summer (an animal crossing playlist)" },
       { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" }
     ];
-    
-    // Function to load JSON data from localStorage
+
     function loadJSON(key) {
       console.log(`Attempting to load JSON data for key: "${key}"`);
       try {
@@ -40,7 +39,6 @@
       }
     }
 
-    // Function to save JSON data to localStorage
     function saveJSON(key, data) {
       console.log(`Attempting to save JSON data for key: "${key}"`);
       try {
@@ -55,7 +53,6 @@
       }
     }
 
-    // Function to reset localStorage
     function resetLocalStorage() {
       console.log('Attempting to reset localStorage.');
       try {
@@ -68,19 +65,17 @@
       }
     }
 
-    // Function to get the combined list of videos
     function getCombinedList() {
       var storedG = loadJSON('g');
       var customVideos = loadJSON('customVideos');
       console.log('Loaded storedG:', storedG);
       console.log('Loaded customVideos:', customVideos);
       return {
-        defaultVideos: storedG.length ? storedG : g, // Use `g` if `storedG` is empty
+        defaultVideos: storedG.length ? storedG : g,
         customVideos: customVideos
       };
     }
 
-    // Function to deduplicate a list based on video name
     function deduplicateByName(list) {
       const seen = new Set();
       const result = [];
@@ -95,7 +90,6 @@
       return result;
     }
 
-    // Initialize the list and perform deduplication
     var { defaultVideos, customVideos } = getCombinedList();
     var uniqueDefaultVideos = deduplicateByName(defaultVideos);
 
@@ -109,14 +103,10 @@
       console.log('No duplicates found.');
     }
 
-    // Combine the unique default videos with custom videos
     var finalList = [...uniqueDefaultVideos, ...customVideos];
     var uniqueFinalList = deduplicateByName(finalList);
-    saveJSON('g', finalList); // Save the final combined list as 'g'
-    g = uniqueFinalList; // Assign the final list to the global variable 'g'
-
-    // Event listener for custom video addition
-    // Event listener for custom video addition
+    saveJSON('g', finalList); 
+    g = uniqueFinalList; 
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -126,8 +116,6 @@
         console.error('Invalid videoData received:', videoData);
         return;
       }
-
-      // Update the combined list with the latest data
       var { defaultVideos, customVideos } = getCombinedList();
       var isVideoInArray = customVideos.some(function(video) {
         return video.name === videoData.name;
@@ -141,21 +129,16 @@
           embedLink: videoData.embedLink || '',
           isCustom: true,
         };
-
-        // Add new video to custom videos array
         customVideos.push(newVideo);
-
-        // Combine the unique default videos with updated custom videos
         var uniqueDefaultVideos = deduplicateByName(defaultVideos);
         var finalList = [...uniqueDefaultVideos, ...customVideos];
         console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
         console.log('Updated Final List:', finalList);
 
-        // Save updated lists to localStorage
-        saveJSON('g', finalList); // Save the updated list as 'g'
-        saveJSON('customVideos', customVideos); // Save only updated custom videos
+       
+        saveJSON('g', finalList); 
+        saveJSON('customVideos', customVideos); 
 
-        // Update the global variable 'g' with the new final list
         g = finalList;
 
         alert("Station Added!");
@@ -163,10 +146,6 @@
         alert("Station already exists!");
       }
     });
-
-
-
-
 
     function getVisitCount() {
       console.log('Attempting to get visit count from localStorage.');
