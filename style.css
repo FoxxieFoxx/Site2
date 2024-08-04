@@ -14,7 +14,7 @@
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
     @font-face {
       font-family: "sans-serif";
-      src: url("fonts/sans-serif.svg") format("svg");
+      src: url("") format("svg");
       font-weight: normal;
       font-style: normal;
     }
@@ -85,13 +85,13 @@
     box-sizing: border-box;
   }
   
-  body,
-  #container:not(.ja) * {
-    font-family: "VT323", monospace;
-  }
-  #container.ja * {
-    font-family: "sans-serif", monospace;
-  }
+body,
+#container:not(.ja) * {
+  font-family: "Varela Round", monospace;
+}
+#container.ja * {
+  font-family: "sans-serif", monospace;
+}
   
   body,
   button,

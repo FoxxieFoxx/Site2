@@ -552,7 +552,7 @@
       var t = e.on
         , n = e.volume;
       return Object(i.jsx)("div", {
-        className: n > .02 ? "green-box" : "red-box",
+        className: n > 0.02 ? "green-box" : "red-box",
         style: {
           width: 6,
           height: 14,
@@ -560,9 +560,11 @@
           background: "white",
           display: "inline-block",
           pointerEvents: "none",
-          opacity: t ? 1 : .5
+          opacity: t ? 1 : 0.5,
+          borderRadius: "25%"
         }
-      })
+      });
+
     };
     var ce = function(e) {
       var t = e.volume
