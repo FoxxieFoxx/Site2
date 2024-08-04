@@ -300,7 +300,7 @@
       , W = n.p + "./media/mailbrew.3d6186a7.svg"
       , R = n.p + "./media/open.b33a26e7.svg"
       , B = n.p + "./media/pause-icon-18-256.png"
-      , F = n.p + "./media/play.1055bee6.svg"
+      , F = n.p + "media/639-6391407_transparent-play-icon-white-png-png-download-removebg-preview.png"
       , V = n.p + "./media/Unknown-2-removebg-preview.png";
     function X(e) {
       var t = e.name
