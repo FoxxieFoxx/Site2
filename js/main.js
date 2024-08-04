@@ -116,6 +116,7 @@
     g = uniqueFinalList; // Assign the final list to the global variable 'g'
 
     // Event listener for custom video addition
+    // Event listener for custom video addition
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -141,6 +142,7 @@
           isCustom: true,
         };
 
+        // Add new video to custom videos array
         customVideos.push(newVideo);
 
         // Combine the unique default videos with updated custom videos
@@ -149,15 +151,19 @@
         console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
         console.log('Updated Final List:', finalList);
 
-        // Save updated lists
+        // Save updated lists to localStorage
         saveJSON('g', finalList); // Save the updated list as 'g'
         saveJSON('customVideos', customVideos); // Save only updated custom videos
+
+        // Update the global variable 'g' with the new final list
+        g = finalList;
 
         alert("Station Added!");
       } else {
         alert("Station already exists!");
       }
     });
+
 
 
 
