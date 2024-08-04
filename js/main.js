@@ -2,7 +2,7 @@
   46: function(e, t, n) { },
   82: function(e, t, n) {
     // Initial video list
-    g = [
+    var g = [
       { id: "jfKfPfyJRdk", name: "lofi hip hop radio - beats to relax/study to" },
       { id: "rUxyKA_-grg", name: "lofi hip hop radio - beats to sleep/chill to" },
       { id: "5yx6BWlEVcY", name: "Chillhop Radio - jazzy & lofi hip hop beats" },
@@ -75,7 +75,7 @@
       console.log('Loaded storedG:', storedG);
       console.log('Loaded customVideos:', customVideos);
       return {
-        defaultVideos: storedG,
+        defaultVideos: storedG.length ? storedG : g, // Use `g` if `storedG` is empty
         customVideos: customVideos
       };
     }
@@ -113,7 +113,7 @@
     var finalList = [...uniqueDefaultVideos, ...customVideos];
     var uniqueFinalList = deduplicateByName(finalList);
     saveJSON('g', finalList); // Save the final combined list as 'g'
-    var g = uniqueFinalList; // Assign the final list to the global variable 'g'
+    g = uniqueFinalList; // Assign the final list to the global variable 'g'
 
     // Event listener for custom video addition
     document.addEventListener("customVideoAdded", function(event) {
@@ -158,7 +158,6 @@
         alert("Station already exists!");
       }
     });
-
 
 
 
