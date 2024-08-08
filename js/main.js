@@ -561,7 +561,7 @@
           display: "inline-block",
           pointerEvents: "none",
           opacity: t ? 1 : 0.5,
-          borderRadius: "25%"
+          borderRadius: "35%"
         }
       });
 
@@ -1234,11 +1234,6 @@
             name: "1037862493550280704",
             username: "foxxie",
             image: "./media/foxxie.webp"
-          }),
-          Object(i.jsx)(Ue, {
-            name: "1177062577281441872",
-            username: "angel",
-            image: "./media/angel.webp"
           })
         ]
       });
