@@ -105,8 +105,9 @@
 
     var finalList = [...uniqueDefaultVideos, ...customVideos];
     var uniqueFinalList = deduplicateByName(finalList);
-    saveJSON('g', finalList);
+    saveJSON('g', uniqueFinalList);
     g = uniqueFinalList;
+
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -116,6 +117,7 @@
         console.error('Invalid videoData received:', videoData);
         return;
       }
+
       var { defaultVideos, customVideos } = getCombinedList();
       var isVideoInArray = customVideos.some(function(video) {
         return video.name === videoData.name;
@@ -130,22 +132,24 @@
           isCustom: true,
         };
         customVideos.push(newVideo);
-        var uniqueDefaultVideos = deduplicateByName(defaultVideos);
+
+        // Re-deduplicate after adding the new custom video
         var finalList = [...uniqueDefaultVideos, ...customVideos];
+        var uniqueFinalList = deduplicateByName(finalList);
         console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
-        console.log('Updated Final List:', finalList);
+        console.log('Updated Final List:', uniqueFinalList);
 
-
-        saveJSON('g', finalList);
+        saveJSON('g', uniqueFinalList);
         saveJSON('customVideos', customVideos);
 
-        g = finalList;
+        g = uniqueFinalList;
 
         alert("Station Added!");
       } else {
         alert("Station already exists!");
       }
     });
+
 
     function getVisitCount() {
       console.log('Attempting to get visit count from localStorage.');
