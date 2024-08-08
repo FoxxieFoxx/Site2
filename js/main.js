@@ -105,8 +105,8 @@
 
     var finalList = [...uniqueDefaultVideos, ...customVideos];
     var uniqueFinalList = deduplicateByName(finalList);
-    saveJSON('g', finalList); 
-    g = uniqueFinalList; 
+    saveJSON('g', finalList);
+    g = uniqueFinalList;
     document.addEventListener("customVideoAdded", function(event) {
       console.log('Custom video addition event detected.');
       var videoData = event.detail;
@@ -135,9 +135,9 @@
         console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
         console.log('Updated Final List:', finalList);
 
-       
-        saveJSON('g', finalList); 
-        saveJSON('customVideos', customVideos); 
+
+        saveJSON('g', finalList);
+        saveJSON('customVideos', customVideos);
 
         g = finalList;
 
@@ -1234,6 +1234,11 @@
             name: "1037862493550280704",
             username: "foxxie",
             image: "./media/foxxie.webp"
+          }),
+          Object(i.jsx)(Ue, {
+            name: "1148126231389294683",
+            username: "Adzzer",
+            image: "./media/a_d4e8e991964a68e8fd0101c86063bf5a.gif"
           })
         ]
       });
