@@ -561,7 +561,7 @@
           display: "inline-block",
           pointerEvents: "none",
           opacity: t ? 1 : 0.5,
-          borderRadius: "35%"
+          borderRadius: "20%"
         }
       });
 
