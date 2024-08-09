@@ -15,6 +15,8 @@
       }
     }    
     </script>
+  <script src="https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
 <head>
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title>Foxxie's Lo-Fi Site</title>
@@ -36,6 +38,66 @@
   <audio loop src="./media/audio.mp3" id="myAudio"></audio>
   <style>
     /* New style for the volume dialog */
+    /* Custom video menu styling */
+    #searchButton {
+        width: 40px; /* Adjust width as needed */
+        height: 40px; /* Adjust height as needed */
+        background-color: transparent; /* Remove any background color */
+        border: none; /* Remove border if present */
+        padding: 0; /* Remove padding */
+        cursor: pointer; /* Change cursor to pointer */
+    }
+
+    #searchButton img {
+        width: 100%; /* Make image fit button width */
+        height: 100%; /* Make image fit button height */
+        object-fit: contain; /* Ensure image scales without distortion */
+    }
+    .custom-video-menu {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
+        padding: 10px;
+        width: 300px; /* Adjust width as needed */
+        max-height: 400px; /* Adjust height as needed */
+        overflow-y: auto; /* Enable scrolling */
+        z-index: 1000; /* Ensure it appears above other elements */
+    }
+
+    /* Style for each video item */
+    .video-item {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee; /* Light border between items */
+    }
+
+    .video-item:hover {
+        background-color: #f0f0f0; /* Highlight on hover */
+    }
+
+    .video-item img {
+        border-radius: 5px; /* Rounded corners for thumbnails */
+        margin-right: 10px; /* Space between thumbnail and title */
+    }
+
+    .video-title {
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Style for the search input */
+    #videoSearchInput {
+        width: calc(100% - 20px); /* Full width minus padding */
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px; /* Rounded corners */
+        margin-bottom: 10px; /* Space below input */
+    }
+
     .volume-dialog {
       position: fixed;
       top: 50%;
@@ -261,42 +323,215 @@
       }
     }
 
+    // Initialize variables
     var customVideoButton = document.getElementById("customVideoButton");
+    var customVideoMenu;
+    var searchInput;
+    var searchResults;
+    var searchButton;
+    var currentDialog;
+    var dialogTimeout;
 
-    function handleCustomVideo() {
-      // Prompt the user for the video link and name
-      var customVideoLink = prompt("Enter custom video link:");
-      var customVideoName = prompt("Enter custom video name:");
+    // Initialize the custom video menu
+    function initializeCustomVideoMenu() {
+        if (!customVideoMenu) {
+            customVideoMenu = document.createElement("div");
+            customVideoMenu.className = "custom-video-menu";
+            customVideoMenu.style.display = "none";
+            customVideoMenu.style.position = "absolute";
+            customVideoMenu.style.backgroundColor = "white";
+            customVideoMenu.style.border = "1px solid #ccc";
+            customVideoMenu.style.zIndex = "1000";
+            customVideoMenu.style.maxHeight = "400px"; // Adjust height as needed
+            customVideoMenu.style.overflowY = "scroll"; // Enable scrolling
 
-      if (customVideoLink && customVideoName) {
-        var videoId = extractVideoId(customVideoLink);
+            searchInput = document.createElement("input");
+            searchInput.type = "text";
+            searchInput.id = "videoSearchInput";
+            searchInput.placeholder = "Search YouTube";
+            searchInput.style.width = "calc(100% - 50px)"; // Adjust width to account for the button
+            searchInput.style.marginRight = "10px"; // Space between input and button
+            customVideoMenu.appendChild(searchInput);
 
-        if (videoId) {
-          // Dispatch a custom event with video data, including the name
-          var event = new CustomEvent("customVideoAdded", {
-            detail: {
-              id: videoId,
-              name: customVideoName, // Use the provided custom video name
-              embedLink: `https://www.youtube.com/embed/${videoId}?autoplay=1&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.foxxie&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1`,
-            },
-          });
+            searchButton = document.createElement("button");
+            searchButton.id = "searchButton";
+            searchButton.style.width = "40px"; // Adjust size as needed
+            searchButton.style.height = "40px"; // Adjust size as needed
+            searchButton.style.backgroundColor = "transparent";
+            searchButton.style.border = "none";
+            searchButton.style.padding = "0";
+            searchButton.style.cursor = "pointer";
 
-          // Dispatch the event
-          document.dispatchEvent(event);
-        } else {
-          alert("Invalid YouTube link. Please provide a valid link.");
+            var searchIcon = document.createElement("img");
+            searchIcon.src = "./media/search.png"; // Replace with actual path to your PNG
+            searchIcon.alt = "Search";
+            searchIcon.style.width = "100%"; // Fit image to button width
+            searchIcon.style.height = "100%"; // Fit image to button height
+            searchIcon.style.objectFit = "contain"; // Ensure the image scales correctly
+
+            searchButton.appendChild(searchIcon);
+            searchButton.addEventListener("click", performSearch);
+            customVideoMenu.appendChild(searchButton);
+
+            searchResults = document.createElement("div");
+            searchResults.id = "searchResults";
+            customVideoMenu.appendChild(searchResults);
+
+            document.body.appendChild(customVideoMenu);
+
+            searchInput.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    performSearch();
+                }
+            });
         }
-      }
     }
 
+    // Handle custom video button click
+    function handleCustomVideo() {
+        initializeCustomVideoMenu();
+
+        // Show the menu in a fixed position
+        customVideoMenu.style.left = "10px";
+        customVideoMenu.style.top = "10px";
+        customVideoMenu.style.display = customVideoMenu.style.display === "block" ? "none" : "block";
+        searchInput.focus();
+    }
+
+    // Perform search based on input
+    async function performSearch() {
+        var query = searchInput.value.trim();
+
+        if (query.startsWith("https://www.youtube.com/watch")) {
+            var videoId = extractVideoId(query);
+            if (videoId) {
+                await searchYouTubeById(videoId);
+            }
+        } else {
+            await searchYouTube(query);
+        }
+    }
+
+    async function searchYouTube(query) {
+        const url = `https://youtube-v31.p.rapidapi.com/search?q=${encodeURIComponent(query)}&part=snippet%2Cid&regionCode=US&maxResults=10&order=relevance&type=video`; 
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': 'a7d3a5c567msh95877a59393fe22p10ee5fjsnb3c55d74d46c',
+                'x-rapidapi-host': 'youtube-v31.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result = await response.json();
+            displaySearchResults(result.items);
+        } catch (error) {
+            console.error('Error fetching YouTube data:', error);
+        }
+    }
+
+
+
+    // Search YouTube for video details based on video ID
+    async function searchYouTubeById(videoId) {
+        const url = `https://youtube-v31.p.rapidapi.com/videos?id=${videoId}&part=snippet`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': 'a7d3a5c567msh95877a59393fe22p10ee5fjsnb3c55d74d46c',
+                'x-rapidapi-host': 'youtube-v31.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result = await response.json();
+            var video = result.items[0];
+            if (video) {
+                var videoName = video.snippet.title;
+                addCustomVideo(videoId, videoName);
+            } else {
+                console.error('Video not found.');
+            }
+        } catch (error) {
+            console.error('Error fetching YouTube video data:', error);
+        }
+    }
+
+    // Display search results
+    function displaySearchResults(items) {
+        if (!items || items.length === 0) {
+            searchResults.innerHTML = '<p>No results found.</p>';
+            return;
+        }
+
+        searchResults.innerHTML = '';
+        items
+            .filter(item => item.id.kind === 'youtube#video') // Ensure only videos are displayed
+            .forEach(item => {
+                var video = item.snippet;
+                var videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+
+                var thumbnail = document.createElement('img');
+                thumbnail.src = video.thumbnails.default.url;
+                thumbnail.alt = video.title;
+                thumbnail.style.width = "120px";
+                thumbnail.style.height = "90px";
+                videoItem.appendChild(thumbnail);
+
+                var title = document.createElement('div');
+                title.textContent = video.title;
+                title.className = 'video-title';
+                videoItem.appendChild(title);
+
+                videoItem.dataset.videoId = item.id.videoId;
+                videoItem.dataset.videoName = video.title;
+                videoItem.addEventListener('click', function() {
+                    addCustomVideo(this.dataset.videoId, this.dataset.videoName);
+                });
+
+                searchResults.appendChild(videoItem);
+            });
+    }
+
+
+    // Add a custom video
+    function addCustomVideo(videoId, videoName) {
+        var event = new CustomEvent("customVideoAdded", {
+            detail: {
+                id: videoId,
+                name: videoName,
+                embedLink: `https://www.youtube.com/embed/${videoId}?autoplay=1&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.foxxie&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=true&amp;color=black&amp;enablejsapi=1&amp;widgetid=1`,
+            },
+        });
+
+        document.dispatchEvent(event);
+        customVideoMenu.style.display = "none"; // Close the menu after selection
+        alert(`Custom video added: ${videoName}`);
+    }
+
+    // Extract video ID from a YouTube link
     function extractVideoId(link) {
-      var regex = /[?&]v=([^?&]+)/;
-      var match = link.match(regex);
-      // we use regex to get the youtube video id from the link, if the link doesnt contain a youtube video id, no custom station for you.
-
-      return match ? match[1] : null;
+        var regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n]+)/;
+        var match = link.match(regex);
+        var videoId = match ? match[1] : null;
+        return videoId;
     }
 
+    // Handle custom video added event
+    document.addEventListener("customVideoAdded", function(event) {
+        var video = event.detail;
+        // Handle custom video added event as needed
+    });
+    
     window.addEventListener("load", function () {
       document.addEventListener("keydown", function (event) {
         if (event.key === "r") {

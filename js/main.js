@@ -1,7 +1,6 @@
 (this["foxxielofi-app"] = this["foxxielofi-app"] || []).push([[0], {
   46: function(e, t, n) { },
-  82: function(e, t, n) {
-    // Initial video list
+  82: function(e, t, n) {    
     var g = [
       { id: "jfKfPfyJRdk", name: "lofi hip hop radio - beats to relax/study to" },
       { id: "rUxyKA_-grg", name: "lofi hip hop radio - beats to sleep/chill to" },
@@ -1671,16 +1670,21 @@
       return Object(i.jsxs)("div", {
         id: "horizontal",
         children: [n &&
-          Object(i.jsx)(J, {
-            tooltip: "Add Custom Station",
-            icon: "plus",
-            onClick: function() {
-              handleCustomVideo();
-            },
-            style: {
-              marginRight: "14px"
-            }
-          }),
+                   // main.js
+                   Object(i.jsx)(J, {
+                       tooltip: "Add Custom Station",
+                       icon: "plus",
+                       onClick: function() {
+                           if (typeof handleCustomVideo === 'function') {
+                               handleCustomVideo();
+                           } else {
+                               console.error('handleCustomVideo is not defined.');
+                           }
+                       },
+                       style: {
+                           marginRight: "14px"
+                       }
+                   }),
         Object(i.jsx)(J, {
           tooltip: "Rain Intensity Slider",
           icon: "rain",
