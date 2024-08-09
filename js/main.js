@@ -142,8 +142,6 @@
         saveJSON('customVideos', customVideos);
 
         g = uniqueFinalList;
-
-        alert("Station Added!");
       } else {
         alert("Station already exists!");
       }
