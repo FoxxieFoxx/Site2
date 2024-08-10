@@ -90,64 +90,70 @@
     }
 
     var { defaultVideos, customVideos } = getCombinedList();
-    var uniqueDefaultVideos = deduplicateByName(defaultVideos);
+        var uniqueDefaultVideos = deduplicateByName(defaultVideos);
 
-    console.log('Default Videos:', defaultVideos);
-    console.log('Unique Default Videos:', uniqueDefaultVideos);
-    console.log('Custom Videos:', customVideos);
+        console.log('Default Videos:', defaultVideos);
+        console.log('Unique Default Videos:', uniqueDefaultVideos);
+        console.log('Custom Videos:', customVideos);
 
-    if (uniqueDefaultVideos.length < defaultVideos.length) {
-      console.log('Duplicates found and removed based on name.');
-    } else {
-      console.log('No duplicates found.');
-    }
+        if (uniqueDefaultVideos.length < defaultVideos.length) {
+            console.log('Duplicates found and removed based on name.');
+        } else {
+            console.log('No duplicates found.');
+        }
 
-    var finalList = [...uniqueDefaultVideos, ...customVideos];
-    var uniqueFinalList = deduplicateByName(finalList);
-    saveJSON('g', uniqueFinalList);
-    g = uniqueFinalList;
-
-    document.addEventListener("customVideoAdded", function(event) {
-      console.log('Custom video addition event detected.');
-      var videoData = event.detail;
-      console.log('Received customVideoAdded event:', videoData);
-
-      if (!videoData || !videoData.id || !videoData.name) {
-        console.error('Invalid videoData received:', videoData);
-        return;
-      }
-
-      var { defaultVideos, customVideos } = getCombinedList();
-      var isVideoInArray = customVideos.some(function(video) {
-        return video.name === videoData.name;
-      });
-
-      if (!isVideoInArray) {
-        console.log('Adding new custom video:', videoData);
-        var newVideo = {
-          id: videoData.id,
-          name: videoData.name,
-          embedLink: videoData.embedLink || '',
-          isCustom: true,
-        };
-        customVideos.push(newVideo);
-
-        // Re-deduplicate after adding the new custom video
         var finalList = [...uniqueDefaultVideos, ...customVideos];
         var uniqueFinalList = deduplicateByName(finalList);
-        console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
-        console.log('Updated Final List:', uniqueFinalList);
-
         saveJSON('g', uniqueFinalList);
-        saveJSON('customVideos', customVideos);
-
         g = uniqueFinalList;
-      } else {
-        alert("Station already exists!");
-      }
-    });
 
+        // Increment visit count and display welcome message
+        incrementVisitCount();
+        var visitCount = getVisitCount();
+        var welcomeMessage = getWelcomeMessage(visitCount);
+        console.log('Final welcome message:', welcomeMessage);
 
+        // Your custom video addition event listener
+        document.addEventListener("customVideoAdded", function(event) {
+            console.log('Custom video addition event detected.');
+            var videoData = event.detail;
+            console.log('Received customVideoAdded event:', videoData);
+
+            if (!videoData || !videoData.id || !videoData.name) {
+                console.error('Invalid videoData received:', videoData);
+                return;
+            }
+
+            var { defaultVideos, customVideos } = getCombinedList();
+            var isVideoInArray = customVideos.some(function(video) {
+                return video.name === videoData.name;
+            });
+
+            if (!isVideoInArray) {
+                console.log('Adding new custom video:', videoData);
+                var newVideo = {
+                    id: videoData.id,
+                    name: videoData.name,
+                    embedLink: videoData.embedLink || '',
+                    isCustom: true,
+                };
+                customVideos.push(newVideo);
+
+                // Re-deduplicate after adding the new custom video
+                var finalList = [...uniqueDefaultVideos, ...customVideos];
+                var uniqueFinalList = deduplicateByName(finalList);
+                console.log('Updated Unique Default Videos:', uniqueDefaultVideos);
+                console.log('Updated Final List:', uniqueFinalList);
+
+                saveJSON('g', uniqueFinalList);
+                saveJSON('customVideos', customVideos);
+
+                g = uniqueFinalList;
+            } else {
+                alert("Station already exists!");
+            }
+        });
+                                                              
     function getVisitCount() {
       console.log('Attempting to get visit count from localStorage.');
       try {
@@ -189,8 +195,6 @@
       var welcomeMessage = getWelcomeMessage(visitCount);
       console.log('Final welcome message:', welcomeMessage);
     });
-
-
 
     "use strict";
     n.r(t);
@@ -1234,12 +1238,7 @@
           Object(i.jsx)(Ue, {
             name: "1037862493550280704",
             username: "foxxie",
-            image: "./media/foxxie.webp"
-          }),
-          Object(i.jsx)(Ue, {
-            name: "1148126231389294683",
-            username: "Adzzer",
-            image: "./media/a_d4e8e991964a68e8fd0101c86063bf5a.gif"
+            image: "./media/foxxie.png"
           })
         ]
       });
