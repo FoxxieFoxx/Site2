@@ -35,51 +35,48 @@
   <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
   <audio loop src="./media/audio.mp3" id="rainAudio"></audio>
   <style>
-    /* New style for the volume dialog */
-    /* Custom video menu styling */
     #searchButton {
-        width: 40px; /* Adjust width as needed */
-        height: 40px; /* Adjust height as needed */
-        background-color: transparent; /* Remove any background color */
-        border: none; /* Remove border if present */
-        padding: 0; /* Remove padding */
-        cursor: pointer; /* Change cursor to pointer */
+        width: 40px; 
+        height: 40px; 
+        background-color: transparent; 
+        border: none; 
+        padding: 0; 
+        cursor: pointer; 
     }
 
     #searchButton img {
-        width: 100%; /* Make image fit button width */
-        height: 100%; /* Make image fit button height */
-        object-fit: contain; /* Ensure image scales without distortion */
+        width: 100%; 
+        height: 100%; 
+        object-fit: contain; 
     }
     .custom-video-menu {
         position: absolute;
         background-color: #fff;
         border: 1px solid #ccc;
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
         padding: 10px;
-        width: 300px; /* Adjust width as needed */
-        max-height: 400px; /* Adjust height as needed */
-        overflow-y: auto; /* Enable scrolling */
-        z-index: 1000; /* Ensure it appears above other elements */
+        width: 300px; 
+        max-height: 400px; 
+        overflow-y: auto; 
+        z-index: 1000; 
     }
 
-    /* Style for each video item */
     .video-item {
         display: flex;
         align-items: center;
         padding: 5px;
         cursor: pointer;
-        border-bottom: 1px solid #eee; /* Light border between items */
+        border-bottom: 1px solid #eee;
     }
 
     .video-item:hover {
-        background-color: #f0f0f0; /* Highlight on hover */
+        background-color: #f0f0f0; 
     }
 
     .video-item img {
-        border-radius: 5px; /* Rounded corners for thumbnails */
-        margin-right: 10px; /* Space between thumbnail and title */
+        border-radius: 5px; 
+        margin-right: 10px; 
     }
 
     .video-title {
@@ -87,13 +84,12 @@
         color: #333;
     }
 
-    /* Style for the search input */
     #videoSearchInput {
-        width: calc(100% - 20px); /* Full width minus padding */
+        width: calc(100% - 20px); 
         padding: 5px;
         border: 1px solid #ccc;
-        border-radius: 5px; /* Rounded corners */
-        margin-bottom: 10px; /* Space below input */
+        border-radius: 5px; 
+        margin-bottom: 10px; 
     }
 
     .volume-dialog {
@@ -105,12 +101,11 @@
         padding: 10px;
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 80vw; /* Adjust width for mobile screens */
-        max-width: 300px; /* Maximum width on larger screens */
+        width: 80vw; 
+        max-width: 300px;
         z-index: 1001;
     }
 
-    /* Style for the close button inside the dialog */
     .close-button {
       cursor: pointer;
       color: #333;
@@ -133,9 +128,6 @@
       z-index: 1000;
     }
 
-    /* Add these styles to ensure the buttons are visible */
-
-
     #mobileVolumeButtons img {
       width: 25px;
       height: 25px;
@@ -155,7 +147,6 @@
       display: none;
       position: absolute;
       top: 100px;
-      /* Adjust the top position */
       left: 50%;
       transform: translateX(-50%);
       width: 400px;
@@ -166,16 +157,12 @@
       text-align: center;
       z-index: 1000;
       opacity: 0;
-      /* Set initial opacity to 0 */
       transition: opacity 0.5s ease-in-out;
-      /* Add transition for opacity */
     }
 
     #sliderContainer.fade-in {
       opacity: 1;
-      /* Set opacity to 1 when the fade-in class is added to the container */
       transition-delay: 0.1s;
-      /* Add a small delay for the fade-in effect */
     }
 
     #sliderContainer img {
@@ -186,16 +173,12 @@
       right: 100%;
       filter: grayscale(25%);
       opacity: 0;
-      /* Set initial opacity to 0 */
       transition: opacity 0.5s ease-in-out;
-      /* Add transition for opacity */
     }
 
     #sliderContainer.fade-in img {
       opacity: 1;
-      /* Set opacity to 1 when the fade-in class is added to the container */
       transition-delay: 0.2s;
-      /* Add a small delay for the fade-in effect */
     }
 
     #volumeSlider {
@@ -229,21 +212,16 @@
     #volumeSlider::-moz-range-thumb {
       appearance: none;
       width: 30px;
-      /* Adjust the width of the thumb */
       height: 30px;
-      /* Adjust the height of the thumb */
       background: #3498db;
       border-radius: 15px;
-      /* Set border-radius to half of the height for a rounded rectangle effect */
       cursor: pointer;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
       position: absolute;
       z-index: 1;
       top: -8px;
-      /* Adjust the vertical position */
       transform: translateX(-50%);
       transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
-      /* Add smooth transition to both left and right properties */
     }
   </style>
 </head>
@@ -262,7 +240,6 @@
     }
 
     function toggleRain() {
-      // i mean it works
       var audio = document.getElementById("rainAudio");
       if (audio.paused) {
         audio.play();
@@ -276,9 +253,8 @@
         var currentVolume = audio.volume;
         var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1));
 
-        // Smoothen the volume transition
         audio.volume = newVolume;
-        audio.style.transition = "volume 0.5s"; // Transition over 0.5 seconds
+        audio.style.transition = "volume 0.5s";
         showVolumeDialog(newVolume);
     }
 
@@ -323,7 +299,6 @@
       }
     }
 
-    // Initialize variables
     var customVideoButton = document.getElementById("customVideoButton");
     var customVideoMenu;
     var searchInput;
@@ -332,7 +307,6 @@
     var currentDialog;
     var dialogTimeout;
 
-    // Initialize the custom video menu
     function initializeCustomVideoMenu() {
         if (!customVideoMenu) {
             customVideoMenu = document.createElement("div");
@@ -342,37 +316,33 @@
             customVideoMenu.style.backgroundColor = "white";
             customVideoMenu.style.border = "1px solid #ccc";
             customVideoMenu.style.zIndex = "1000";
-            customVideoMenu.style.maxHeight = "400px"; // Adjust height as needed
-            customVideoMenu.style.overflowY = "scroll"; // Enable scrolling
-
+            customVideoMenu.style.maxHeight = "400px"; 
+            customVideoMenu.style.overflowY = "scroll"; 
             searchInput = document.createElement("input");
             searchInput.type = "text";
             searchInput.id = "videoSearchInput";
             searchInput.placeholder = "Search YouTube";
-            searchInput.style.width = "calc(100% - 50px)"; // Adjust width to account for the button
-            searchInput.style.marginRight = "10px"; // Space between input and button
+            searchInput.style.width = "calc(100% - 50px)"; 
+            searchInput.style.marginRight = "10px";
             customVideoMenu.appendChild(searchInput);
-
             searchButton = document.createElement("button");
             searchButton.id = "searchButton";
-            searchButton.style.width = "40px"; // Adjust size as needed
-            searchButton.style.height = "40px"; // Adjust size as needed
+            searchButton.style.width = "40px"; 
+            searchButton.style.height = "40px"; 
             searchButton.style.backgroundColor = "transparent";
             searchButton.style.border = "none";
             searchButton.style.padding = "0";
             searchButton.style.cursor = "pointer";
 
             var searchIcon = document.createElement("img");
-            searchIcon.src = "./media/search.png"; // Replace with actual path to your PNG
+            searchIcon.src = "./media/search.png"; 
             searchIcon.alt = "Search";
-            searchIcon.style.width = "100%"; // Fit image to button width
-            searchIcon.style.height = "100%"; // Fit image to button height
-            searchIcon.style.objectFit = "contain"; // Ensure the image scales correctly
-
+            searchIcon.style.width = "100%"; 
+            searchIcon.style.height = "100%"; 
+            searchIcon.style.objectFit = "contain"; 
             searchButton.appendChild(searchIcon);
             searchButton.addEventListener("click", performSearch);
             customVideoMenu.appendChild(searchButton);
-
             searchResults = document.createElement("div");
             searchResults.id = "searchResults";
             customVideoMenu.appendChild(searchResults);
@@ -387,11 +357,9 @@
         }
     }
 
-    // Handle custom video button click
     function handleCustomVideo() {
         initializeCustomVideoMenu();
 
-        // Show the menu in a fixed position
         customVideoMenu.style.left = "10px";
         customVideoMenu.style.top = "10px";
         customVideoMenu.style.display = customVideoMenu.style.display === "block" ? "none" : "block";
@@ -399,7 +367,6 @@
     }
 
 
-    // Perform search based on input
     async function performSearch() {
         var query = searchInput.value.trim();
 
@@ -437,7 +404,6 @@
 
 
 
-    // Search YouTube for video details based on video ID
     async function searchYouTubeById(videoId) {
         const url = `https://youtube-v31.p.rapidapi.com/videos?id=${videoId}&part=snippet`;
         const options = {
@@ -466,7 +432,6 @@
         }
     }
 
-    // Display search results
     function displaySearchResults(items) {
         if (!items || items.length === 0) {
             searchResults.innerHTML = '<p>No results found.</p>';
@@ -475,7 +440,7 @@
 
         searchResults.innerHTML = '';
         items
-            .filter(item => item.id.kind === 'youtube#video') // Ensure only videos are displayed
+            .filter(item => item.id.kind === 'youtube#video')
             .forEach(item => {
                 var video = item.snippet;
                 var videoItem = document.createElement('div');
@@ -504,7 +469,6 @@
     }
 
 
-    // Add a custom video
     function addCustomVideo(videoId, videoName) {
         var event = new CustomEvent("customVideoAdded", {
             detail: {
@@ -515,11 +479,10 @@
         });
 
         document.dispatchEvent(event);
-        customVideoMenu.style.display = "none"; // Close the menu after selection
+        customVideoMenu.style.display = "none";
         alert(`Custom video added: ${videoName}`);
     }
 
-    // Extract video ID from a YouTube link
     function extractVideoId(link) {
         var regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n]+)/;
         var match = link.match(regex);
@@ -555,7 +518,6 @@
         });
       }
 
-      // Remove the mobile-specific check
       var mobileVolumeButtons = document.getElementById("mobileVolumeButtons");
       if (mobileVolumeButtons) {
         mobileVolumeButtons.style.display = "flex";
@@ -568,24 +530,20 @@
 
       if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
         sliderContainer.style.display = 'block';
-        
 
-        // Use setTimeout to add the fade-in class after a small delay
+
         setTimeout(function () {
           sliderContainer.classList.add("fade-in");
-        }, 50); // Adjust the delay as needed
+        }, 50); 
       } else {
-        // Add fade-out class before changing display to 'none'
         sliderContainer.classList.add("fade-out");
 
-        // Set a timeout to change display to 'none' after the fade-out animation duration
         setTimeout(function () {
           sliderContainer.style.display = 'none';
 
-          // Remove both fade-in and fade-out classes when closing the slider
           sliderContainer.classList.remove("fade-in", "fade-out");
-        }, 500); // Adjust the duration to match the CSS transition time
-        
+        }, 500);
+
       }
     }
 
@@ -593,7 +551,6 @@
     function changeRainAudio(value) {
       var audio = document.getElementById("rainAudio");
 
-      // Map the slider values to corresponding audio sources
       var audioSources = [
         "./media/audio_drizzle.mp3",
         "./media/audio_hail.mp3",
@@ -601,7 +558,6 @@
         "./media/audio_heavy_rain.mp3"
       ];
 
-      // Set the audio source based on the slider value
       audio.src = audioSources[value];
       audio.play();
     }
