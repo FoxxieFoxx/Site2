@@ -49,6 +49,16 @@
         height: 100%; 
         object-fit: contain; 
     }
+    .live-counter {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: 'Varela Round', sans-serif;
+    }
     .custom-video-menu {
         position: absolute;
         background-color: #fff;
@@ -677,6 +687,8 @@
     </div>
   </div>
   </div>
+  <div id="userCount" class="live-counter">Live Users: 0</div>
+  <script src="./js/livecount.js"></script>
   <script>
           ! function (e) {
               function r(r) {
@@ -772,5 +784,4 @@
     </div>
   </div>
 </body>
-
 </html>
