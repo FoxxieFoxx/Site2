@@ -1,31 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const socket = new WebSocket('wss://server-foxxie.replit.app');
+    let socket;
+    let reconnectInterval = 5000; // Time between reconnection attempts (in milliseconds)
+    let heartbeatInterval = 30000; // Time between heartbeat messages (in milliseconds)
+    let pingInterval;
+    let pongTimeout;
 
-    socket.onopen = () => {
-        console.log('WebSocket connection established');
-    };
+    function connectWebSocket() {
+        socket = new WebSocket('wss://server-foxxie.replit.app');
 
-    socket.onmessage = (event) => {
-        try {
-            console.log('Received message:', event.data);
-            const data = JSON.parse(event.data);
-            if (data && typeof data.count === 'number') {
-                updateCounter(data.count);
-            } else {
-                console.error('Invalid message format:', data);
+        socket.onopen = () => {
+            console.log('WebSocket connection established');
+            startHeartbeat();
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                console.log('Received message:', event.data);
+                const data = JSON.parse(event.data);
+                if (data && typeof data.count === 'number') {
+                    updateCounter(data.count);
+                } else {
+                    console.error('Invalid message format:', data);
+                }
+            } catch (error) {
+                console.error('Error parsing WebSocket message:', error);
             }
-        } catch (error) {
-            console.error('Error parsing WebSocket message:', error);
-        }
-    };
+        };
 
-    socket.onerror = (error) => {
-        console.error('WebSocket error:', error);
-    };
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
 
-    socket.onclose = () => {
-        console.log('WebSocket connection closed');
-    };
+        socket.onclose = (event) => {
+            console.log('WebSocket connection closed', event.reason);
+            stopHeartbeat();
+            // Attempt to reconnect
+            setTimeout(connectWebSocket, reconnectInterval);
+        };
+    }
+
+    function startHeartbeat() {
+        pingInterval = setInterval(() => {
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send('ping'); // Send a ping message
+                console.log('Heartbeat Sent')
+                pongTimeout = setTimeout(() => {
+                    console.error('No pong response, closing connection');
+                    socket.close(); // Close the connection if no pong received
+                }, heartbeatInterval);
+            }
+        }, heartbeatInterval);
+    }
+
+    function stopHeartbeat() {
+        clearInterval(pingInterval);
+        clearTimeout(pongTimeout);
+    }
 
     function updateCounter(newCount) {
         const counterElement = document.getElementById('userCount');
@@ -45,4 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateText();
     }
+
+    connectWebSocket();
 });
