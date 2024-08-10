@@ -53,11 +53,30 @@
         position: fixed;
         bottom: 10px;
         right: 10px;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
         color: white;
         padding: 10px;
         border-radius: 5px;
-        font-family: 'Varela Round', sans-serif;
+        font-family: 'Varela Round', sans-serif; /* Font family */
+        display: flex;
+        align-items: center;
+    }
+
+    .live-counter::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        margin-right: 10px;
+        animation: flash 3s infinite;
+    }
+
+    @keyframes flash {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
     }
     .custom-video-menu {
         position: absolute;
