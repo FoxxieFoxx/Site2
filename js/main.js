@@ -1631,6 +1631,11 @@
                                 username: "foxxie",
                                 image: "./media/foxxie.png",
                             }),
+                            Object(i.jsx)(Ue, {
+                                name: "923370607557640312",
+                                username: "kit",
+                                image: "./kit.png",
+                            }),
                         ],
                     });
                 },

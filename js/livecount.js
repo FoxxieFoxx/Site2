@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pingInterval = setInterval(() => {
             if (socket.readyState === WebSocket.OPEN) {
                 socket.send('ping'); // Send a ping message
-                console.log('Heartbeat Sent');
+                console.log('Ping Sent');
                 pongTimeout = setTimeout(() => {
                     console.error('No pong response, closing connection');
                     socket.close(); // Close the connection if no pong received
