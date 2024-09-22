@@ -1138,61 +1138,60 @@
                                                 {
                                                     style: re,
                                                     children: [
-                                                        !n &&
-                                                        Object(i.jsx)(
-                                                            J,
-                                                            {
-                                                                icon:
-                                                                    "play",
-                                                                onClick: function() {
-                                                                    return Oe(
-                                                                        !0
-                                                                    );
-                                                                },
-                                                            }
-                                                        ),
-                                                        n &&
-                                                        Object(i.jsx)(
-                                                            J,
-                                                            {
-                                                                icon:
-                                                                    "pause",
-                                                                onClick: function() {
-                                                                    return Oe(
-                                                                        !1
-                                                                    );
-                                                                },
-                                                            }
-                                                        ),
+                                                        !n && Object(i.jsx)(J, {
+                                                            icon: "play",
+                                                            onClick: function() {
+                                                                return Oe(!0);
+                                                            },
+                                                        }),
+                                                        n && Object(i.jsx)(J, {
+                                                            icon: "pause",
+                                                            onClick: function() {
+                                                                return Oe(!1);
+                                                            },
+                                                        }),
                                                         Object(i.jsx)(J, {
                                                             icon: "shuffle",
                                                             onClick: Ie,
                                                         }),
                                                         Object(i.jsx)(J, {
-                                                            icon:
-                                                                "previous",
+                                                            icon: "previous",
                                                             onClick: we,
                                                         }),
                                                         Object(i.jsx)(J, {
                                                             icon: "forward",
                                                             onClick: Me,
                                                         }),
-                                                        !me &&
-                                                        Object(i.jsx)(
-                                                            ce,
-                                                            {
-                                                                volume: W,
-                                                                setVolume: R,
-                                                                style: {
-                                                                    marginLeft:
-                                                                        "4px",
-                                                                },
-                                                            }
-                                                        ),
+
+                                                        // Adding the "Custom Video" button here
+                                                        Object(i.jsx)(J, {
+                                                            tooltip: "Add Custom Station",
+                                                            icon: "plus",
+                                                            onClick: function() {
+                                                                if (typeof handleCustomVideo === "function") {
+                                                                    handleCustomVideo();
+                                                                } else {
+                                                                    console.error("handleCustomVideo is not defined.");
+                                                                }
+                                                            },
+                                                            style: {
+                                                                marginRight: "14px",
+                                                            },
+                                                        }),
+
+                                                        // Volume slider
+                                                        !me && Object(i.jsx)(ce, {
+                                                            volume: W,
+                                                            setVolume: R,
+                                                            style: {
+                                                                marginLeft: "4px",
+                                                            },
+                                                        }),
                                                     ],
                                                 }
                                             ),
                                         }),
+
                                         Object(i.jsx)(ne, {
                                             size: 12,
                                         }),
@@ -2178,24 +2177,6 @@
                     children: [
                         n &&
                         // main.js
-                        Object(i.jsx)(J, {
-                            tooltip: "Add Custom Station",
-                            icon: "plus",
-                            onClick: function() {
-                                if (
-                                    typeof handleCustomVideo === "function"
-                                ) {
-                                    handleCustomVideo();
-                                } else {
-                                    console.error(
-                                        "handleCustomVideo is not defined."
-                                    );
-                                }
-                            },
-                            style: {
-                                marginRight: "14px",
-                            },
-                        }),
                         Object(i.jsx)(J, {
                             tooltip: "Rain Intensity Slider",
                             icon: "rain",
