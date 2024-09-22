@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const counterElement = document.getElementById('userCount');
         if (counterElement) {
             const currentText = counterElement.textContent;
-            const newText = `Live Users: ${newCount}`;
+            const newText = `Live Listeners: ${newCount}`;
             let index = 0;
 
             function updateText() {
