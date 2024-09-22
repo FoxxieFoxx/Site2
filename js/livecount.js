@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     let socket;
-    let reconnectInterval = 5000; // Time between reconnection attempts (in milliseconds)
+    let reconnectInterval = 1000; // Time between reconnection attempts (in milliseconds)
     let heartbeatInterval = 30000; // Time between heartbeat messages (in milliseconds)
     let pingInterval;
     let pongTimeout;
 
     function connectWebSocket() {
-        socket = new WebSocket('wss://server-foxxie.replit.app');
+        socket = new WebSocket('wss://websocket.foxxie.space/');
 
         socket.onopen = () => {
             console.log('WebSocket connection established');
@@ -15,17 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         socket.onmessage = (event) => {
             try {
-                console.log('Received message:', event.data);
-                if (event.data === 'pong') {
+                const data = JSON.parse(event.data);
+                console.log('Received message:', data);
+
+                if (data.type === 'pong') {
                     console.log('Pong received');
                     clearTimeout(pongTimeout); // Clear the pong timeout on receiving pong
+                } else if (data.count !== undefined) {
+                    updateCounter(data.count);
                 } else {
-                    const data = JSON.parse(event.data);
-                    if (data && typeof data.count === 'number') {
-                        updateCounter(data.count);
-                    } else {
-                        console.error('Invalid message format:', data);
-                    }
+                    console.error('Invalid message format:', data);
                 }
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startHeartbeat() {
         pingInterval = setInterval(() => {
             if (socket.readyState === WebSocket.OPEN) {
-                socket.send('ping'); // Send a ping message
+                socket.send(JSON.stringify({ type: "heartbeat" }));
                 console.log('Ping Sent');
                 pongTimeout = setTimeout(() => {
                     console.error('No pong response, closing connection');

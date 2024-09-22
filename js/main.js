@@ -1,15 +1,15 @@
 (this["foxxielofi-app"] = this["foxxielofi-app"] || []).push([
     [0],
     {
-        46: function (e, t, n) {},
-        82: function (e, t, n) {
+        46: function(e, t, n) { },
+        82: function(e, t, n) {
             var g = [
                 {
                     id: "jfKfPfyJRdk",
                     name: "lofi hip hop radio - beats to relax/study to",
                 },
                 {
-                    id: "rUxyKA_-grg",
+                    id: "28KRPhVzCus",
                     name: "lofi hip hop radio - beats to sleep/chill to",
                 },
                 {
@@ -49,7 +49,7 @@
                     name:
                         "3 hours of relaxing and beautiful animal crossing music",
                 },
-                { id: "jgvWFbgJ5fY", name: "Video Game Study Lounge 🎮" },
+                { id: "Cyf_xeuGoUc", name: "Video Game Study Lounge 🎮" },
                 { id: "-z3RRwk2rdU", name: "Zelda & Chill + Zelda & Chill 2" },
                 { id: "NJuSStkIZBg", name: "Rainy Jazz Cafe ☕️" },
                 {
@@ -170,13 +170,13 @@
             saveJSON("g", uniqueFinalList);
             g = uniqueFinalList;
 
-                    incrementVisitCount();
+            incrementVisitCount();
             var visitCount = getVisitCount();
             var welcomeMessage = getWelcomeMessage(visitCount);
             console.log("Final welcome message:", welcomeMessage);
 
             // Your custom video addition event listener
-            document.addEventListener("customVideoAdded", function (event) {
+            document.addEventListener("customVideoAdded", function(event) {
                 console.log("Custom video addition event detected.");
                 var videoData = event.detail;
                 console.log("Received customVideoAdded event:", videoData);
@@ -187,7 +187,7 @@
                 }
 
                 var { defaultVideos, customVideos } = getCombinedList();
-                var isVideoInArray = customVideos.some(function (video) {
+                var isVideoInArray = customVideos.some(function(video) {
                     return video.name === videoData.name;
                 });
 
@@ -261,7 +261,7 @@
                 }
             }
 
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 console.log("DOM fully loaded. Starting initialization.");
                 incrementVisitCount();
                 var visitCount = getVisitCount();
@@ -281,25 +281,25 @@
                 u = n(28);
             function b(e, t) {
                 var n =
-                        arguments.length > 2 && void 0 !== arguments[2]
-                            ? arguments[2]
-                            : window,
+                    arguments.length > 2 && void 0 !== arguments[2]
+                        ? arguments[2]
+                        : window,
                     i = Object(c.useRef)();
                 Object(c.useEffect)(
-                    function () {
+                    function() {
                         i.current = t;
                     },
                     [t]
                 ),
                     Object(c.useEffect)(
-                        function () {
+                        function() {
                             if (n && n.addEventListener) {
-                                var t = function (e) {
+                                var t = function(e) {
                                     return i.current(e);
                                 };
                                 return (
                                     n.addEventListener(e, t),
-                                    function () {
+                                    function() {
                                         n.removeEventListener(e, t);
                                     }
                                 );
@@ -310,15 +310,15 @@
             }
             function d() {
                 var e =
-                        arguments.length > 0 && void 0 !== arguments[0]
-                            ? arguments[0]
-                            : [],
+                    arguments.length > 0 && void 0 !== arguments[0]
+                        ? arguments[0]
+                        : [],
                     t =
                         !(arguments.length > 1 && void 0 !== arguments[1]) ||
                         arguments[1];
                 function n(n) {
                     t &&
-                        e.forEach(function (e) {
+                        e.forEach(function(e) {
                             var t = (e[2] || {}).withShift;
                             ("any" === e[0] ||
                                 (n.key === e[0] && (!0 !== t || n.shiftKey))) &&
@@ -326,7 +326,7 @@
                         });
                 }
                 return (
-                    b("keyup", function (e) {
+                    b("keyup", function(e) {
                         var t;
                         j.includes(
                             null === (t = e.target) || void 0 === t
@@ -344,42 +344,42 @@
                 h = n(0),
                 p = h.useEffect,
                 v = h.useState;
-            var x = function () {
-                    var e = v(!1),
-                        t = Object(l.a)(e, 2),
-                        n = t[0],
-                        i = t[1];
-                    return (
-                        p(function () {
-                            i(
-                                [
-                                    "iPad Simulator",
-                                    "iPhone Simulator",
-                                    "iPod Simulator",
-                                    "iPad",
-                                    "iPhone",
-                                    "iPod",
-                                ].includes(navigator.platform) ||
-                                    (navigator.userAgent.includes("Mac") &&
-                                        "ontouchend" in document)
-                            );
-                        }, []),
-                        n
-                    );
-                },
+            var x = function() {
+                var e = v(!1),
+                    t = Object(l.a)(e, 2),
+                    n = t[0],
+                    i = t[1];
+                return (
+                    p(function() {
+                        i(
+                            [
+                                "iPad Simulator",
+                                "iPhone Simulator",
+                                "iPod Simulator",
+                                "iPad",
+                                "iPhone",
+                                "iPod",
+                            ].includes(navigator.platform) ||
+                            (navigator.userAgent.includes("Mac") &&
+                                "ontouchend" in document)
+                        );
+                    }, []),
+                    n
+                );
+            },
                 g = g,
                 y = {
-                    track: function (e, t) {},
+                    track: function(e, t) { },
                 },
-                I = function () {
+                I = function() {
                     var e = Object(c.useState)(""),
                         t = Object(l.a)(e, 2),
                         n = t[0],
                         i = t[1];
                     return (
                         Object(c.useEffect)(
-                            function () {
-                                setTimeout(function () {
+                            function() {
+                                setTimeout(function() {
                                     "" === n && i("."),
                                         "." === n && i(".."),
                                         ".." === n && i("..."),
@@ -436,37 +436,37 @@
                 });
             }
             var Q = {
-                    shuffle: n.p + "./media/Unknown-4-removebg-preview.png",
-                    play: F,
-                    pause: B,
-                    forward: H,
-                    previous: V,
-                    open: R,
-                    timer:
-                        n.p +
-                        "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
-                    mail: k,
-                    heart: Y,
-                    plus: AA,
-                    rain: AB,
-                    twitter:
-                        n.p +
-                        "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
-                    facebook: S,
-                    checkmark: P,
-                    fullscreenEnter: L,
-                    fullscreenExit: E,
-                    beats1: w,
-                    beats2: N,
-                    beats3: M,
-                    beats4: Z,
-                    buffering1: T,
-                    buffering2: A,
-                    buffering3: G,
-                    buffering4: D,
-                    beatsMute: z,
-                    mailbrew: W,
-                },
+                shuffle: n.p + "./media/Unknown-4-removebg-preview.png",
+                play: F,
+                pause: B,
+                forward: H,
+                previous: V,
+                open: R,
+                timer:
+                    n.p +
+                    "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
+                mail: k,
+                heart: Y,
+                plus: AA,
+                rain: AB,
+                twitter:
+                    n.p +
+                    "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
+                facebook: S,
+                checkmark: P,
+                fullscreenEnter: L,
+                fullscreenExit: E,
+                beats1: w,
+                beats2: N,
+                beats3: M,
+                beats4: Z,
+                buffering1: T,
+                buffering2: A,
+                buffering3: G,
+                buffering4: D,
+                beatsMute: z,
+                mailbrew: W,
+            },
                 C = n(36);
             function U(e) {
                 return Object(i.jsx)(
@@ -480,91 +480,91 @@
                     )
                 );
             }
-            var J = function (e) {
-                    var t = e.onClick,
-                        n = e.text,
-                        c = e.style,
-                        a = e.icon,
-                        o = e.tooltip,
-                        r = e.type,
-                        s = e.value,
-                        l = e.className;
-                    return Object(i.jsx)(U, {
-                        content: o,
-                        disabled: !o,
-                        children: Object(i.jsxs)("button", {
-                            onClick: t,
-                            type: null !== r && void 0 !== r ? r : "button",
-                            value: s,
-                            style: Object(m.a)(
-                                Object(m.a)(
-                                    {
-                                        display: "flex",
-                                        alignItems: "center",
-                                    },
-                                    c
-                                ),
-                                n
-                                    ? {}
-                                    : {
-                                          lineHeight: 0,
-                                      }
+            var J = function(e) {
+                var t = e.onClick,
+                    n = e.text,
+                    c = e.style,
+                    a = e.icon,
+                    o = e.tooltip,
+                    r = e.type,
+                    s = e.value,
+                    l = e.className;
+                return Object(i.jsx)(U, {
+                    content: o,
+                    disabled: !o,
+                    children: Object(i.jsxs)("button", {
+                        onClick: t,
+                        type: null !== r && void 0 !== r ? r : "button",
+                        value: s,
+                        style: Object(m.a)(
+                            Object(m.a)(
+                                {
+                                    display: "flex",
+                                    alignItems: "center",
+                                },
+                                c
                             ),
-                            className: l,
-                            title: o,
-                            children: [
-                                a &&
-                                    Object(i.jsx)(X, {
-                                        name: a,
-                                        style: {
-                                            marginRight: n ? 8 : 0,
-                                        },
-                                    }),
-                                n &&
-                                    Object(i.jsx)("span", {
-                                        children: n,
-                                    }),
-                            ],
-                        }),
-                    });
-                },
+                            n
+                                ? {}
+                                : {
+                                    lineHeight: 0,
+                                }
+                        ),
+                        className: l,
+                        title: o,
+                        children: [
+                            a &&
+                            Object(i.jsx)(X, {
+                                name: a,
+                                style: {
+                                    marginRight: n ? 8 : 0,
+                                },
+                            }),
+                            n &&
+                            Object(i.jsx)("span", {
+                                children: n,
+                            }),
+                        ],
+                    }),
+                });
+            },
                 K = n(88),
                 q = n(87);
             function _(e) {
                 return "../default.gif";
             }
             var $ = "ontouchend" in document;
-            var ee = function (e) {
-                    var t = e.isPlaying,
-                        n = Object(c.useState)(1),
-                        a = Object(l.a)(n, 2),
-                        o = a[0],
-                        r = a[1],
-                        u = Object(s.f)(pe),
-                        b = Object(s.f)(ve),
-                        d = u < 0.1 || !t;
-                    return (
-                        Object(c.useEffect)(function () {
-                            var e = setInterval(function () {
-                                r(function (e) {
-                                    return 4 === e ? 1 : e + 1;
-                                });
-                            }, 250);
-                            return function () {
-                                return clearInterval(e);
-                            };
-                        }, []),
-                        Object(i.jsx)(X, {
-                            name: d
-                                ? "beatsMute"
-                                : (b ? "buffering" : "beats") + o,
-                            style: {
-                                marginRight: "8px",
-                            },
-                        })
-                    );
-                },
-                te = function (e) {
+            var ee = function(e) {
+                var t = e.isPlaying,
+                    n = Object(c.useState)(1),
+                    a = Object(l.a)(n, 2),
+                    o = a[0],
+                    r = a[1],
+                    u = Object(s.f)(pe),
+                    b = Object(s.f)(ve),
+                    d = u < 0.1 || !t;
+                return (
+                    Object(c.useEffect)(function() {
+                        var e = setInterval(function() {
+                            r(function(e) {
+                                return 4 === e ? 1 : e + 1;
+                            });
+                        }, 250);
+                        return function() {
+                            return clearInterval(e);
+                        };
+                    }, []),
+                    Object(i.jsx)(X, {
+                        name: d
+                            ? "beatsMute"
+                            : (b ? "buffering" : "beats") + o,
+                        style: {
+                            marginRight: "8px",
+                        },
+                    })
+                );
+            },
+                te = function(e) {
                     var t = e.currentStationId,
                         n = e.setCurrentStationId,
                         c = e.isPlaying,
@@ -575,29 +575,29 @@
                         b = Object(s.g)(we),
                         d = Object(s.g)(Ie);
                     if (!t) return null;
-                    var j = g.find(function (e) {
+                    var j = g.find(function(e) {
                         return e.id === t;
                     });
                     if (!j) return null;
                     var m =
                         localStorage.stationClicked || $
                             ? Object(i.jsx)("span", {
-                                  children: j.name,
-                              })
+                                children: j.name,
+                            })
                             : Object(i.jsxs)("span", {
-                                  children: [
-                                      Object(i.jsxs)("span", {
-                                          className: "red",
-                                          style: {
-                                              display: "inline",
-                                          },
-                                          children: ["click to change >", " "],
-                                      }),
-                                      j.name,
-                                  ],
-                              });
+                                children: [
+                                    Object(i.jsxs)("span", {
+                                        className: "red",
+                                        style: {
+                                            display: "inline",
+                                        },
+                                        children: ["click to change >", " "],
+                                    }),
+                                    j.name,
+                                ],
+                            });
                     return Object(i.jsxs)("div", {
-                        onChange: function (e) {
+                        onChange: function(e) {
                             n(e.target.value);
                         },
                         value: t,
@@ -626,15 +626,15 @@
                                             bounce: 0.1,
                                         },
                                         id: "stations-list",
-                                        onClick: function () {
+                                        onClick: function() {
                                             return u(!1);
                                         },
-                                        children: g.map(function (e) {
+                                        children: g.map(function(e) {
                                             var c = e.id === t;
                                             return Object(i.jsxs)("div", {
                                                 className:
                                                     "station-wrapper pointer",
-                                                onClick: function () {
+                                                onClick: function() {
                                                     c || n(e.id);
                                                 },
                                                 children: [
@@ -650,14 +650,14 @@
                                                             backgroundImage: "url(".concat(
                                                                 _(
                                                                     "station_thumb_" +
-                                                                        e.id
+                                                                    e.id
                                                                 ),
                                                                 ")"
                                                             ),
                                                         },
                                                         children: [
                                                             Object(i.jsx)("a", {
-                                                                onClick: function (
+                                                                onClick: function(
                                                                     e
                                                                 ) {
                                                                     e.stopPropagation();
@@ -701,7 +701,7 @@
                             Object(i.jsxs)("div", {
                                 id: "stations-button",
                                 className: "pointer",
-                                onClick: function () {
+                                onClick: function() {
                                     localStorage.setItem(
                                         "stationClicked",
                                         "true"
@@ -727,7 +727,7 @@
                         ],
                     });
                 },
-                ne = function (e) {
+                ne = function(e) {
                     var t = e.size,
                         n = void 0 === t ? 10 : t;
                     return Object(i.jsx)("div", {
@@ -737,7 +737,7 @@
                         },
                     });
                 };
-            var ie = function (e) {
+            var ie = function(e) {
                 var t = e.on,
                     n = e.volume;
                 return Object(i.jsx)("div", {
@@ -754,7 +754,7 @@
                     },
                 });
             };
-            var ce = function (e) {
+            var ce = function(e) {
                 var t = e.volume,
                     n = e.setVolume,
                     a = e.style,
@@ -783,7 +783,7 @@
                         Math.min(
                             Math.max(
                                 ((t = (i - f.x) / f.w),
-                                Math.round(100 * (t + Number.EPSILON)) / 100),
+                                    Math.round(100 * (t + Number.EPSILON)) / 100),
                                 0
                             ),
                             1
@@ -792,7 +792,7 @@
                 }
                 return (
                     Object(c.useEffect)(
-                        function () {
+                        function() {
                             var e = o.current.getBoundingClientRect();
                             O({
                                 x: e.x,
@@ -809,7 +809,7 @@
                             a
                         ),
                         children: Object(i.jsxs)("div", {
-                            onMouseDown: function (e) {
+                            onMouseDown: function(e) {
                                 b(!0), v(e);
                             },
                             onMouseOut: h,
@@ -874,9 +874,9 @@
                 return n === t ? ae(e, t) : n;
             }
             var oe = {
-                    width: "100%",
-                    zIndex: 6,
-                },
+                width: "100%",
+                zIndex: 6,
+            },
                 re = {
                     display: "flex",
                     justifyContent: "flex-start",
@@ -916,15 +916,15 @@
                     zIndex: -1,
                     borderRadius: "8px",
                 },
-                de = function () {
+                de = function() {
                     var e = Object(c.useState)(""),
                         t = Object(l.a)(e, 2),
                         n = t[0],
                         a = t[1];
                     return (
                         Object(c.useEffect)(
-                            function () {
-                                setTimeout(function () {
+                            function() {
+                                setTimeout(function() {
                                     "" === n && a("."),
                                         "." === n && a(".."),
                                         ".." === n && a("..."),
@@ -938,7 +938,7 @@
                         })
                     );
                 },
-                je = function (e) {
+                je = function(e) {
                     var t = e.onStationChanged,
                         n = e.isPlaying,
                         a = e.setIsPlaying,
@@ -994,7 +994,7 @@
                             a(e);
                     }
                     var Ie = Object(c.useCallback)(
-                        function () {
+                        function() {
                             fe(), j(!1);
                             var e = ae(g, N);
                             v(g[e].id), t(), y.track("Player - Shuffle");
@@ -1003,7 +1003,7 @@
                     );
                     function we() {
                         fe(), j(!1);
-                        var e = (function (e, t) {
+                        var e = (function(e, t) {
                             var n = t - 1;
                             return n < 0 ? e.length - 1 : n;
                         })(g, N);
@@ -1011,7 +1011,7 @@
                     }
                     function Me() {
                         fe(), j(!1);
-                        var e = (function (e, t) {
+                        var e = (function(e, t) {
                             var n = t + 1;
                             return n > e.length - 1 ? 0 : n;
                         })(g, N);
@@ -1024,7 +1024,7 @@
                                 ["ArrowLeft", we],
                                 [
                                     "ArrowUp",
-                                    function () {
+                                    function() {
                                         R(
                                             Math.round(
                                                 10 * Math.min(W + 0.1, 1)
@@ -1034,7 +1034,7 @@
                                 ],
                                 [
                                     "ArrowDown",
-                                    function () {
+                                    function() {
                                         R(
                                             Math.round(
                                                 10 * Math.max(W - 0.1, 0)
@@ -1044,20 +1044,20 @@
                                 ],
                                 [
                                     "v",
-                                    function () {
+                                    function() {
                                         je || y.track("Xem video chính thức"),
                                             ie(!je);
                                     },
                                 ],
                                 [
                                     "Escape",
-                                    function () {
+                                    function() {
                                         return j(!1);
                                     },
                                 ],
                                 [
                                     " ",
-                                    function () {
+                                    function() {
                                         return Oe(!n);
                                     },
                                 ],
@@ -1065,14 +1065,14 @@
                             o
                         ),
                         Object(c.useEffect)(
-                            function () {
+                            function() {
                                 var e;
                                 if (D)
                                     return (
-                                        (e = setTimeout(function () {
+                                        (e = setTimeout(function() {
                                             E(!0);
                                         }, 3e3)),
-                                        function () {
+                                        function() {
                                             return clearTimeout(e);
                                         }
                                     );
@@ -1081,15 +1081,15 @@
                             [D, w]
                         ),
                         Object(c.useEffect)(
-                            function () {
+                            function() {
                                 if (150 === V) {
                                     K(
                                         "Oops, this station is not working. Skipping it"
                                     );
-                                    var e = setTimeout(function () {
+                                    var e = setTimeout(function() {
                                         fe(), Ie();
                                     }, 4e3);
-                                    return function () {
+                                    return function() {
                                         return clearTimeout(e);
                                     };
                                 }
@@ -1108,109 +1108,109 @@
                                     ),
                                     children: [
                                         !b &&
-                                            U &&
-                                            Object(i.jsxs)("span", {
-                                                className: "red",
-                                                children: [
-                                                    U,
-                                                    Object(i.jsx)(I, {}),
-                                                ],
-                                            }),
+                                        U &&
+                                        Object(i.jsxs)("span", {
+                                            className: "red",
+                                            children: [
+                                                U,
+                                                Object(i.jsx)(I, {}),
+                                            ],
+                                        }),
                                         !b &&
-                                            !U &&
-                                            D &&
-                                            L &&
-                                            Object(i.jsxs)("span", {
-                                                className: "red",
-                                                children: [
-                                                    "Buffering",
-                                                    Object(i.jsx)(I, {}),
-                                                ],
-                                            }),
+                                        !U &&
+                                        D &&
+                                        L &&
+                                        Object(i.jsxs)("span", {
+                                            className: "red",
+                                            children: [
+                                                "Buffering",
+                                                Object(i.jsx)(I, {}),
+                                            ],
+                                        }),
                                         Object(i.jsx)(ne, {
                                             size: 14,
                                         }),
                                         !z &&
-                                            Object(i.jsx)("div", {
-                                                id: "buttons-ui",
-                                                children: Object(i.jsxs)(
-                                                    "div",
-                                                    {
-                                                        style: re,
-                                                        children: [
-                                                            !n &&
-                                                                Object(i.jsx)(
-                                                                    J,
-                                                                    {
-                                                                        icon:
-                                                                            "play",
-                                                                        onClick: function () {
-                                                                            return Oe(
-                                                                                !0
-                                                                            );
-                                                                        },
-                                                                    }
-                                                                ),
-                                                            n &&
-                                                                Object(i.jsx)(
-                                                                    J,
-                                                                    {
-                                                                        icon:
-                                                                            "pause",
-                                                                        onClick: function () {
-                                                                            return Oe(
-                                                                                !1
-                                                                            );
-                                                                        },
-                                                                    }
-                                                                ),
-                                                            Object(i.jsx)(J, {
-                                                                icon: "shuffle",
-                                                                onClick: Ie,
-                                                            }),
-                                                            Object(i.jsx)(J, {
+                                        Object(i.jsx)("div", {
+                                            id: "buttons-ui",
+                                            children: Object(i.jsxs)(
+                                                "div",
+                                                {
+                                                    style: re,
+                                                    children: [
+                                                        !n &&
+                                                        Object(i.jsx)(
+                                                            J,
+                                                            {
                                                                 icon:
-                                                                    "previous",
-                                                                onClick: we,
-                                                            }),
-                                                            Object(i.jsx)(J, {
-                                                                icon: "forward",
-                                                                onClick: Me,
-                                                            }),
-                                                            !me &&
-                                                                Object(i.jsx)(
-                                                                    ce,
-                                                                    {
-                                                                        volume: W,
-                                                                        setVolume: R,
-                                                                        style: {
-                                                                            marginLeft:
-                                                                                "4px",
-                                                                        },
-                                                                    }
-                                                                ),
-                                                        ],
-                                                    }
-                                                ),
-                                            }),
+                                                                    "play",
+                                                                onClick: function() {
+                                                                    return Oe(
+                                                                        !0
+                                                                    );
+                                                                },
+                                                            }
+                                                        ),
+                                                        n &&
+                                                        Object(i.jsx)(
+                                                            J,
+                                                            {
+                                                                icon:
+                                                                    "pause",
+                                                                onClick: function() {
+                                                                    return Oe(
+                                                                        !1
+                                                                    );
+                                                                },
+                                                            }
+                                                        ),
+                                                        Object(i.jsx)(J, {
+                                                            icon: "shuffle",
+                                                            onClick: Ie,
+                                                        }),
+                                                        Object(i.jsx)(J, {
+                                                            icon:
+                                                                "previous",
+                                                            onClick: we,
+                                                        }),
+                                                        Object(i.jsx)(J, {
+                                                            icon: "forward",
+                                                            onClick: Me,
+                                                        }),
+                                                        !me &&
+                                                        Object(i.jsx)(
+                                                            ce,
+                                                            {
+                                                                volume: W,
+                                                                setVolume: R,
+                                                                style: {
+                                                                    marginLeft:
+                                                                        "4px",
+                                                                },
+                                                            }
+                                                        ),
+                                                    ],
+                                                }
+                                            ),
+                                        }),
                                         Object(i.jsx)(ne, {
                                             size: 12,
                                         }),
                                         !z &&
-                                            Object(i.jsx)(te, {
-                                                isPlaying: n,
-                                                currentStationId: p,
-                                                setCurrentStationId: function (
-                                                    e
-                                                ) {
-                                                    v(e), t(), Oe(!0);
-                                                },
-                                            }),
+                                        Object(i.jsx)(te, {
+                                            isPlaying: n,
+                                            currentStationId: p,
+                                            setCurrentStationId: function(
+                                                e
+                                            ) {
+                                                v(e), t(), Oe(!0);
+                                            },
+                                        }),
                                         z &&
-                                            Object(i.jsx)("div", {
-                                                id: "buttons-ui",
-                                                children: Object(i.jsx)(de, {}),
-                                            }),
+                                        Object(i.jsx)("div", {
+                                            id: "buttons-ui",
+                                            children: Object(i.jsx)(de, {}),
+                                        }),
                                     ],
                                 }),
                                 Object(i.jsx)("div", {
@@ -1237,28 +1237,28 @@
                                                 },
                                             },
                                             playsinline: !0,
-                                            onReady: function () {
+                                            onReady: function() {
                                                 return T(!1);
                                             },
-                                            onError: function (e) {
+                                            onError: function(e) {
                                                 return X(e);
                                             },
-                                            onPlay: function () {
+                                            onPlay: function() {
                                                 return a(!0);
                                             },
-                                            onPause: function () {
+                                            onPause: function() {
                                                 return a(!1);
                                             },
-                                            onBuffer: function () {
+                                            onBuffer: function() {
                                                 return P(!0);
                                             },
-                                            onBufferEnd: function () {
+                                            onBufferEnd: function() {
                                                 return P(!1);
                                             },
-                                            onStart: function () {
+                                            onStart: function() {
                                                 return P(!1);
                                             },
-                                            onEnded: function () {
+                                            onEnded: function() {
                                                 return Ie();
                                             },
                                         }),
@@ -1335,8 +1335,8 @@
                     "static7",
                     "static8",
                 ],
-                Oe = function (e) {
-                    return function (t) {
+                Oe = function(e) {
+                    return function(t) {
                         var n = t.setSelf,
                             i = t.onSet,
                             c = localStorage.getItem(e);
@@ -1378,9 +1378,9 @@
                 }),
                 ge = Object(s.d)({
                     key: "currentStation",
-                    get: function (e) {
+                    get: function(e) {
                         var t = (0, e.get)(xe),
-                            n = g.find(function (e) {
+                            n = g.find(function(e) {
                                 return e.id === t;
                             });
                         return (
@@ -1391,9 +1391,9 @@
                 }),
                 ye = Object(s.d)({
                     key: "currentStationIndex",
-                    get: function (e) {
+                    get: function(e) {
                         var t = (0, e.get)(ge);
-                        return g.findIndex(function (e) {
+                        return g.findIndex(function(e) {
                             return e === t;
                         });
                     },
@@ -1441,68 +1441,68 @@
                 return "ontouchend" in document;
             }
             function Pe(e) {
-                var t = (function (e, t) {
-                        var n = function (e) {
-                                var t = window.localStorage.getItem(e);
-                                if (t) return JSON.parse(t);
-                            },
-                            i = Object(c.useState)(function () {
-                                if ("undefined" !== typeof window)
-                                    return n(e) || t;
-                            }),
-                            a = Object(l.a)(i, 2),
-                            o = a[0],
-                            r = a[1];
-                        Object(c.useEffect)(
-                            function () {
-                                try {
-                                    r(n(e));
-                                } catch (t) {
-                                    console.log(
-                                        "error reading local storage!",
-                                        t
+                var t = (function(e, t) {
+                    var n = function(e) {
+                        var t = window.localStorage.getItem(e);
+                        if (t) return JSON.parse(t);
+                    },
+                        i = Object(c.useState)(function() {
+                            if ("undefined" !== typeof window)
+                                return n(e) || t;
+                        }),
+                        a = Object(l.a)(i, 2),
+                        o = a[0],
+                        r = a[1];
+                    Object(c.useEffect)(
+                        function() {
+                            try {
+                                r(n(e));
+                            } catch (t) {
+                                console.log(
+                                    "error reading local storage!",
+                                    t
+                                );
+                            }
+                        },
+                        [e]
+                    );
+                    var s = Object(c.useCallback)(
+                        function(t) {
+                            try {
+                                var n =
+                                    t instanceof Function ? t(o) : t;
+                                r(n),
+                                    window.localStorage.setItem(
+                                        e,
+                                        JSON.stringify(n)
                                     );
-                                }
-                            },
-                            [e]
-                        );
-                        var s = Object(c.useCallback)(
-                                function (t) {
-                                    try {
-                                        var n =
-                                            t instanceof Function ? t(o) : t;
-                                        r(n),
-                                            window.localStorage.setItem(
-                                                e,
-                                                JSON.stringify(n)
-                                            );
-                                    } catch (i) {
-                                        console.log(
-                                            "error writing local storage",
-                                            i
-                                        );
-                                    }
-                                },
-                                [o]
-                            ),
-                            u = Object(c.useCallback)(function () {
-                                window.localStorage.removeItem(e), r(t);
-                            }, []);
-                        return [o, s, u];
-                    })("aboutShown", !1),
+                            } catch (i) {
+                                console.log(
+                                    "error writing local storage",
+                                    i
+                                );
+                            }
+                        },
+                        [o]
+                    ),
+                        u = Object(c.useCallback)(function() {
+                            window.localStorage.removeItem(e), r(t);
+                        }, []);
+                    return [o, s, u];
+                })("aboutShown", !1),
                     n = Object(l.a)(t, 2),
                     i = n[0],
                     a = n[1],
                     o = De(),
                     r = Object(s.g)(we);
                 Object(c.useEffect)(
-                    function () {
+                    function() {
                         var t = window.innerWidth;
                         if (!(o || t < 600) && !i && e) {
-                            var n = setTimeout(function () {
+                            var n = setTimeout(function() {
                                 r(!0), a(!0);
                             }, 1e3);
-                            return function () {
+                            return function() {
                                 return clearTimeout(n);
                             };
                         }
@@ -1514,12 +1514,12 @@
                 He = n.n(Se);
             function Le() {
                 var e = Object(s.g)(xe);
-                Object(c.useEffect)(function () {
-                    var t = (function () {
+                Object(c.useEffect)(function() {
+                    var t = (function() {
                         var e = He.a.parse(location.search).station;
                         return (
                             e &&
-                            g.find(function (t) {
+                            g.find(function(t) {
                                 return t.id === e;
                             })
                         );
@@ -1529,7 +1529,7 @@
             }
             function Ee() {
                 var e = Object(s.f)(ge);
-                return function () {
+                return function() {
                     e &&
                         y.track("Tweet Station", {
                             stationName: e.name,
@@ -1545,7 +1545,7 @@
                 var audio = new Audio(audioFileName);
                 audio.loop = false;
                 audio.play();
-                setTimeout(function () {
+                setTimeout(function() {
                     audio.pause();
                     audio.currentTime = 0;
                 }, 1000);
@@ -1619,27 +1619,27 @@
                         ),
                 });
             }
-            var Ce = function () {
-                    return Object(i.jsxs)("span", {
-                        style: {
-                            display: "flex",
-                            marginBottom: "10px",
-                        },
-                        children: [
-                            Object(i.jsx)(Ue, {
-                                name: "1037862493550280704",
-                                username: "foxxie",
-                                image: "./media/foxxie.png",
-                            }),
-                            Object(i.jsx)(Ue, {
-                                name: "923370607557640312",
-                                username: "kit",
-                                image: "./kit.png",
-                            }),
-                        ],
-                    });
-                },
-                Ue = function (e) {
+            var Ce = function() {
+                return Object(i.jsxs)("span", {
+                    style: {
+                        display: "flex",
+                        marginBottom: "10px",
+                    },
+                    children: [
+                        Object(i.jsx)(Ue, {
+                            name: "1037862493550280704",
+                            username: "foxxie",
+                            image: "./media/foxxie.png",
+                        }),
+                        Object(i.jsx)(Ue, {
+                            name: "923370607557640312",
+                            username: "kit",
+                            image: "./kit.png",
+                        }),
+                    ],
+                });
+            },
+                Ue = function(e) {
                     var t = e.name,
                         n = e.username,
                         c = e.image;
@@ -1678,7 +1678,7 @@
                         ],
                     });
                 },
-                Je = function () {
+                Je = function() {
                     return Object(i.jsxs)("form", {
                         action: "",
                         method: "post",
@@ -1693,7 +1693,7 @@
                         },
                     });
                 },
-                Ke = function () {
+                Ke = function() {
                     var e = Object(s.f)(we);
 
                     function VisitCounter() {
@@ -1821,25 +1821,25 @@
                     });
                 };
 
-            var qe = function (e) {
+            var qe = function(e) {
                 var t = e.src,
                     n = e.zIndex,
                     c = void 0 === n ? 0 : n,
                     a = e.show;
                 return void 0 === a || a
                     ? Object(i.jsx)("img", {
-                          style: {
-                              position: "absolute",
-                              width: "100vw",
-                              height: "100vh",
-                              top: "0",
-                              left: "0",
-                              objectFit: "cover",
-                              zIndex: c,
-                          },
-                          src: t,
-                          alt: "",
-                      })
+                        style: {
+                            position: "absolute",
+                            width: "100vw",
+                            height: "100vh",
+                            top: "0",
+                            left: "0",
+                            objectFit: "cover",
+                            zIndex: c,
+                        },
+                        src: t,
+                        alt: "",
+                    })
                     : null;
             };
             function _e() {
@@ -1866,7 +1866,7 @@
                     ],
                 });
             }
-            var $e = function (e) {
+            var $e = function(e) {
                 var t = e.src;
                 return Object(i.jsx)("img", {
                     src: t,
@@ -1886,12 +1886,12 @@
                     r = o[0],
                     u = o[1];
                 Object(c.useEffect)(
-                    function () {
+                    function() {
                         if (r) {
-                            var e = setTimeout(function () {
+                            var e = setTimeout(function() {
                                 u(!1);
                             }, 1e3);
-                            return function () {
+                            return function() {
                                 return clearTimeout(e);
                             };
                         }
@@ -1904,155 +1904,155 @@
                 return b || d || j
                     ? null
                     : Object(i.jsx)("div", {
-                          style: {
-                              position: "absolute",
-                              top: "25%",
-                              right: "25%",
-                              bottom: "25%",
-                              left: "25%",
-                              cursor: "pointer",
-                              zIndex: 99,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                          },
-                          onMouseEnter: function () {
-                              return u(!0);
-                          },
-                          onMouseLeave: function () {
-                              return u(!1);
-                          },
-                          onClick: function () {
-                              n(!t);
-                          },
-                          children: Object(i.jsx)(X, {
-                              name: t ? "pause" : "play",
-                              style: {
-                                  transform: "scale(".concat(
-                                      r ? 0.98 : 0.3,
-                                      ")"
-                                  ),
-                                  opacity: r ? 1 : 0,
-                                  transition: "0.1s",
-                              },
-                          }),
-                      });
+                        style: {
+                            position: "absolute",
+                            top: "25%",
+                            right: "25%",
+                            bottom: "25%",
+                            left: "25%",
+                            cursor: "pointer",
+                            zIndex: 99,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        },
+                        onMouseEnter: function() {
+                            return u(!0);
+                        },
+                        onMouseLeave: function() {
+                            return u(!1);
+                        },
+                        onClick: function() {
+                            n(!t);
+                        },
+                        children: Object(i.jsx)(X, {
+                            name: t ? "pause" : "play",
+                            style: {
+                                transform: "scale(".concat(
+                                    r ? 0.98 : 0.3,
+                                    ")"
+                                ),
+                                opacity: r ? 1 : 0,
+                                transition: "0.1s",
+                            },
+                        }),
+                    });
             }
             var tt = 1500;
-            var nt = function () {
-                    var e = Object(s.f)(Ie),
-                        t = Object(c.useState)(tt),
-                        n = Object(l.a)(t, 2),
-                        a = n[0],
-                        o = n[1],
-                        r = Object(c.useState)(!1),
-                        u = Object(l.a)(r, 2),
-                        b = u[0],
-                        d = u[1],
-                        j = Object(c.useState)(!1),
-                        m = Object(l.a)(j, 2),
-                        f = m[0],
-                        O = m[1],
-                        h = Object(c.useRef)(4),
-                        p = Math.floor(a / 60).toString(),
-                        v = (a - 60 * p).toString(),
-                        x = !0 === f ? "blue" : !0 === b ? "red" : void 0;
-                    function g() {
-                        b || y.track("Pomodoro"), d(!b);
-                    }
-                    return (
-                        Object(c.useEffect)(
-                            function () {
-                                var e;
-                                return (
-                                    b
-                                        ? (e = setInterval(function () {
-                                              o(function (e) {
-                                                  return e - 1;
-                                              });
-                                          }, 1e3))
-                                        : clearInterval(e),
-                                    function () {
-                                        return clearInterval(e);
-                                    }
-                                );
-                            },
-                            [b]
-                        ),
-                        Object(c.useEffect)(
-                            function () {
-                                0 === a &&
-                                    (d(!1),
+            var nt = function() {
+                var e = Object(s.f)(Ie),
+                    t = Object(c.useState)(tt),
+                    n = Object(l.a)(t, 2),
+                    a = n[0],
+                    o = n[1],
+                    r = Object(c.useState)(!1),
+                    u = Object(l.a)(r, 2),
+                    b = u[0],
+                    d = u[1],
+                    j = Object(c.useState)(!1),
+                    m = Object(l.a)(j, 2),
+                    f = m[0],
+                    O = m[1],
+                    h = Object(c.useRef)(4),
+                    p = Math.floor(a / 60).toString(),
+                    v = (a - 60 * p).toString(),
+                    x = !0 === f ? "blue" : !0 === b ? "red" : void 0;
+                function g() {
+                    b || y.track("Pomodoro"), d(!b);
+                }
+                return (
+                    Object(c.useEffect)(
+                        function() {
+                            var e;
+                            return (
+                                b
+                                    ? (e = setInterval(function() {
+                                        o(function(e) {
+                                            return e - 1;
+                                        });
+                                    }, 1e3))
+                                    : clearInterval(e),
+                                function() {
+                                    return clearInterval(e);
+                                }
+                            );
+                        },
+                        [b]
+                    ),
+                    Object(c.useEffect)(
+                        function() {
+                            0 === a &&
+                                (d(!1),
                                     f
                                         ? (o(tt), O(!1), Be.endPause.play())
                                         : (O(!0),
-                                          h.current++,
-                                          h.current % 4 === 0
-                                              ? (o(900), Be.endWork.play())
-                                              : (o(300), Be.endWork.play())));
-                            },
-                            [a, f]
-                        ),
-                        Object(i.jsxs)(Qe, {
-                            show: e,
-                            style: {
-                                textAlign: "right",
-                                marginTop: 15,
-                            },
-                            className: "vertical",
-                            children: [
-                                Object(i.jsxs)("span", {
-                                    className: x,
+                                            h.current++,
+                                            h.current % 4 === 0
+                                                ? (o(900), Be.endWork.play())
+                                                : (o(300), Be.endWork.play())));
+                        },
+                        [a, f]
+                    ),
+                    Object(i.jsxs)(Qe, {
+                        show: e,
+                        style: {
+                            textAlign: "right",
+                            marginTop: 15,
+                        },
+                        className: "vertical",
+                        children: [
+                            Object(i.jsxs)("span", {
+                                className: x,
+                                children: [
+                                    2 === p.length ? p : "0" + p,
+                                    ":",
+                                    2 === v.length ? v : "0" + v,
+                                ],
+                            }),
+                            b || a === tt || 300 === a || 900 === a
+                                ? Object(i.jsx)(J, {
+                                    text: b ? "Pause" : "Start",
+                                    onClick: g,
+                                })
+                                : Object(i.jsxs)("div", {
+                                    style: {
+                                        display: "flex",
+                                    },
                                     children: [
-                                        2 === p.length ? p : "0" + p,
-                                        ":",
-                                        2 === v.length ? v : "0" + v,
+                                        Object(i.jsx)(J, {
+                                            text: "Continue",
+                                            onClick: g,
+                                            style: {
+                                                marginRight: "8px",
+                                            },
+                                        }),
+                                        " ",
+                                        Object(i.jsx)(J, {
+                                            text: "Stop",
+                                            onClick: function() {
+                                                d(!1), o(tt);
+                                            },
+                                        }),
                                     ],
                                 }),
-                                b || a === tt || 300 === a || 900 === a
-                                    ? Object(i.jsx)(J, {
-                                          text: b ? "Pause" : "Start",
-                                          onClick: g,
-                                      })
-                                    : Object(i.jsxs)("div", {
-                                          style: {
-                                              display: "flex",
-                                          },
-                                          children: [
-                                              Object(i.jsx)(J, {
-                                                  text: "Continue",
-                                                  onClick: g,
-                                                  style: {
-                                                      marginRight: "8px",
-                                                  },
-                                              }),
-                                              " ",
-                                              Object(i.jsx)(J, {
-                                                  text: "Stop",
-                                                  onClick: function () {
-                                                      d(!1), o(tt);
-                                                  },
-                                              }),
-                                          ],
-                                      }),
-                                (!f || (f && !b)) &&
-                                    Object(i.jsx)(J, {
-                                        text: "+5:00",
-                                        onClick: function () {
-                                            o(function (e) {
-                                                return e + 300;
-                                            }),
-                                                b ||
-                                                    (O(!1),
-                                                    d(!0),
-                                                    Be.endWork.play());
-                                        },
+                            (!f || (f && !b)) &&
+                            Object(i.jsx)(J, {
+                                text: "+5:00",
+                                onClick: function() {
+                                    o(function(e) {
+                                        return e + 300;
                                     }),
-                            ],
-                        })
-                    );
-                },
-                it = function (e) {
+                                        b ||
+                                        (O(!1),
+                                            d(!0),
+                                            Be.endWork.play());
+                                },
+                            }),
+                        ],
+                    })
+                );
+            },
+                it = function(e) {
                     var t = e.blinking,
                         n = e.style,
                         a = Object(c.useState)("\u2588"),
@@ -2061,12 +2061,12 @@
                         s = o[1];
                     return (
                         Object(c.useEffect)(
-                            function () {
+                            function() {
                                 t
-                                    ? setTimeout(function () {
-                                          "" === r && s("\u2588"),
-                                              "\u2588" === r && s("");
-                                      }, 600)
+                                    ? setTimeout(function() {
+                                        "" === r && s("\u2588"),
+                                            "\u2588" === r && s("");
+                                    }, 600)
                                     : s("\u2588");
                             },
                             [t, r]
@@ -2083,7 +2083,7 @@
                         })
                     );
                 },
-                ct = function (e) {
+                ct = function(e) {
                     var t = e.children,
                         n = e.delay,
                         a = void 0 === n ? 0 : n,
@@ -2100,10 +2100,10 @@
                         h = t.length;
                     return (
                         Object(c.useEffect)(
-                            function () {
+                            function() {
                                 if (r) {
-                                    var e = setTimeout(function () {
-                                        var e = setInterval(function () {
+                                    var e = setTimeout(function() {
+                                        var e = setInterval(function() {
                                             return (
                                                 O.current++,
                                                 f(
@@ -2112,15 +2112,15 @@
                                                         .slice(0, O.current)
                                                 ),
                                                 O.current > h - 1 &&
-                                                    (clearInterval(e),
+                                                (clearInterval(e),
                                                     s && s()),
-                                                function () {
+                                                function() {
                                                     return clearInterval(e);
                                                 }
                                             );
                                         }, 40);
                                     }, a);
-                                    return function () {
+                                    return function() {
                                         return clearTimeout(e);
                                     };
                                 }
@@ -2146,7 +2146,7 @@
                     children: [
                         Object(i.jsx)(ct, {
                             delay: 1500,
-                            onFinished: function () {
+                            onFinished: function() {
                                 return a(!0);
                             },
                             children: o,
@@ -2177,29 +2177,29 @@
                     id: "horizontal",
                     children: [
                         n &&
-                            // main.js
-                            Object(i.jsx)(J, {
-                                tooltip: "Add Custom Station",
-                                icon: "plus",
-                                onClick: function () {
-                                    if (
-                                        typeof handleCustomVideo === "function"
-                                    ) {
-                                        handleCustomVideo();
-                                    } else {
-                                        console.error(
-                                            "handleCustomVideo is not defined."
-                                        );
-                                    }
-                                },
-                                style: {
-                                    marginRight: "14px",
-                                },
-                            }),
+                        // main.js
+                        Object(i.jsx)(J, {
+                            tooltip: "Add Custom Station",
+                            icon: "plus",
+                            onClick: function() {
+                                if (
+                                    typeof handleCustomVideo === "function"
+                                ) {
+                                    handleCustomVideo();
+                                } else {
+                                    console.error(
+                                        "handleCustomVideo is not defined."
+                                    );
+                                }
+                            },
+                            style: {
+                                marginRight: "14px",
+                            },
+                        }),
                         Object(i.jsx)(J, {
                             tooltip: "Rain Intensity Slider",
                             icon: "rain",
-                            onClick: function () {
+                            onClick: function() {
                                 toggleSlider();
                             },
                             style: {
@@ -2212,7 +2212,7 @@
                             icon: t.active
                                 ? "fullscreenExit"
                                 : "fullscreenEnter",
-                            onClick: function () {
+                            onClick: function() {
                                 return t.active ? t.exit() : t.enter();
                             },
                             style: {
@@ -2222,7 +2222,7 @@
                         Object(i.jsx)(J, {
                             tooltip: "Pomodoro Timer",
                             icon: "timer",
-                            onClick: function () {
+                            onClick: function() {
                                 o || y.track("Start Pomodoro"), r(!o), j(!1);
                             },
                             style: {
@@ -2232,7 +2232,7 @@
                         Object(i.jsx)(J, {
                             tooltip: "About",
                             icon: "heart",
-                            onClick: function () {
+                            onClick: function() {
                                 d || y.track("Open About"), j(!d), r(!1);
                             },
                         }),
@@ -2242,11 +2242,11 @@
             var ut = n(10),
                 bt = n.n(ut),
                 dt = n(24),
-                jt = function (e) {
+                jt = function(e) {
                     var t =
-                            arguments.length > 1 && void 0 !== arguments[1]
-                                ? arguments[1]
-                                : [],
+                        arguments.length > 1 && void 0 !== arguments[1]
+                            ? arguments[1]
+                            : [],
                         n = Object(c.useState)(null),
                         i = Object(l.a)(n, 2),
                         a = i[0],
@@ -2256,14 +2256,14 @@
                         u = s[0],
                         b = s[1];
                     return (
-                        Object(c.useEffect)(function () {
-                            (function () {
+                        Object(c.useEffect)(function() {
+                            (function() {
                                 var t = Object(dt.a)(
                                     bt.a.mark(function t() {
                                         var n, i;
                                         return bt.a.wrap(
-                                            function (t) {
-                                                for (;;)
+                                            function(t) {
+                                                for (; ;)
                                                     switch ((t.prev = t.next)) {
                                                         case 0:
                                                             return (
@@ -2299,7 +2299,7 @@
                                         );
                                     })
                                 );
-                                return function () {
+                                return function() {
                                     return t.apply(this, arguments);
                                 };
                             })()();
@@ -2310,7 +2310,7 @@
                         }
                     );
                 },
-                mt = function (e) {
+                mt = function(e) {
                     var t = e.blinking,
                         n = Object(Xe.a)(e, ["blinking"]),
                         a = Object(c.useState)("\u2022"),
@@ -2319,12 +2319,12 @@
                         s = o[1];
                     return (
                         Object(c.useEffect)(
-                            function () {
+                            function() {
                                 t
-                                    ? setTimeout(function () {
-                                          " " === r && s("\u2022"),
-                                              "\u2022" === r && s(" ");
-                                      }, 600)
+                                    ? setTimeout(function() {
+                                        " " === r && s("\u2022"),
+                                            "\u2022" === r && s(" ");
+                                    }, 600)
                                     : s("\u2022");
                             },
                             [t, r]
@@ -2341,7 +2341,7 @@
                         )
                     );
                 },
-                ft = function () {
+                ft = function() {
                     var e,
                         t = Object(c.useState)(!1),
                         n = Object(l.a)(t, 2),
@@ -2351,7 +2351,7 @@
                         s = Object(l.a)(r, 2),
                         u = s[0],
                         d = s[1];
-                    b("focus", function () {
+                    b("focus", function() {
                         d(u + 1);
                     });
                     var j = jt("", [u]),
@@ -2365,7 +2365,7 @@
                                 : 0,
                         f = m && m.toLocaleString("en"),
                         O = Object(c.useMemo)(
-                            function () {
+                            function() {
                                 return Ve.listeningNow + " " + f.toString();
                             },
                             [f]
@@ -2374,31 +2374,31 @@
                         (null === j || void 0 === j ? void 0 : j.response) < 3
                         ? null
                         : Object(i.jsxs)("span", {
-                              className: "red",
-                              id: "visitors-counter",
-                              children: [
-                                  Object(i.jsx)(ct, {
-                                      delay: 1e3,
-                                      className: "red",
-                                      onFinished: function () {
-                                          return o(!0);
-                                      },
-                                      children: O,
-                                  }),
-                                  a &&
-                                      Object(i.jsx)(mt, {
-                                          style: {
-                                              display: "inline-block",
-                                              width: "10px",
-                                              marginLeft: "4px",
-                                          },
-                                          blinking: !0,
-                                          className: "red",
-                                      }),
-                              ],
-                          });
+                            className: "red",
+                            id: "visitors-counter",
+                            children: [
+                                Object(i.jsx)(ct, {
+                                    delay: 1e3,
+                                    className: "red",
+                                    onFinished: function() {
+                                        return o(!0);
+                                    },
+                                    children: O,
+                                }),
+                                a &&
+                                Object(i.jsx)(mt, {
+                                    style: {
+                                        display: "inline-block",
+                                        width: "10px",
+                                        marginLeft: "4px",
+                                    },
+                                    blinking: !0,
+                                    className: "red",
+                                }),
+                            ],
+                        });
                 };
-            var Ot = function () {
+            var Ot = function() {
                 var e = Object(s.e)(he),
                     t = Object(l.a)(e, 2),
                     n = t[0],
@@ -2413,28 +2413,28 @@
                     h = f[1],
                     p = Object(s.g)(Ie),
                     v = Object(s.g)(we),
-                    x = (function () {
+                    x = (function() {
                         var e = Object(s.g)(Ae),
                             t = Object(s.e)(Ge),
                             n = Object(l.a)(t, 2),
                             i = n[0],
                             c = n[1];
-                        return function (t) {
+                        return function(t) {
                             e(!0),
-                                setTimeout(function () {
+                                setTimeout(function() {
                                     e(!1);
                                     var t = ae(fe, i);
                                     c(t);
                                 }, t);
                         };
                     })(),
-                    g = (function () {
+                    g = (function() {
                         var e = Object(s.g)(ze),
                             t = Object(s.e)(Te),
                             n = Object(l.a)(t, 2),
                             i = n[0],
                             c = n[1];
-                        return function () {
+                        return function() {
                             e(i);
                             var t = ae(me, i);
                             c(t);
@@ -2456,14 +2456,14 @@
                     d([
                         [
                             "Escape",
-                            function () {
+                            function() {
                                 v(!1), p(!1);
                             },
                         ],
                         ["d", I],
                         [
                             "l",
-                            function () {
+                            function() {
                                 return j(!b);
                             },
                         ],
@@ -2484,10 +2484,10 @@
                             onClick: Z,
                             children: [
                                 n &&
-                                    Object(i.jsx)(et, {
-                                        isPlaying: O,
-                                        setIsPlaying: h,
-                                    }),
+                                Object(i.jsx)(et, {
+                                    isPlaying: O,
+                                    setIsPlaying: h,
+                                }),
                                 Object(i.jsx)(_e, {}),
                                 Object(i.jsx)("div", {
                                     id: "crt-lines",
@@ -2508,10 +2508,10 @@
                                             className: "vertical",
                                             children: [
                                                 n &&
-                                                    Object(i.jsx)(lt, {
-                                                        fullscreen: N,
-                                                        fullscreenAvailable: M,
-                                                    }),
+                                                Object(i.jsx)(lt, {
+                                                    fullscreen: N,
+                                                    fullscreenAvailable: M,
+                                                }),
                                                 Object(i.jsx)(Ke, {}),
                                                 Object(i.jsx)(nt, {}),
                                             ],
@@ -2522,7 +2522,7 @@
                                 Object(i.jsx)(je, {
                                     isPlaying: O,
                                     setIsPlaying: h,
-                                    onStationChanged: function () {
+                                    onStationChanged: function() {
                                         var e =
                                             !(
                                                 arguments.length > 0 &&
@@ -2539,18 +2539,18 @@
                     })
                 );
             };
-            var ht = function () {
-                    return Object(i.jsx)(s.b, {
-                        children: Object(i.jsx)(Ot, {}),
-                    });
-                },
-                pt = function (e) {
+            var ht = function() {
+                return Object(i.jsx)(s.b, {
+                    children: Object(i.jsx)(Ot, {}),
+                });
+            },
+                pt = function(e) {
                     e &&
                         e instanceof Function &&
                         n
                             .e(3)
                             .then(n.bind(null, 89))
-                            .then(function (t) {
+                            .then(function(t) {
                                 var n = t.getCLS,
                                     i = t.getFID,
                                     c = t.getFCP,
