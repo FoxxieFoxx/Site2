@@ -4,91 +4,40 @@
         46: function(e, t, n) { },
         82: function(e, t, n) {
             var g = [
-                {
-                    id: "jfKfPfyJRdk",
-                    name: "lofi hip hop radio - beats to relax/study to",
-                },
-                {
-                    id: "28KRPhVzCus",
-                    name: "lofi hip hop radio - beats to sleep/chill to",
-                },
-                {
-                    id: "5yx6BWlEVcY",
-                    name: "Chillhop Radio - jazzy & lofi hip hop beats",
-                },
-                {
-                    id: "qH3fETPsqXU",
-                    name:
-                        "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to",
-                },
-                {
-                    id: "CLeZyIID9Bo",
-                    name: "Chill Lofi Mix [chill lo-fi hip hop beats]",
-                },
-                {
-                    id: "YOJsKatW-Ts",
-                    name:
-                        "Rain+Lofi Chill 19m: Space Traveling Background Music, Music for Stress Relief, Dreaming",
-                },
-                {
-                    id: "4xDzrJKXOOY",
-                    name: "synthwave radio 🌌 - beats to chill/game to",
-                },
+                { id: "jfKfPfyJRdk", name: "lofi hip hop radio - beats to relax/study to" },
+                { id: "28KRPhVzCus", name: "lofi hip hop radio - beats to sleep/chill to" },
+                { id: "5yx6BWlEVcY", name: "Chillhop Radio - jazzy & lofi hip hop beats" },
+                { id: "qH3fETPsqXU", name: "【24/7 CHILL LOFI HIP HOP RADIO】beats to sleep/relax/study to" },
+                { id: "CLeZyIID9Bo", name: "Chill Lofi Mix [chill lo-fi hip hop beats]" },
+                { id: "YOJsKatW-Ts", name: "Rain+Lofi Chill 19m: Space Traveling Background Music" },
+                { id: "4xDzrJKXOOY", name: "synthwave radio 🌌 - beats to chill/game to" },
                 { id: "M8yB4NqlnqQ", name: "lofi songs for cold days" },
-                {
-                    id: "q55qNEKQLG0",
-                    name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended",
-                },
-                {
-                    id: "og0F2Dpcs1I",
-                    name:
-                        "Study Lofi 📚 Lofi Deep Focus Study Work Concentration 🌿 Study beats ~ lofi / relax / stress relief",
-                },
-                {
-                    id: "VKum4lF8a10",
-                    name:
-                        "3 hours of relaxing and beautiful animal crossing music",
-                },
-                { id: "Cyf_xeuGoUc", name: "Video Game Study Lounge 🎮" },
+                { id: "q55qNEKQLG0", name: "RAINING IN OSAKA ( Lofi HipHop) 3 Hour Extended" },
+                { id: "og0F2Dpcs1I", name: "Study Lofi 📚 Lofi Deep Focus Study Work Concentration" },
+                { id: "VKum4lF8a10", name: "3 hours of relaxing and beautiful animal crossing music" },
+                { id: "34KOjUSdv50", name: "Video Game Study Lounge 🎮" },
                 { id: "-z3RRwk2rdU", name: "Zelda & Chill + Zelda & Chill 2" },
                 { id: "NJuSStkIZBg", name: "Rainy Jazz Cafe ☕️" },
-                {
-                    id: "8TbLuBOClSg",
-                    name:
-                        "Cozy animal crossing music that cures my headaches🌿",
-                },
-                {
-                    id: "IumNzh6yvfM",
-                    name:
-                        "pov: it finally feels like summer (an animal crossing playlist)",
-                },
-                {
-                    id: "azV9PMW5-Ro",
-                    name: "[24/7 study with me] chill study live stream",
-                },
+                { id: "8TbLuBOClSg", name: "Cozy animal crossing music that cures my headaches🌿" },
+                { id: "IumNzh6yvfM", name: "pov: it finally feels like summer (an animal crossing playlist)" },
+                { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" }
             ];
+
+            const currentGVersion = hash(JSON.stringify(g)); // Create a hash of the current list
 
             function loadJSON(key) {
                 console.log(`Attempting to load JSON data for key: "${key}"`);
                 try {
                     var data = localStorage.getItem(key);
                     if (!data) {
-                        console.warn(
-                            `No data found for key "${key}" or data is empty. Returning empty array.`
-                        );
+                        console.warn(`No data found for key "${key}" or data is empty. Returning empty array.`);
                         return [];
                     }
                     var parsedData = JSON.parse(data);
-                    console.log(
-                        `Data successfully retrieved for key "${key}":`,
-                        parsedData
-                    );
+                    console.log(`Data successfully retrieved for key "${key}":`, parsedData);
                     return parsedData;
                 } catch (e) {
-                    console.error(
-                        `Error parsing JSON from localStorage for key "${key}":`,
-                        e
-                    );
+                    console.error(`Error parsing JSON from localStorage for key "${key}":`, e);
                     return [];
                 }
             }
@@ -101,16 +50,21 @@
                     }
                     var jsonData = JSON.stringify(data);
                     localStorage.setItem(key, jsonData);
-                    console.log(
-                        `Data successfully saved for key "${key}":`,
-                        jsonData
-                    );
+                    console.log(`Data successfully saved for key "${key}":`, jsonData);
                 } catch (e) {
-                    console.error(
-                        `Error saving JSON to localStorage for key "${key}":`,
-                        e
-                    );
+                    console.error(`Error saving JSON to localStorage for key "${key}":`, e);
                 }
+            }
+
+            function hash(str) {
+                var hash = 0, i, chr;
+                if (str.length === 0) return hash;
+                for (i = 0; i < str.length; i++) {
+                    chr = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + chr;
+                    hash |= 0;
+                }
+                return hash;
             }
 
             function resetLocalStorage() {
@@ -119,6 +73,7 @@
                     localStorage.removeItem("g");
                     localStorage.removeItem("customVideos");
                     localStorage.removeItem("visitCount");
+                    localStorage.removeItem("gVersion");
                     console.log("LocalStorage reset successfully.");
                 } catch (e) {
                     console.error("Error resetting localStorage:", e);
@@ -127,11 +82,24 @@
 
             function getCombinedList() {
                 var storedG = loadJSON("g");
+                var storedVersion = localStorage.getItem("gVersion");
+
+                // Compare versions to check if `g` has been updated
+                if (storedVersion !== currentGVersion) {
+                    console.log("Stored g list is outdated. Updating localStorage with new list.");
+                    saveJSON("g", g);
+                    localStorage.setItem("gVersion", currentGVersion);
+                    storedG = g;
+                } else {
+                    console.log("Stored g list is up-to-date.");
+                }
+
                 var customVideos = loadJSON("customVideos");
                 console.log("Loaded storedG:", storedG);
                 console.log("Loaded customVideos:", customVideos);
+
                 return {
-                    defaultVideos: storedG.length ? storedG : g,
+                    defaultVideos: storedG,
                     customVideos: customVideos,
                 };
             }
@@ -144,9 +112,7 @@
                         seen.add(video.name);
                         result.push(video);
                     } else {
-                        console.log(
-                            `Duplicate found and removed: ${video.name}`
-                        );
+                        console.log(`Duplicate found and removed: ${video.name}`);
                     }
                 });
                 return result;
@@ -204,10 +170,7 @@
                     // Re-deduplicate after adding the new custom video
                     var finalList = [...uniqueDefaultVideos, ...customVideos];
                     var uniqueFinalList = deduplicateByName(finalList);
-                    console.log(
-                        "Updated Unique Default Videos:",
-                        uniqueDefaultVideos
-                    );
+                    console.log("Updated Unique Default Videos:", uniqueDefaultVideos);
                     console.log("Updated Final List:", uniqueFinalList);
 
                     saveJSON("g", uniqueFinalList);
@@ -231,10 +194,7 @@
                     }
                     return parseInt(visitCount, 10);
                 } catch (e) {
-                    console.error(
-                        "Error getting visit count from localStorage:",
-                        e
-                    );
+                    console.error("Error getting visit count from localStorage:", e);
                     return 0;
                 }
             }
@@ -248,16 +208,11 @@
             }
 
             function getWelcomeMessage(visitCount) {
-                console.log(
-                    "Formatting welcome message for visit count:",
-                    visitCount
-                );
+                console.log("Formatting welcome message for visit count:", visitCount);
                 if (visitCount === 1) {
                     return "Welcome! It's your first visit.";
                 } else {
-                    return (
-                        "Welcome back! You've visited " + visitCount + " times."
-                    );
+                    return "Welcome back! You've visited " + visitCount + " times.";
                 }
             }
 
@@ -266,8 +221,8 @@
                 incrementVisitCount();
                 var visitCount = getVisitCount();
                 var welcomeMessage = getWelcomeMessage(visitCount);
-                console.log("Final welcome message:", welcomeMessage);
             });
+
 
             ("use strict");
             n.r(t);
@@ -2178,16 +2133,6 @@
                         n &&
                         // main.js
                         Object(i.jsx)(J, {
-                            tooltip: "Rain Intensity Slider",
-                            icon: "rain",
-                            onClick: function() {
-                                toggleSlider();
-                            },
-                            style: {
-                                marginRight: "14px",
-                            },
-                        }),
-                        Object(i.jsx)(J, {
                             className: "hide-small-screen",
                             tooltip: "Fullscreen",
                             icon: t.active
@@ -2195,6 +2140,16 @@
                                 : "fullscreenEnter",
                             onClick: function() {
                                 return t.active ? t.exit() : t.enter();
+                            },
+                            style: {
+                                marginRight: "14px",
+                            },
+                        }),
+                        Object(i.jsx)(J, {
+                            tooltip: "Rain Intensity Slider",
+                            icon: "rain",
+                            onClick: function() {
+                                toggleSlider();
                             },
                             style: {
                                 marginRight: "14px",

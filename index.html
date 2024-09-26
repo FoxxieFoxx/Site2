@@ -51,8 +51,8 @@
     }
     .live-counter {
         position: fixed;
-        bottom: 10px;
-        right: 10px;
+        top: 10px;
+        left: 10px;
         background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
         color: white;
         padding: 10px;
@@ -141,20 +141,20 @@
       font-weight: bold;
     }
 
+    /* For the volume buttons */
     #mobileVolumeButtons {
       display: inline-block;
       justify-content: center;
       align-items: center;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed; /* Fixed position to ensure it stays in the same place */
+      bottom: 20px; /* Adjust this value for how far from the bottom you want it */
+      right: 20px; /* Adjust this value for how far from the right you want it */
       background-color: #fff;
       padding: 10px;
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       text-align: center;
-      z-index: 1000;
+      z-index: 1000; /* Ensure it's above other elements */
     }
 
     #mobileVolumeButtons img {
@@ -172,99 +172,102 @@
       margin-right: 5px;
     }
 
+    /* For the slider container */
+    /* For the slider container */
     #sliderContainer {
-      display: none;
-      position: absolute;
-      top: 100px;
+      display: none; /* Hide initially */
+      position: fixed; /* Fixed to the viewport */
+      top: 20px; /* Space from the top of the viewport */
       left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      padding: 1px;
-      background-color: #444;
-      border-radius: 50px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      transform: translateX(-50%); /* Center it horizontally */
+      width: 375px; /* Reduced width */
+      padding: 15px; /* Reduced padding for better spacing */
+      background: linear-gradient(135deg, #333, #444); /* Gradient background for depth */
+      border-radius: 25px; /* Softer corners */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for depth */
+      text-align: center; 
+      z-index: 1001; /* Ensure it's above other elements */
+      opacity: 0; 
+      transition: opacity 0.5s ease-in-out; 
     }
 
-    #sliderContainer.fade-in {
-      opacity: 1;
-      transition-delay: 0.1s;
+    /* For the images container */
+    #imagesContainer {
+      position: relative; /* Needed for positioning images */
+      width: 100%; /* Full width to use space effectively */
+      padding-top: 10px; /* Space between slider and images */
     }
 
-    #sliderContainer img {
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      top: 50px;
-      right: 100%;
+    /* For the images */
+    #imagesContainer img {
+      position: absolute; /* Position images absolutely */
+      width: 50px; /* Width of the images */
+      height: 50px; /* Height of the images */
       filter: grayscale(25%);
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      opacity: 0; /* Initially hidden */
+      transition: opacity 0.5s ease-in-out; 
     }
 
+    /* Fade-in effect for images */
     #sliderContainer.fade-in img {
-      opacity: 1;
-      transition-delay: 0.2s;
+      opacity: 1; 
+      transition-delay: 0.2s; 
     }
 
+    /* For the volume slider */
     #volumeSlider {
-      width: calc(100%);
-      margin: 0 auto;
-      margin-top: 0px;
-      appearance: none;
-      height: 20px;
-      background: #555;
-      border-radius: 10px;
-      outline: none;
+      width: calc(100% - 40px); /* Full width minus padding */
+      height: 20px; /* Height of the slider */
+      background: #555; /* Background for the slider track */
+      border-radius: 10px; /* Softer corners for track */
+      outline: none; /* Remove outline */
+      margin: 15px 0; /* Margin for spacing */
       position: relative;
-      transition: all 0.5s ease-in-out;
     }
 
-    #volumeSlider.transitioning {
-      transition: margin-left 0.5s ease-in-out;
+    /* For the slider thumb */
+    #volumeSlider::-webkit-slider-thumb,
+    #volumeSlider::-moz-range-thumb {
+      appearance: none; /* Remove default styling */
+      width: 30px; /* Width of the thumb */
+      height: 30px; /* Height of the thumb */
+      background: #3498db; /* Blue color for the thumb */
+      border-radius: 15px; /* Softer corners */
+      cursor: pointer; /* Pointer cursor */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+      position: relative;
+    }
+
+    /* Add hover effect for the thumb */
+    #volumeSlider::-webkit-slider-thumb:hover,
+    #volumeSlider::-moz-range-thumb:hover {
+      background: #2980b9; /* Darker blue on hover */
+    }
+
+    /* For the fading effects */
+    #sliderContainer.fade-in {
+      opacity: 1; 
+      transition-delay: 0.1s; 
     }
 
     #sliderContainer.fade-out {
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
     }
-
-    #sliderContainer.fade-out img {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    #volumeSlider::-webkit-slider-thumb,
-    #volumeSlider::-moz-range-thumb {
-      appearance: none;
-      width: 30px;
-      height: 30px;
-      background: #3498db;
-      border-radius: 15px;
-      cursor: pointer;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-      position: absolute;
-      z-index: 1;
-      top: -8px;
-      transform: translateX(-50%);
-      transition: left 0.5s ease-in-out, right 0.5s ease-in-out;
-    }
   </style>
 </head>
 
 <body onload="playAudio()">
   <script>
-
-    var currentDialog = null;
+    
+    let currentDialog = null; // Declare currentDialog at the top level
+    let dialogTimeout; // Declare dialogTimeout at the top level
 
     function playAudio() {
       var audio = document.getElementById("rainAudio");
       if (audio.paused) {
         audio.play();
-        audio.volume = 0.5;
+        audio.volume = 0.5; // Set initial volume to 50%
       }
     }
 
@@ -278,15 +281,19 @@
     }
 
     function changeRainVolume(direction) {
-        var audio = document.getElementById("rainAudio");
-        var currentVolume = audio.volume;
-        var newVolume = Math.max(0.1, Math.min(1, currentVolume + direction * 0.1));
+      var audio = document.getElementById("rainAudio");
+      var currentVolume = audio.volume;
 
+      // Calculate the new volume
+      var newVolume = Math.max(0, Math.min(1, currentVolume + direction * 0.1));
+
+      // Only update if the volume actually changes
+      if (newVolume !== currentVolume) {
         audio.volume = newVolume;
-        audio.style.transition = "volume 0.5s";
+        audio.style.transition = "volume 0.5s"; // Note: This doesn't actually animate volume
         showVolumeDialog(newVolume);
+      }
     }
-
 
     function showVolumeDialog(volume) {
       if (currentDialog) {
@@ -312,7 +319,7 @@
         document.body.appendChild(dialog);
         currentDialog = dialog;
 
-        var dialogTimeout = setTimeout(function () {
+        dialogTimeout = setTimeout(function () {
           if (currentDialog === dialog) {
             document.body.removeChild(dialog);
             currentDialog = null;
@@ -328,13 +335,12 @@
       }
     }
 
+
     var customVideoButton = document.getElementById("customVideoButton");
     var customVideoMenu;
     var searchInput;
     var searchResults;
     var searchButton;
-    var currentDialog;
-    var dialogTimeout;
 
     function initializeCustomVideoMenu() {
         if (!customVideoMenu) {
@@ -558,24 +564,26 @@
       var sliderContainer = document.getElementById("sliderContainer");
       var toggleButton = document.getElementById("volumeUpButtonMobile");
 
+      // Check if the slider is currently hidden
       if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
-        sliderContainer.style.display = 'block';
+        sliderContainer.style.display = 'block'; // Show the slider
 
-
+        // Add fade-in effect
         setTimeout(function () {
           sliderContainer.classList.add("fade-in");
         }, 50); 
       } else {
+        // Add fade-out effect
         sliderContainer.classList.add("fade-out");
 
+        // After the fade-out completes, hide the slider
         setTimeout(function () {
           sliderContainer.style.display = 'none';
-
           sliderContainer.classList.remove("fade-in", "fade-out");
         }, 500);
-
       }
     }
+
 
 
     function changeRainAudio(value) {
@@ -796,12 +804,15 @@
       <img src="./media/volumeup.png" alt="Increase Volume">
     </button>
     <div id="sliderContainer" class="slider-container">
-      <img src="./media/drizzle.png" alt="Image 1" style="left: 0%;">
-      <img src="./media/hail.png" alt="Image 2" style="left: 29%;">
-      <img src="./media/rain.png" alt="Image 3" style="left: 58%;">
-      <img src="./media/heavy rain.png" alt="Image 4" style="left: 88%;">
       <input type="range" id="volumeSlider" min="0" max="3" step="1" value="2">
+      <div id="imagesContainer">
+        <img src="./media/drizzle.png" alt="Image 1" style="left: 0%;">
+        <img src="./media/hail.png" alt="Image 2" style="left: 29%;">
+        <img src="./media/rain.png" alt="Image 3" style="left: 58%;">
+        <img src="./media/heavy rain.png" alt="Image 4" style="left: 88%;">
+      </div>
     </div>
+
   </div>
 </body>
 </html>
