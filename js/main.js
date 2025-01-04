@@ -397,16 +397,12 @@
                 forward: H,
                 previous: V,
                 open: R,
-                timer:
-                    n.p +
-                    "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
+                timer: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
                 mail: k,
                 heart: Y,
                 plus: AA,
                 rain: AB,
-                twitter:
-                    n.p +
-                    "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
+                twitter: n.p + "./media/31-314846_clock-icon-png-white-transparent-png-removebg-preview.png",
                 facebook: S,
                 checkmark: P,
                 fullscreenEnter: L,
@@ -421,7 +417,8 @@
                 buffering4: D,
                 beatsMute: z,
                 mailbrew: W,
-            },
+                chatImage: n.p + "./icon.png",
+            };
                 C = n(36);
             function U(e) {
                 return Object(i.jsx)(
@@ -2154,6 +2151,17 @@
                             style: {
                                 marginRight: "14px",
                             },
+                        }),
+                        Object(i.jsx)(J, {
+                          tooltip: "Toggle Chat",
+                          icon: "chatImage",
+                          onClick: function() {
+                            // Call your function to toggle the chatbox visibility
+                            toggleChat();
+                          },
+                          style: {
+                            marginRight: "14px",
+                          },
                         }),
                         Object(i.jsx)(J, {
                             tooltip: "Pomodoro Timer",

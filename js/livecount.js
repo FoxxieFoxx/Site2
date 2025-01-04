@@ -5,12 +5,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let pingInterval;
     let pongTimeout;
 
+    let username = '';
+    let currentListeners = 0; // Track the number of live listeners
+
+    // Prompt for the username
+    function askForUsername() {
+        username = prompt("Enter your username:");
+        if (!username) {
+            username = 'Anonymous'; // Default to 'Anonymous' if no username is provided
+        }
+        console.log(`Username set to: ${username}`);
+    }
+
     function connectWebSocket() {
         socket = new WebSocket('wss://websocket.foxxie.space/');
 
         socket.onopen = () => {
             console.log('WebSocket connection established');
             startHeartbeat();
+            // Send the username to the server after connecting
+            socket.send(JSON.stringify({ type: 'setUsername', username }));
+            // Increment live listeners count
+            currentListeners++;
+            updateCounter(currentListeners);
         };
 
         socket.onmessage = (event) => {
@@ -22,9 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('Pong received');
                     clearTimeout(pongTimeout); // Clear the pong timeout on receiving pong
                 } else if (data.count !== undefined) {
-                    updateCounter(data.count);
+                    // If the count is received, update it
+                    currentListeners = data.count;
+                    updateCounter(currentListeners);
                 } else {
-                    console.error('Invalid message format:', data);
+                    console.log('Message received:', data);
+                    displayMessage(data);
                 }
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
@@ -38,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.onclose = (event) => {
             console.log('WebSocket connection closed', event.reason);
             stopHeartbeat();
+            // Decrement the listener count by 1 when the connection closes
+            currentListeners = Math.max(0, currentListeners - 1);  // Ensure the count doesn't go negative
+            updateCounter(currentListeners);
             // Attempt to reconnect
             setTimeout(connectWebSocket, reconnectInterval);
         };
@@ -48,9 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (socket.readyState === WebSocket.OPEN) {
                 socket.send(JSON.stringify({ type: "heartbeat" }));
                 console.log('Ping Sent');
+                clearTimeout(pongTimeout); // Clear the previous timeout before setting a new one
                 pongTimeout = setTimeout(() => {
-                    console.error('No pong response, closing connection');
-                    socket.close(); // Close the connection if no pong received
+                    console.log('No pong received in time, closing connection');
+                    socket.close();
                 }, heartbeatInterval);
             }
         }, heartbeatInterval);
@@ -62,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounter(newCount) {
+        const finalCount = Math.max(0, newCount);  // Ensure count doesn't go negative
         const counterElement = document.getElementById('userCount');
         if (counterElement) {
-            const currentText = counterElement.textContent;
-            const newText = `Live Listeners: ${newCount}`;
+            const newText = `Live Listeners: ${finalCount}`;
             let index = 0;
 
             function updateText() {
@@ -84,5 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Send a message through the WebSocket connection
+    function sendMessage(message) {
+        if (socket.readyState === WebSocket.OPEN) {
+            const messageData = {
+                type: 'chat',
+                message: message
+            };
+
+            socket.send(JSON.stringify(messageData));
+            console.log('Message sent:', message);
+        } else {
+            console.error('WebSocket is not open, cannot send message');
+        }
+    }
+
+    // Display incoming messages
+    function displayMessage(data) {
+        console.log(`${data.username}: ${data.message}`);
+        // You can implement this function to display the message in your UI
+    }
+
+    // Handle sending messages when the user presses the Enter key
     connectWebSocket();
 });

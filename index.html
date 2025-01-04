@@ -35,6 +35,68 @@
   <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
   <audio loop src="./media/audio.mp3" id="rainAudio"></audio>
   <style>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      #chatBox {
+        position: fixed;
+        top: 10%;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7); 
+        color: white;
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+        padding: 10px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      #chatMessages {
+        flex-grow: 1;
+        overflow-y: auto;
+      }
+
+      #userInput {
+        padding: 10px;
+        background-color: #333;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      #usernameInput {
+        padding: 10px;
+        background-color: #333;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      #toggleChatButton {
+        width: 40px; 
+        height: 40px; 
+        background-color: transparent; 
+        border: none; 
+        padding: 0; 
+        cursor: pointer; 
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      #toggleChatButton img {
+        width: 100%; 
+        height: 100%; 
+        object-fit: contain; 
+      }
+
     #searchButton {
         width: 40px; 
         height: 40px; 
@@ -259,6 +321,260 @@
 
 <body onload="playAudio()">
   <script>
+    var toggleChatButton = document.getElementById("toggleChatButton");
+    var chatBox, userInput, chatMessages, socket, onlineCounter;
+    var reconnectInterval = 1000; // Reconnect delay
+    var heartbeatInterval = 30000; // Heartbeat interval
+    var pingInterval;
+    var pongTimeout;
+    var username = localStorage.getItem('username'); // Get the username from localStorage
+
+      function createChatboxContainer() {
+          var chatboxContainer = document.getElementById("chatbox-container");
+          if (!chatboxContainer) {
+              chatboxContainer = document.createElement("div");
+              chatboxContainer.id = "chatbox-container";
+              chatboxContainer.style.position = "fixed";
+              chatboxContainer.style.bottom = "10px";
+              chatboxContainer.style.right = "10px";
+              chatboxContainer.style.zIndex = "1000"; // Ensure it's on top of other content
+              document.body.appendChild(chatboxContainer);
+              console.log("chatbox-container created.");
+          }
+          return chatboxContainer;
+      }
+
+      function initializeChatBox() {
+          if (!chatBox) {
+              chatBox = document.createElement("div");
+              chatBox.id = "chatBox";
+              chatBox.style.display = "none";  // Hide by default
+              chatBox.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+              chatBox.style.padding = "10px";
+              chatBox.style.borderRadius = "8px";
+              chatBox.style.width = "300px";
+
+              // Now, only apply the flex styles after ensuring it's hidden
+              chatBox.style.display = "flex";
+              chatBox.style.flexDirection = "column";
+              chatBox.style.justifyContent = "flex-end"; // Keep input at the bottom
+              chatBox.style.height = "300px"; // Set a fixed height for the chatbox
+
+              // Create messages container
+              chatMessages = document.createElement("div");
+              chatMessages.id = "chatMessages";
+              chatMessages.style.maxHeight = "200px";
+              chatMessages.style.overflowY = "auto";
+              chatBox.appendChild(chatMessages);
+
+              // Create the user input field
+              userInput = document.createElement("input");
+              userInput.id = "userInput";
+              userInput.placeholder = "Type a message...";
+              userInput.style.width = "100%";
+              userInput.style.padding = "5px";
+              userInput.style.marginTop = "5px";
+              chatBox.appendChild(userInput);
+
+              // Create or get the chatbox container and append the chatbox
+              var chatboxContainer = createChatboxContainer();
+              chatboxContainer.appendChild(chatBox);
+
+              // Create live online user count display
+              onlineCounter = document.createElement("div");
+              onlineCounter.id = "onlineUserCount";
+              onlineCounter.style.color = "#fff";
+              onlineCounter.style.marginBottom = "10px";
+              chatBox.appendChild(onlineCounter);
+
+              // Handle user input when pressing Enter
+              userInput.addEventListener("keydown", function (event) {
+                  if (event.key === "Enter" && userInput.value.trim()) {
+                      var message = userInput.value.trim();
+                      sendMessage(message); // Send the message over WebSocket
+
+                      // Clear the input field after sending the message
+                      userInput.value = '';
+                      chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+                  }
+              });
+
+              console.log("Chat box initialized, but hidden.");
+          }
+      }
+
+
+      function toggleChat() {
+          // Check if username exists in localStorage
+          if (!username) {
+              // If no username is found, prompt the user to create one
+              username = prompt("Please enter a username:");
+              if (username && username.trim()) {
+                  localStorage.setItem('username', username.trim()); // Save the username to localStorage
+                  console.log("Username saved:", username);
+              } else {
+                  alert("You must enter a valid username to use the chat.");
+                  return; // Exit the function if no username is provided
+              }
+          }
+
+          // Toggle chatbox visibility (initialize it if it doesn't exist)
+          if (!chatBox) {
+              initializeChatBox();
+          }
+
+          // Check the current display and toggle
+          if (chatBox.style.display === "none") {
+              chatBox.style.display = "flex"; // Use "flex" to show the chat box
+              console.log("Chat box displayed");
+          } else {
+              chatBox.style.display = "none";
+              console.log("Chat box hidden");
+          }
+      }
+
+      // Initialize the chat box when the page loads
+      initializeChatBox();
+
+      if (toggleChatButton) {
+          toggleChatButton.addEventListener("click", toggleChat);
+      } else {
+          console.error("Toggle chat button not found!");
+      }
+      
+    function connectWebSocket() {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            console.log('WebSocket is already open');
+            return; // Prevent reconnecting if already connected
+        }
+
+        socket = new WebSocket('wss://websocket.foxxie.space/');
+
+        socket.onopen = function () {
+            console.log('WebSocket connection established');
+            startHeartbeat();
+        };
+
+        socket.onmessage = function (event) {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('Received message:', data);
+
+                // If the message type is "history", append the previous chat history to the chat
+                if (data.type === 'history') {
+                    displayHistory(data.messages);
+                } else if (data.message) {
+                    // If it's a regular message, display it in the chat
+                    displayMessage(data);
+                }
+
+                // Handle online user count update
+                if (data.type === 'onlineCount') {
+                    updateOnlineUserCount(data.count);
+                }
+            } catch (error) {
+                console.error('Error parsing WebSocket message:', error);
+            }
+        };
+
+        function displayHistory(messages) {
+            const chatMessages = document.getElementById("chatMessages");
+            if (chatMessages) {
+                // Append each message in the history to the chat box
+                messages.forEach(message => {
+                    const messageElement = document.createElement("div");
+                    messageElement.textContent = `${message.username || 'Anonymous'}: ${message.message}`;
+                    chatMessages.appendChild(messageElement);
+                });
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+            } else {
+                console.error('Chat messages container not found');
+            }
+        }
+
+        function displayMessage(data) {
+            const chatMessages = document.getElementById("chatMessages");
+            if (chatMessages) {
+                const messageElement = document.createElement("div");
+                messageElement.textContent = `${data.username || 'Anonymous'}: ${data.message}`;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+            } else {
+                console.error('Chat messages container not found');
+            }
+        }
+
+        socket.onerror = function (error) {
+            console.error('WebSocket error:', error);
+        };
+
+        socket.onclose = function () {
+            console.log('WebSocket connection closed');
+            stopHeartbeat();
+            setTimeout(connectWebSocket, reconnectInterval); // Reconnect after delay
+        };
+    }
+
+    function startHeartbeat() {
+        pingInterval = setInterval(() => {
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ type: "heartbeat" }));
+                console.log('Ping Sent');
+                pongTimeout = setTimeout(() => {
+                    console.error('No pong response, closing connection');
+                    socket.close();
+                }, heartbeatInterval);
+            }
+        }, heartbeatInterval);
+    }
+
+    function stopHeartbeat() {
+        clearInterval(pingInterval);
+        clearTimeout(pongTimeout);
+    }
+
+    function sendMessage(message) {
+        if (socket.readyState === WebSocket.OPEN) {
+            const messageData = { type: 'chat', message: message, username: username };
+            socket.send(JSON.stringify(messageData));
+            console.log('Message sent:', message);
+        } else {
+            console.error('WebSocket is not open');
+        }
+    }
+
+    function displayMessage(data) {
+        const chatMessages = document.getElementById("chatMessages");
+        if (chatMessages) {
+            const messageElement = document.createElement("div");
+            messageElement.textContent = `${data.username || 'Anonymous'}: ${data.message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        } else {
+            console.error('Chat messages container not found');
+        }
+    }
+
+    // Update the online user count on the page
+    function updateOnlineUserCount(count) {
+        if (onlineCounter) {
+            onlineCounter.textContent = `Users Online: ${count}`;
+        } else {
+            console.error('Online counter element not found');
+        }
+    }
+
+    // Check if the toggleChatButton exists and add event listener if present
+    if (toggleChatButton) {
+        toggleChatButton.addEventListener("click", toggleChat);
+    } else {
+        console.error("Toggle chat button not found!");
+    }
+
+    // Connect to WebSocket server when the script loads
+    connectWebSocket();
+
+
     
     let currentDialog = null; // Declare currentDialog at the top level
     let dialogTimeout; // Declare dialogTimeout at the top level
@@ -637,6 +953,20 @@
                   style="width: 20px; height: 20px; flex: 0 0 20px; margin-right: 0px;">
               </button>
             </div>
+            <div id="chatbox-container" style="position: absolute; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-end;">
+              <!-- Chat Toggle Button -->
+              <button id="toggleChatButton" type="button" class="hide-small-screen" title="Toggle Chat"
+                style="display: flex; align-items: center; margin-right: 14px; line-height: 0;">
+                <img class="shadow" src="./media/chat-icon.svg" alt="Chat Icon" style="width: 20px; height: 20px; flex: 0 0 20px;">
+              </button>
+              <div id="chatBox" style="display: none; background-color: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 8px; width: 300px;">
+                  <div id="chatMessages" style="max-height: 200px; overflow-y: auto;"></div>
+                  <input type="text" id="userInput" placeholder="Type a message..." style="width: 100%; padding: 5px; margin-top: 5px;">
+                </div>
+              </div>
+              <button id="toggle-chat">
+                  <img src="./media/images.png" alt="Toggle Chat">
+              </button>
           </div>
         </div>
         <div style="width: 100%; z-index: 6; display: block; position: relative;">
@@ -716,6 +1046,7 @@
   </div>
   </div>
   <div id="userCount" class="live-counter">Live Users: 0</div>
+
   <script src="./js/livecount.js"></script>
   <script>
           ! function (e) {
