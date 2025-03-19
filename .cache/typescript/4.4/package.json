@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "types-registry": "^0.1.701"
+    "types-registry": "^0.1.712"
   },
   "devDependencies": {
     "@types/core-js": "^2.5.6",

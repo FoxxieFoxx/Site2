@@ -555,14 +555,6 @@
         }
     }
 
-    // Update the online user count on the page
-    function updateOnlineUserCount(count) {
-        if (onlineCounter) {
-            onlineCounter.textContent = `Users Online: ${count}`;
-        } else {
-            console.error('Online counter element not found');
-        }
-    }
 
     // Check if the toggleChatButton exists and add event listener if present
     if (toggleChatButton) {
