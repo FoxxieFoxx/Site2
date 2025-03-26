@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounter(newCount) {
-        const finalCount = Math.max(0, Math.floor(newCount / 2));  // Adjust by dividing by 2
+        let finalCount = newCount === 1 ? 1 : Math.max(0, Math.floor(newCount / 2)); // Don't divide when there's only one listener
         const counterElement = document.getElementById('userCount');
         if (counterElement) {
             const newText = `Live Listeners: ${finalCount}`;
