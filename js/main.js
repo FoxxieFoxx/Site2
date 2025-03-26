@@ -16,11 +16,12 @@
                 { id: "og0F2Dpcs1I", name: "Study Lofi 📚 Lofi Deep Focus Study Work Concentration" },
                 { id: "VKum4lF8a10", name: "3 hours of relaxing and beautiful animal crossing music" },
                 { id: "34KOjUSdv50", name: "Video Game Study Lounge 🎮" },
-                { id: "-z3RRwk2rdU", name: "Zelda & Chill + Zelda & Chill 2" },
+                { id: "mF3m7Jza2uc", name: "Zelda & Chill + Zelda & Chill 2" },
                 { id: "NJuSStkIZBg", name: "Rainy Jazz Cafe ☕️" },
                 { id: "8TbLuBOClSg", name: "Cozy animal crossing music that cures my headaches🌿" },
                 { id: "IumNzh6yvfM", name: "pov: it finally feels like summer (an animal crossing playlist)" },
-                { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" }
+                { id: "azV9PMW5-Ro", name: "[24/7 study with me] chill study live stream" },
+                { id: "v3gOQbh32Pg", name: "nintendo chill mix" }
             ];
 
             const currentGVersion = hash(JSON.stringify(g)); // Create a hash of the current list
@@ -419,7 +420,7 @@
                 mailbrew: W,
                 chatImage: n.p + "./icon.png",
             };
-                C = n(36);
+            C = n(36);
             function U(e) {
                 return Object(i.jsx)(
                     C.a,
@@ -2153,15 +2154,15 @@
                             },
                         }),
                         Object(i.jsx)(J, {
-                          tooltip: "Toggle Chat",
-                          icon: "chatImage",
-                          onClick: function() {
-                            // Call your function to toggle the chatbox visibility
-                            toggleChat();
-                          },
-                          style: {
-                            marginRight: "14px",
-                          },
+                            tooltip: "Toggle Chat",
+                            icon: "chatImage",
+                            onClick: function() {
+                                // Call your function to toggle the chatbox visibility
+                                toggleChat();
+                            },
+                            style: {
+                                marginRight: "14px",
+                            },
                         }),
                         Object(i.jsx)(J, {
                             tooltip: "Pomodoro Timer",

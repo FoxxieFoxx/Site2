@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounter(newCount) {
-        const finalCount = Math.max(0, newCount);  // Ensure count doesn't go negative
+        const finalCount = Math.max(0, Math.floor(newCount / 2));  // Adjust by dividing by 2
         const counterElement = document.getElementById('userCount');
         if (counterElement) {
             const newText = `Live Listeners: ${finalCount}`;
@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Counter element not found');
         }
     }
+
 
     // Send a message through the WebSocket connection
     function sendMessage(message) {
