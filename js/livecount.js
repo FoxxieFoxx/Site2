@@ -86,23 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounter(newCount) {
-        let finalCount = newCount === 1 ? 1 : Math.max(0, Math.floor(newCount / 2)); // Don't divide when there's only one listener
+        let finalCount = Math.max(1, Math.floor((newCount + 1) / 2)); // Adjust for the server's subtraction and double-counting
+
         const counterElement = document.getElementById('userCount');
         if (counterElement) {
-            const newText = `Live Listeners: ${finalCount}`;
-            let index = 0;
-
-            function updateText() {
-                if (index < newText.length) {
-                    counterElement.textContent = newText.substring(0, index + 1);
-                    index++;
-                    setTimeout(updateText, 50); // Adjust speed of the letter-by-letter update here
-                } else {
-                    counterElement.textContent = newText; // Ensure complete text is set
-                }
-            }
-
-            updateText();
+            counterElement.textContent = `Live Listeners: ${finalCount}`;
         } else {
             console.error('Counter element not found');
         }
